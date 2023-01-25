@@ -1,22 +1,18 @@
+import reportWebVitals from "./reportWebVitals";
+import App from "./App";
+import {Provider} from "mobx-react";
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import {Provider} from "mobx-react";
-import AuthUser from "./ViewModel/AuthUser";
-import Token from "./ViewModel/Token";
 import AuthStore from "./Store/AuthStore";
-import statusResponse from "./Api/Response/StatusResponse";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-let authStore = new AuthStore(new AuthUser(), new Token(), statusResponse.Wait);
+
 
 root.render(
   <React.StrictMode>
-      <Provider authStore={authStore} >
+      <Provider authStore={new AuthStore()} >
     <App />
       </Provider>
   </React.StrictMode>
