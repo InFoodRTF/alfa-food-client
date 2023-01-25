@@ -1,7 +1,8 @@
 import React from "react";
-interface IUser {
+
+interface IAuthUser {
     username: string;
     password: string;
 }
 
-export default IUser;
+export default IAuthUser;

@@ -1,14 +1,20 @@
 import React from "react";
 import axios from "axios";
-import User from "../ViewModel/User";
+import IToken from "../ViewModel/Interface/IToken";
+import IAuthUser from "../ViewModel/Interface/IAuthUser";
+import StatusResponse from "./Response/StatusResponse";
 
 class ApiClient {
 
-    async GetToken(user: User) {
-        let x = await axios.post("auth/login/", {username: user.username, password: user.password})
+    async TryGetToken(user: IAuthUser): Promise<{token: IToken, statusResponse: StatusResponse}> {
 
-        console.log(x.data)
-        return x.data;
+        let response = await axios.post<IToken>("auth/login/", user)
+        console.log(response.data)
+
+        if (response.status === 400)
+            console.log("ААААААА нету")
+
+        return {token: response.data, statusResponse: response.status};
     }
 
 }

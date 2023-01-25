@@ -1,16 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import User from "./ViewModel/User";
-import {observer} from "mobx-react";
+import AuthUser from "./ViewModel/AuthUser";
+import {inject, observer} from "mobx-react";
 import Token from "./ViewModel/Token";
 
-let log = new User();
+let log = new AuthUser();
 let x = new Token();
-
+inject()
 @observer
 class App extends React.Component{
-  render() {
+
+    render() {
     return (
         <div>
           <div className="App">
@@ -21,11 +22,10 @@ class App extends React.Component{
               </p>
               <input type='text' defaultValue='' onChange={(e) => {
                   log.ChangeName(e.target.value)
-
               }}/>
                 <input type='text' onChange={(e) =>  log.ChangePassword(e.target.value)}/>
-                <input type='button' onClick={() => x.CheckInServer(log)}/>
-              Learn React
+                <input type='button' onClick={() => x.GetTokenAuth(log)}/>
+                Learn React
             </header>
           </div>
         </div>

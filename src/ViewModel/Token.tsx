@@ -1,12 +1,6 @@
-import apiClient from "../Api/ApiClient";
-import User from "./User";
+import TokenServer from "./ServerWork/TokenServer";
 
-export default class Token {
-    value: string = "";
-
-
-    async CheckInServer(user: User) {
-        this.value = await apiClient.GetToken(user);
-        console.log(this.value)
-    }
+export default class Token extends TokenServer {
+    token: string = "";
 }
+
