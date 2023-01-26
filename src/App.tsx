@@ -1,13 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import AuthUser from "./ViewModel/AuthUser";
 import {inject, observer} from "mobx-react";
-import Token from "./ViewModel/Token";
 import AuthStore from "./Store/AuthStore";
+import statusResponse from "./Api/Response/StatusResponse";
+import { Navigate} from "react-router-dom";
 
-let log = new AuthUser();
-let x = new Token();
 
 type props = {
     authStore : AuthStore;
@@ -22,6 +20,7 @@ class App extends React.Component{
 
     render() {
         const {authStore} = this.injected;
+
     return (
         <div>
           <div className="App">
@@ -35,7 +34,12 @@ class App extends React.Component{
               }}/>
                 <input type='text' onChange={(e) =>  authStore.User.ChangePassword(e.target.value)}/>
                 <input type='button' onClick={() => authStore.UserAuth()}/>
-                Learn React
+                <input type='button' onClick={() => authStore.Token.GetUser()}/>
+
+                {authStore.ResponseStatus === statusResponse.BadRequest && <p>не прошел запрос</p>}
+                {authStore.ResponseStatus === statusResponse.NotServer && <p>не прошел запрос</p>}
+                {authStore.ResponseStatus === statusResponse.Ok && <Navigate to={'/Profile'}/>}
+                {authStore.ResponseStatus === statusResponse.ServerNotFound && <p>не прошел запрос</p>}
             </header>
           </div>
         </div>

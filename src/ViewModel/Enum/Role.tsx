@@ -1,7 +1,11 @@
 import React from "react";
 
 enum Role {
-    Parent,
+    Admin,
     Teacher,
-    Child
+    Cooker,
+    Parent,
+    NonAuth
 }
+
+export default Role
