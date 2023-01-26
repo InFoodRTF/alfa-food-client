@@ -1,31 +1,45 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import User from "./ViewModel/User";
-import {observer} from "mobx-react";
-import Token from "./ViewModel/Token";
+import {inject, observer} from "mobx-react";
+import AuthStore from "./Store/AuthStore";
+import statusResponse from "./Api/Response/StatusResponse";
+import { Navigate} from "react-router-dom";
 
-let log = new User();
-let x = new Token();
 
+type props = {
+    authStore : AuthStore;
+}
+
+@inject("authStore")
 @observer
 class App extends React.Component{
-  render() {
+    get injected(): props{
+        return this.props as props;
+    }
+
+    render() {
+        const {authStore} = this.injected;
+
     return (
         <div>
           <div className="App">
             <header className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
               <p>
-                Edit <code>src/App.tsx</code> {log.username}.
+                Edit <code>src/App.tsx</code> {authStore.User.username}.
               </p>
               <input type='text' defaultValue='' onChange={(e) => {
-                  log.ChangeName(e.target.value)
-
+                  authStore.User.ChangeName(e.target.value)
               }}/>
-                <input type='text' onChange={(e) =>  log.ChangePassword(e.target.value)}/>
-                <input type='button' onClick={() => x.CheckInServer(log)}/>
-              Learn React
+                <input type='text' onChange={(e) =>  authStore.User.ChangePassword(e.target.value)}/>
+                <input type='button' onClick={() => authStore.UserAuth()}/>
+                <input type='button' onClick={() => authStore.Token.GetUser()}/>
+
+                {authStore.ResponseStatus === statusResponse.BadRequest && <p>не прошел запрос</p>}
+                {authStore.ResponseStatus === statusResponse.NotServer && <p>не прошел запрос</p>}
+                {authStore.ResponseStatus === statusResponse.Ok && <Navigate to={'/Profile'}/>}
+                {authStore.ResponseStatus === statusResponse.ServerNotFound && <p>не прошел запрос</p>}
             </header>
           </div>
         </div>

@@ -1,9 +1,8 @@
-import React from "react";
-import {action, makeAutoObservable, makeObservable, observable, override} from "mobx";
-import UserServer from "./ServerWork/UserWorkServer";
+import {action, makeObservable, override} from "mobx";
+import UserServer from "./ServerWork/UserServer";
 
 
-export default class User extends UserServer{
+export default class AuthUser extends UserServer {
     username: string = ''
     password: string = ''
 
@@ -17,11 +16,11 @@ export default class User extends UserServer{
         })
     }
 
-    ChangeName(name: string){
+    ChangeName(name: string) {
         this.username = name;
     }
 
-    ChangePassword(password: string){
+    ChangePassword(password: string) {
         this.password = password;
     }
 }

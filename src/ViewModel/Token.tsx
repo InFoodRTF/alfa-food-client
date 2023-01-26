@@ -1,12 +1,13 @@
-import apiClient from "../Api/ApiClient";
-import User from "./User";
+import TokenServer from "./ServerWork/TokenServer";
 
-export default class Token {
-    value: string = "";
+export default class Token extends TokenServer {
+    token: string = "";
 
+    GetTokenByLocalStorage(): void{
+        const tokenStore = localStorage.getItem('token');
 
-    async CheckInServer(user: User) {
-        this.value = await apiClient.GetToken(user);
-        console.log(this.value)
+        if (tokenStore === null)
+            console.log("ой ай в стораже нету токена")
     }
 }
+
