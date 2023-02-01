@@ -1,5 +1,5 @@
 import React from "react";
-import AuthUser from "../../ViewModel/AuthUser";
+import AuthUser from "../../Model/AuthUser";
 
 export default class InputLogin extends React.Component<{user: AuthUser}> {
 
@@ -10,7 +10,7 @@ export default class InputLogin extends React.Component<{user: AuthUser}> {
                     type="username"
                     name="username"
                     placeholder="Введите логин"
-                    onChange={e => this.props.user.ChangeName(e.target.value)}
+                    onChange={e => this.props.user.ChangeUserName(e.target.value)}
                 />
             </div>
         );

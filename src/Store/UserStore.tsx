@@ -1,12 +1,30 @@
-import IUser from "../ViewModel/Interface/IUser";
-import Token from "../ViewModel/Token";
-import UserParent from "../ViewModel/UserParent";
-class UserStore {
-    public Token: Token = new Token();
-    public User: IUser = new UserParent();
+import IUser from "../Model/Interface/IUser";
+import Token from "../Model/Token";
+import Parent from "../Model/Parent";
+import apiClient from "../Api/ApiClient";
+import {action, computed, makeAutoObservable, observable} from "mobx";
 
-    async GetUser(){
-        this.User = await this.Token.GetUser()
+class UserStore {
+    @observable
+    public Token: Token = new Token();
+    @observable
+    public User: IUser = new Parent();
+
+    constructor() {
+        makeAutoObservable(this)
+    }
+
+    @computed
+    TokenLocalStorage() {
+        if (this.Token.token == null)
+            this.Token.GetTokenByLocalStorage();
+    }
+
+    @action
+    async RecognizeUser() {
+        this.TokenLocalStorage();
+        this.User = await apiClient.TryGetUser(this.Token);
+        console.log(this.User.first_name)
     }
 }
 

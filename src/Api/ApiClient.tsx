@@ -1,38 +1,32 @@
 import React from "react";
-import axios, {AxiosResponse} from "axios";
-import IToken from "../ViewModel/Interface/IToken";
-import IAuthUser from "../ViewModel/Interface/IAuthUser";
+import axios, {} from "axios";
+import IToken from "../Model/Interface/IToken";
 import StatusResponse from "./Response/StatusResponse";
-import IUser from "../ViewModel/Interface/IUser";
-import Token from "../ViewModel/Token";
-import statusResponse from "./Response/StatusResponse";
-
+import IUser from "../Model/Interface/IUser";
+import Token from "../Model/Token";
+import AuthUser from "../Model/AuthUser";
 class ApiClient {
 
-    async TryGetToken(user: IAuthUser): Promise<{ token: IToken, statusResponse: StatusResponse }> {
-        let status: number = statusResponse.Wait;
+    async TryGetToken(user: AuthUser): Promise<{ token: IToken, statusResponse: StatusResponse }> {
         try {
             let response = await axios.post<IToken>("auth/login/", user)
-            status = response.status;
             console.log('dfas22')
             return {token: response.data, statusResponse: response.status};
         }
         catch (err){
             console.log('dfas1')
-            // @ts-ignore
+            // @ts-ignore - это кринж
             return {token: new Token(), statusResponse: err.response.status}
         }
-
-        console.log('dfas1')
-
-
 
     }
 
     async TryGetUser(token: IToken): Promise<IUser> {
-        let response = await axios.get<IUser>("/user/", {headers: {Authorization: `Token ${token.token}` }});
-
-            return response.data
+        const st = token.token!.replace('\"', '')
+        let response = await axios.get<IUser>("/user/", {headers: {Authorization: `token ${st.substring(0, st.length - 1)}` }});  // этот кринж нужно будет убрать
+        let p = response.data
+        // @ts-ignore - это кринж
+        return response.data.user
         }
     }
 

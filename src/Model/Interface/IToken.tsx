@@ -1,8 +1,5 @@
-import AuthUser from "../AuthUser";
-import apiClient from "../../Api/ApiClient";
-
 interface IToken {
-     token: string;
+     token: string | null;
 }
 
 export default IToken;
