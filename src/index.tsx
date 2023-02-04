@@ -4,8 +4,7 @@ import {Provider} from "mobx-react";
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import AuthStore from "./Store/AuthStore";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import UserMenu from "./Pages/UserMenu/UserMenu";
+import {BrowserRouter} from "react-router-dom";
 import UserStore from "./Store/UserStore";
 
 const root = ReactDOM.createRoot(
@@ -17,10 +16,7 @@ root.render(
     <React.StrictMode>
         <Provider authStore={new AuthStore()} userStore={new UserStore()}>
             <BrowserRouter>
-                <Routes>
-                    <Route path={'/'} element={<App/>}/>
-                    <Route path={'/Profile'} element={<UserMenu/>}/>
-                </Routes>
+                <App/>
             </BrowserRouter>
 
         </Provider>

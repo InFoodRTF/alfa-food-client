@@ -1,7 +1,9 @@
 import React from "react";
 import AuthUser from "../../Model/AuthUser";
+import {observer} from "mobx-react";
 
-export default class InputLogin extends React.Component<{user: AuthUser}> {
+@observer
+export default class InputLogin extends React.Component<{ user: AuthUser }> {
 
     render() {
         return (
@@ -12,8 +14,17 @@ export default class InputLogin extends React.Component<{user: AuthUser}> {
                     placeholder="Введите логин"
                     onChange={e => this.props.user.ChangeUserName(e.target.value)}
                 />
-            </div>
-        );
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Введите пароль"
+                    onChange={e => this.props.user.ChangePassword(e.target.value)}
+                />
+            </div>)
+
+            ;
+
         // добавить еще htmlем пароль!
     };
 }

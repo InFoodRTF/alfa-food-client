@@ -3,7 +3,7 @@ import TokenServer from "./ServerWork/TokenServer";
 export default class Token extends TokenServer {
     token: string | null = null;
 
-    GetTokenByLocalStorage(): void{
+    GetTokenByLocalStorage(): void {
         const token = localStorage.getItem('token');
 
         if (token === null)
@@ -11,6 +11,5 @@ export default class Token extends TokenServer {
 
         this.token = token;
     }
-
 }
 

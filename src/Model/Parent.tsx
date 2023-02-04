@@ -1,22 +1,13 @@
-import IUser from "./Interface/IUser";
+import BaseUser from "./BaseUser";
+import IParent from "./Interface/IParent";
 import Role from "./Enum/Role";
-import role from "./Enum/Role";
-import {makeAutoObservable} from "mobx";
 
-class Parent implements IUser {
-    first_name: string = '';
-    role: Role = role.NonAuth;
-    last_name: string = '';
-    username: string = '';
-    middle_name: string = '';
+class Parent extends BaseUser implements IParent {
     balance: number = 0;
+    readonly role = Role.Parent;
 
-    constructor() {
-        makeAutoObservable(this)
+    BuyFood(): void {
     }
-
-
-
 }
 
 export default Parent

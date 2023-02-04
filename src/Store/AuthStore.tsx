@@ -4,6 +4,7 @@ import AuthUser from "../Model/AuthUser";
 import {action, makeAutoObservable, observable} from "mobx";
 import ApiClient from "../Api/ApiClient";
 import statusResponse from "../Api/Response/StatusResponse";
+import IToken from "../Model/Interface/IToken";
 
 class AuthStore {
     @observable
@@ -11,7 +12,7 @@ class AuthStore {
     @observable
     public User: AuthUser = new AuthUser();
     @observable
-    public Token: Token = new Token();
+    public Token: IToken = new Token();
 
     constructor() {
         makeAutoObservable(this)
@@ -20,9 +21,10 @@ class AuthStore {
     @action
     async UserAuth(): Promise<void> {
         let {token, statusResponse} = await ApiClient.TryGetToken(this.User);
-        localStorage.setItem("token", JSON.stringify(token.token))
-        console.log("выход")
-        this.Token = token as Token;
+        localStorage.setItem("token", token.token!)
+        console.log("вышли из запроса токена")
+
+        this.Token.token = token.token;
         this.ResponseStatus = statusResponse
     }
 }

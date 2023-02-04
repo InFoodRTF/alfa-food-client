@@ -4,8 +4,8 @@ interface IUser{
     username: string;
     first_name: string;
     last_name: string;
-    middle_name: string
-    role: Role
+    middle_name: string;
+    readonly role: Role;
 }
 
 export default IUser;
