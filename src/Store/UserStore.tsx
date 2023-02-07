@@ -14,12 +14,10 @@ class UserStore {
         makeAutoObservable(this)
     }
 
-
     @action
     async AuthUserByToken() {
         this.Token.GetTokenByLocalStorage();
-        const user = await apiClient.TryGetUser(this.Token);
-        this.User = user;
+        this.User = await apiClient.TryGetUser(this.Token);
     }
 
 }

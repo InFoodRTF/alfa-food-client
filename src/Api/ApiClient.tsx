@@ -21,8 +21,14 @@ class ApiClient {
     }
 
     async TryGetUser(token: IToken): Promise<IUser> {
-        let response = await axios.get<IUser>("/user/", {headers: {Authorization: `token ${token.token}`}});
-        return response.data
+        try {
+            let response = await axios.get<IUser>("/user/", {headers: {Authorization: `token ${token.token}`}});
+            console.log("Юзер получен")
+            return response.data
+        } catch (err) {
+            const e = err as AxiosError<IUser, any>;
+            throw new Error(`юзер не получен ${e.status}`);
+        }
     }
 }
 
