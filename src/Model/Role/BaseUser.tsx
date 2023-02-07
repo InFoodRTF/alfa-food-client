@@ -1,5 +1,5 @@
-import IUser from "./Interface/IUser";
-import Role from "./Enum/Role";
+import IUser from "../Interface/IUser";
+import Role from "../Enum/Role";
 
 class BaseUser implements IUser{
     first_name: string = '';
