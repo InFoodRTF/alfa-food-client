@@ -1,5 +1,3 @@
-
-
 enum StatusResponse {
     Ok = 200,
     Wait,

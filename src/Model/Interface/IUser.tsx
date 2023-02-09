@@ -1,12 +1,12 @@
 import React from "react";
-import Profile from "../../Entity/Profile";
 import Role from "../Enum/Role";
-interface IUser{
+
+interface IUser {
     username: string;
     first_name: string;
     last_name: string;
-    profile: Profile
-    role: Role
+    middle_name: string;
+    readonly role: Role;
 }
 
 export default IUser;

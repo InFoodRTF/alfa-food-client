@@ -1,15 +1,18 @@
-import Token from "../ViewModel/Token";
-import StatusResponse from "../Api/Response/StatusResponse";
-import AuthUser from "../ViewModel/AuthUser";
+import Token from "../Model/Token";
+import StatusResponse from "../Api/StatusResponse/StatusResponse";
+import AuthUser from "../Model/AuthUser";
 import {action, makeAutoObservable, observable} from "mobx";
 import ApiClient from "../Api/ApiClient";
-import statusResponse from "../Api/Response/StatusResponse";
+import statusResponse from "../Api/StatusResponse/StatusResponse";
+import IToken from "../Model/Interface/IToken";
 
 class AuthStore {
     @observable
     public ResponseStatus: StatusResponse = statusResponse.Wait;
+    @observable
     public User: AuthUser = new AuthUser();
-    public Token: Token = new Token();
+    @observable
+    public Token: IToken = new Token();
 
     constructor() {
         makeAutoObservable(this)
@@ -18,12 +21,12 @@ class AuthStore {
     @action
     async UserAuth(): Promise<void> {
         let {token, statusResponse} = await ApiClient.TryGetToken(this.User);
-        localStorage.setItem("token", JSON.stringify(token.token))
-        console.log("выход")
+        localStorage.setItem("token", token.token!)
+        console.log("вышли из запроса токена")
+
         this.Token.token = token.token;
         this.ResponseStatus = statusResponse
     }
-
 }
 
 export default AuthStore;
