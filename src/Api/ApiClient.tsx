@@ -1,7 +1,7 @@
 import React from "react";
 import axios, {AxiosError} from "axios";
 import IToken from "../Model/Interface/IToken";
-import StatusResponse from "./Response/StatusResponse";
+import StatusResponse from "./StatusResponse/StatusResponse";
 import IUser from "../Model/Interface/IUser";
 import Token from "../Model/Token";
 import AuthUser from "../Model/AuthUser";
@@ -27,7 +27,20 @@ class ApiClient {
             return response.data
         } catch (err) {
             const e = err as AxiosError<IUser, any>;
+            // return new NotAuthUser(); пока на уровне идей
             throw new Error(`юзер не получен ${e.status}`);
+        }
+    }
+
+    async GetOrdersId(token: IToken): Promise<number[]> {
+        try {
+            let response = await axios.get<number[]>("orders/ID", {headers: {Authorization: `token ${token.token}`}})
+            console.log('заказы получены')
+            return response.data;
+        } catch (err) {
+            const e = err as AxiosError<number[],null>
+            console.log('что-то пошло не так')
+            return e.response!.data
         }
     }
 }

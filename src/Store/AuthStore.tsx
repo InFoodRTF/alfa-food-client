@@ -1,9 +1,9 @@
 import Token from "../Model/Token";
-import StatusResponse from "../Api/Response/StatusResponse";
+import StatusResponse from "../Api/StatusResponse/StatusResponse";
 import AuthUser from "../Model/AuthUser";
 import {action, makeAutoObservable, observable} from "mobx";
 import ApiClient from "../Api/ApiClient";
-import statusResponse from "../Api/Response/StatusResponse";
+import statusResponse from "../Api/StatusResponse/StatusResponse";
 import IToken from "../Model/Interface/IToken";
 
 class AuthStore {
@@ -17,7 +17,7 @@ class AuthStore {
     constructor() {
         makeAutoObservable(this)
     }
-    
+
     @action
     async UserAuth(): Promise<void> {
         let {token, statusResponse} = await ApiClient.TryGetToken(this.User);

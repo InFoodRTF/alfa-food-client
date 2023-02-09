@@ -1,6 +1,6 @@
 import IUser from "./IUser";
 
-interface ICooker extends IUser{
+interface ICooker extends IUser {
     CreateDish(): void
 }
 

@@ -1,7 +1,5 @@
-
-
 interface IToken {
-     token: string | null
+    token: string | null
 }
 
 export default IToken;

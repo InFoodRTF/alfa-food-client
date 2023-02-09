@@ -14,7 +14,7 @@ class App extends React.Component {
             <div>
                 <Routes>
                     <Route path={'/'} element={<LoginMenu/>}/>
-                    <Route path={'/Profile'} element={<UserMenu isLogin={true}/>}/>
+                    <Route path={'/Profile'} element={<UserMenu/>}/>
                 </Routes>
             </div>
         );

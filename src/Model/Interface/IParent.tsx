@@ -1,9 +1,9 @@
 import IUser from "./IUser";
 
-interface IParent extends IUser{
+interface IParent extends IUser {
     balance: number;
 
-    BuyFood() : void
+    BuyFood(): void
 }
 
 export default IParent;

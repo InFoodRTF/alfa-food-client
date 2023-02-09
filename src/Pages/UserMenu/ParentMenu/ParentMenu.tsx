@@ -6,7 +6,7 @@ class ParentMenu extends React.Component<{ user: IParent }> {
         console.log("это меню родителя")
         return (
             <div>
-                <p>это меню родителя</p>
+                <p>это меню родителя {this.props.user.balance}</p>
             </div>
         );
     }

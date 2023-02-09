@@ -9,14 +9,19 @@ import Cooker from "../../Model/Role/Cooker";
 import Teacher from "../../Model/Role/Teacher";
 import TeacherMenu from "./TeacherMenu/TeacherMenu";
 
+/*
 type defaultProps = {
     isLogin: boolean;
 }
 type props = {
-    userStore: UserStore;
-    isLogin: boolean;
-} & defaultProps
+    userStore: UserStore;  штука ради примера авось я забуду что так можно
 
+} & defaultProps
+*/
+
+type props = {
+    userStore: UserStore;
+}
 
 @inject('userStore')
 @observer
@@ -31,7 +36,6 @@ class UserMenu extends React.Component {
         console.log("DinMount");
     }
 
-    // параша с юзером, он не отображает после одной секунды исчезает
     render() {
         const {userStore} = this.injected;
         console.log(userStore.User.role)

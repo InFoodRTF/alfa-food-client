@@ -1,6 +1,7 @@
 import React from "react";
 import Role from "../Enum/Role";
-interface IUser{
+
+interface IUser {
     username: string;
     first_name: string;
     last_name: string;
