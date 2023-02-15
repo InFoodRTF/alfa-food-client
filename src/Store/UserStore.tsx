@@ -16,7 +16,7 @@ class UserStore {
 
     @action
     async AuthUserByToken() {
-        this.Token.GetTokenByLocalStorage();
+        this.Token.ExtractFromLocalStorage();
         this.User = await apiClient.TryGetUser(this.Token);
     }
 
