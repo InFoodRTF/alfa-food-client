@@ -1,12 +1,9 @@
-import Token from "../Model/Token";
 import apiClient from "../Api/ApiClient";
 import {action, makeAutoObservable, observable} from "mobx";
 import NotAuthUser from "../Model/Role/NotAuthUser";
 import IUser from "../Model/Interface/IUser";
-
+import AuthKey from "../Model/AuthKey";
 class UserStore {
-    @observable
-    public Token: Token = new Token();
     @observable
     public User: IUser = new NotAuthUser();
 
@@ -16,8 +13,8 @@ class UserStore {
 
     @action
     async AuthUserByToken() {
-        this.Token.ExtractFromLocalStorage();
-        this.User = await apiClient.TryGetUser(this.Token);
+        AuthKey.ExtractFromLocalStorage();
+        this.User = await apiClient.TryGetUser(AuthKey);
     }
 
 }

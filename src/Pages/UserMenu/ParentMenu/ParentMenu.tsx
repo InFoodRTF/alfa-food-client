@@ -35,9 +35,11 @@ class ParentMenu extends React.Component<{ user: IParent }, any> {
         console.log("это меню родителя")
         return (
             <div>
-                <InfiniteScroll next={() => orderStore.GetOrder()} hasMore={true} loader={"загрузка....."}
+                <InfiniteScroll hasMore={true}
+                                loader={"загрузка....."}
+                                next={() => orderStore.GetOrder()}
                                 dataLength={orderStore.Orders.length}>
-                    {orderStore.Orders.map(order =>  <OrderView key={order.id} order={order} user={user}/>)}
+                    {orderStore.Orders.map(order => <OrderView key={order.id} order={order} user={user}/>)}
                 </InfiniteScroll>
             </div>
         );

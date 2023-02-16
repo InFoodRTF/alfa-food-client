@@ -21,7 +21,6 @@ export default class LoginMenu extends React.Component {
         const {authStore} = this.injected;
         return (
             <div>
-                <p>{authStore.User.username}</p>
                 <InputLogin user={authStore.User}/>
                 <input type='button' onClick={() => authStore.UserAuth()}/>
                 <Link to={'/Profile'}>

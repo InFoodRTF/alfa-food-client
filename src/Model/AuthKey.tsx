@@ -1,6 +1,7 @@
 import TokenServer from "./ServerWork/TokenServer";
+import IToken from "./Interface/IToken";
 
-export default class Token extends TokenServer {
+class AuthKey extends TokenServer {
     token: string | null = null;
 
     ExtractFromLocalStorage(): void {
@@ -11,5 +12,14 @@ export default class Token extends TokenServer {
 
         this.token = token;
     }
+
+    LoadToLocalStorage(token: IToken): void {
+        localStorage.setItem("token", token.token!)
+        console.log("вышли из запроса токена")
+
+        this.token = token.token;
+    }
 }
+
+export default new AuthKey();
 
