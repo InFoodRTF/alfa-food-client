@@ -1,5 +1,7 @@
 import OrderItem from "./OrderItem";
 import MealCategory from "../Enum/MealCategory";
+import Student from "../Student";
+import student from "../Student";
 
 class Order {
     id: number = 0;
@@ -7,7 +9,7 @@ class Order {
     order_date: Date = new Date();
     date_ordered: Date = new Date();
     meal_category: MealCategory = MealCategory.DontKnow;
-    student_id: number = 0;
+    student: Student = new student();
 }
 
 export default Order
