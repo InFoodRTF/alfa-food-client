@@ -1,16 +1,26 @@
+import reportWebVitals from "./reportWebVitals";
+import App from "./App";
+import {Provider} from "mobx-react";
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import AuthStore from "./Store/AuthStore";
+import {BrowserRouter} from "react-router-dom";
+import UserStore from "./Store/UserStore";
+import OrdersStore from "./Store/OrdersStore";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
+
+// strict.mode убран!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ВАЖНО ОЧЕНЬ ВАЖНО
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+        <Provider authStore={new AuthStore()} userStore={new UserStore()} orderStore={new OrdersStore()}>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+
+        </Provider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function
