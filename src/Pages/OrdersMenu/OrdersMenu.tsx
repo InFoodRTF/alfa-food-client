@@ -2,20 +2,20 @@ import React from "react";
 import OrderView from "../../componets/Order/Order";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {inject, observer} from "mobx-react";
-import IUser from "../../Model/Interface/IUser";
 import OrdersStore from "../../Store/OrdersStore";
+import UserStore from "../../Store/UserStore";
+import Header from "../../componets/Header";
 
-type props = {
-    user: IUser;
-}
+
 
 type injprops = {
     orderStore: OrdersStore;
-} & props
+    userStore: UserStore;
+}
 
-@inject("orderStore")
+@inject("orderStore", "userStore")
 @observer
-class OrdersMenu extends React.Component<{ user: IUser }> {
+class OrdersMenu extends React.Component {
     get injected(): injprops {
         return this.props as injprops;
     }
@@ -28,15 +28,16 @@ class OrdersMenu extends React.Component<{ user: IUser }> {
     }
 
     render() {
-        let {orderStore, user} = this.injected;
+        let {orderStore, userStore} = this.injected;
         console.log("i here")
         return (
             <div>
+                <Header/>
                 <InfiniteScroll hasMore={orderStore.CanLoad}
                                 loader={"загрузка....."}
                                 next={() => orderStore.GetOrder()}
                                 dataLength={orderStore.Orders.length}>
-                    {orderStore.Orders.map(order => <OrderView key={order.id} order={order} user={user}/>)}
+                    {orderStore.Orders.map(order => <OrderView key={order.id} order={order} user={userStore.User}/>)}
                 </InfiniteScroll>
             </div>
         );

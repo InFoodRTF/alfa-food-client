@@ -4,6 +4,7 @@ import {inject, observer} from "mobx-react";
 import AuthStore from "../../Store/AuthStore";
 import {Link, Navigate} from "react-router-dom";
 import statusResponse from "../../Api/StatusResponse/StatusResponse";
+import httpPages from "../HttpPages";
 
 type props = {
     authStore: AuthStore;
@@ -23,12 +24,12 @@ export default class LoginMenu extends React.Component {
             <div>
                 <InputLogin user={authStore.User}/>
                 <input type='button' onClick={() => authStore.UserAuth()}/>
-                <Link to={'/Profile'}>
+                <Link to={httpPages.Profile}>
                     <button type="button"> toProfile</button>
                 </Link>
                 {authStore.ResponseStatus === statusResponse.BadRequest && <p>не прошел запрос</p>}
                 {authStore.ResponseStatus === statusResponse.NotServer && <p>нет коннекта </p>}
-                {authStore.ResponseStatus === statusResponse.Ok && <Navigate to={'/Profile'}/>}
+                {authStore.ResponseStatus === statusResponse.Ok && <Navigate to={httpPages.Profile}/>}
                 {authStore.ResponseStatus === statusResponse.ServerNotFound && <p>не прошел запрос</p>}
             </div>
         );

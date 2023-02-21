@@ -1,15 +1,14 @@
 import React from "react";
 import IParent from "../../../Model/Interface/IParent";
 import {observer} from "mobx-react";
-import "./ParentMenuStyles.css"
-import {Link, Route, Routes} from "react-router-dom";
-import OrdersMenu from "../../OrdersMenu/OrdersMenu";
+import "./ParentMenuStyles.css";
+import Header from "../../../componets/Header";
 
 
 
 @observer
 class ParentMenu extends React.Component<{ user: IParent }, any> {
-
+//TODO придумать норм реализацию layout а это это кринж лютый писать шакбки в каждой и плюс постоянно их рендерить - кринж один словом
 
 
     render() {
@@ -17,13 +16,7 @@ class ParentMenu extends React.Component<{ user: IParent }, any> {
         console.log(this.props.user.balance)
         console.log("это меню родителя")
         return (
-            <div>
-                <Link to={"MyOrders"}>заказы</Link>
-                <Routes>
-                    <Route path={"MyOrders"} element={<OrdersMenu user={this.props.user}/>}/>
-                </Routes>
-
-            </div>
+            <Header/>
         );
     }
 }

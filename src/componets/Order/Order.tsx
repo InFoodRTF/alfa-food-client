@@ -3,7 +3,7 @@ import Order from "../../Model/Order/Order";
 import IUser from "../../Model/Interface/IUser";
 
 
-// TODo разбить каждый продукт заказа на компонент
+// TODo разбить каждый продукт заказа на компонент!! а надо ли?
 class OrderView extends React.Component<{ order: Order, user: IUser }> {
 
 
