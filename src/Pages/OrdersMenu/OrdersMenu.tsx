@@ -4,8 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {inject, observer} from "mobx-react";
 import OrdersStore from "../../Store/OrdersStore";
 import UserStore from "../../Store/UserStore";
-import Header from "../../componets/Header";
-
+import Header from "../../componets/Header/Header";
 
 
 type injprops = {
@@ -20,8 +19,9 @@ class OrdersMenu extends React.Component {
         return this.props as injprops;
     }
 
-   async componentDidMount() {
-      await this.injected.orderStore.GetOrder();
+    async componentDidMount() {
+        await this.injected.orderStore.GetOrders();
+        await this.injected.userStore.AuthUserByToken();
     }
 
     componentWillUnmount() {
@@ -33,9 +33,9 @@ class OrdersMenu extends React.Component {
         return (
             <div>
                 <Header/>
-                <InfiniteScroll hasMore={orderStore.CanLoad}
+                <InfiniteScroll hasMore={orderStore.Loader.GetCanLoad}
                                 loader={"загрузка....."}
-                                next={() => orderStore.GetOrder()}
+                                next={() => orderStore.GetOrders()}
                                 dataLength={orderStore.Orders.length}>
                     {orderStore.Orders.map(order => <OrderView key={order.id} order={order} user={userStore.User}/>)}
                 </InfiniteScroll>

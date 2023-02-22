@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import httpPages from "../Pages/HttpPages";
+import httpPages from "../../Pages/HttpPages";
 
 class Header extends React.Component {
 

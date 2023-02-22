@@ -22,7 +22,6 @@ export default class InputLogin extends React.Component<{ user: AuthUser }> {
                     onChange={e => this.props.user.ChangePassword(e.target.value)}
                 />
             </div>)
-
             ;
 
         // добавить еще htmlем пароль!

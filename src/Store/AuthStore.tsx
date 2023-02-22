@@ -1,8 +1,8 @@
-import StatusResponse from "../Api/StatusResponse/StatusResponse";
+import StatusResponse from "../Api/StatusResponse";
 import AuthUser from "../Model/AuthUser";
 import {action, makeAutoObservable, observable} from "mobx";
 import ApiClient from "../Api/ApiClient";
-import statusResponse from "../Api/StatusResponse/StatusResponse";
+import statusResponse from "../Api/StatusResponse";
 import AuthKey from "../Model/AuthKey";
 
 class AuthStore {

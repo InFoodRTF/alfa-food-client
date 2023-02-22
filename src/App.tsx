@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import {observer} from "mobx-react";
 import {Route, Routes} from "react-router-dom";
 import UserMenu from "./Pages/UserMenu/UserMenu";

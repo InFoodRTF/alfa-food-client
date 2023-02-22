@@ -2,7 +2,7 @@ import React from "react";
 import IParent from "../../../Model/Interface/IParent";
 import {observer} from "mobx-react";
 import "./ParentMenuStyles.css";
-import Header from "../../../componets/Header";
+import Header from "../../../componets/Header/Header";
 
 
 

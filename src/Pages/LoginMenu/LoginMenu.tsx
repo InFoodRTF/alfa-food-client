@@ -3,7 +3,7 @@ import InputLogin from "../../componets/InputLogin/InputLogin";
 import {inject, observer} from "mobx-react";
 import AuthStore from "../../Store/AuthStore";
 import {Link, Navigate} from "react-router-dom";
-import statusResponse from "../../Api/StatusResponse/StatusResponse";
+import statusResponse from "../../Api/StatusResponse";
 import httpPages from "../HttpPages";
 
 type props = {
