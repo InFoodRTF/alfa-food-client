@@ -20,7 +20,7 @@ class OrdersMenu extends React.Component {
     }
 
     async componentDidMount() {
-        await this.injected.orderStore.GetOrders();
+        await this.injected.orderStore.Loader.LoadData();
         await this.injected.userStore.AuthUserByToken();
     }
 
@@ -33,11 +33,11 @@ class OrdersMenu extends React.Component {
         return (
             <div>
                 <Header/>
-                <InfiniteScroll hasMore={orderStore.Loader.GetCanLoad}
+                <InfiniteScroll hasMore={orderStore.Loader.LoadMore}
                                 loader={"загрузка....."}
-                                next={() => orderStore.GetOrders()}
-                                dataLength={orderStore.Orders.length}>
-                    {orderStore.Orders.map(order => <OrderView key={order.id} order={order} user={userStore.User}/>)}
+                                next={() => orderStore.Loader.LoadData()}
+                                dataLength={orderStore.Loader.List.length}>
+                    {orderStore.Loader.List.map(order => <OrderView key={order.id} order={order} user={userStore.User}/>)}
                 </InfiniteScroll>
             </div>
         );

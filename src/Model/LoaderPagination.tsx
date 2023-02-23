@@ -1,33 +1,33 @@
 import {makeAutoObservable} from "mobx";
 import ILoaderPagination from "./Interface/ILoaderPagination";
+import ApiClient from "../Api/ApiClient";
+import IToken from "./Interface/IToken";
 
-class LoaderPagination implements ILoaderPagination{
+class LoaderPagination<T> implements ILoaderPagination {
     private CanLoad: boolean = true;
     private OffSet: number = 0;
     private LoadTotal: number = -1;
-    private readonly Limit: number = 0;  // чет названик вообще такое себе учитывая, что она делат ниже в коде
+    public List: T[] = []
 
-    get GetOffSet(): number {
-        return this.OffSet;
-    }
-
-    get GetLimit(): number {
-        return this.Limit
-    }
-
-    get GetCanLoad(): boolean {
+    public get LoadMore(): boolean {
         return this.CanLoad;
     }
 
-    constructor(limit: number) {
-        makeAutoObservable(this)
-        this.Limit = limit;
+    async LoadData(): Promise<void> {
+        console.log("пошли заказы")
+        let {newData, totalLoad} = await ApiClient.GetData<T>(this.Token, this.Url + `?limit=${this.Limit}&offset=${this.OffSet}`)   // ApiClient можно вынести, тогда этот класс будет полностью независимы
+        this.List = [...this.List, ...newData];
+        this.LoaderUpdate(totalLoad)
     }
 
-    LoaderUpdate(curLoad: number, loadTotal: number): void {
-        this.OffSet += this.Limit  // плюсем limit )))
+    constructor(private readonly Limit: number, public Token: IToken,  public Url: string = "") {
+        makeAutoObservable(this)
+    }
+
+    private LoaderUpdate(loadTotal: number): void {
+        this.OffSet += this.Limit
         this.LoadTotal = loadTotal;
-        this.CanLoad = curLoad !== this.LoadTotal
+        this.CanLoad = this.List.length !== this.LoadTotal
     }
 }
 

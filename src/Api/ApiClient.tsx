@@ -1,10 +1,8 @@
-import React from "react";
 import axios, {AxiosError} from "axios";
 import IToken from "../Model/Interface/IToken";
 import StatusResponse from "./StatusResponse";
 import IUser from "../Model/Interface/IUser";
 import AuthUser from "../Model/AuthUser";
-import Order from "../Model/Order/Order";
 
 class ApiClient {
 
@@ -32,15 +30,15 @@ class ApiClient {
         }
     }
 
-    async GetOrders(token: IToken, limit: number, offSet: number): Promise<{ orders: Order[], totalLoad: number }> {
+    async GetData<T>(token: IToken, url: string): Promise<{ newData: T[], totalLoad: number }> {
         try {
-            let response = await axios.get<Order[]>(`/orders/?limit=${limit}&offset=${offSet}`, {headers: {Authorization: `token ${token.token}`}})
-            console.log('заказы получены')
-            return {orders: response.data, totalLoad: Number(response.headers["orders-total-count"])}; // а может просто orders-total
+            let response = await axios.get<T[]>(url, {headers: {Authorization: `token ${token.token}`}})
+            console.log('Данные получены')
+            return {newData: response.data, totalLoad: Number(response.headers["orders-total-count"])}; // а может просто orders-total
         } catch (err) {
-            const e = err as AxiosError<Order[], null>
+            const e = err as AxiosError<T[], null>
             console.log('что-то пошло не так')
-            return {orders: e.response!.data, totalLoad: Number(e.response!.headers["orders-total-count"])}
+            return {newData: e.response!.data, totalLoad: Number(e.response!.headers["orders-total-count"])}
         }
     }
 }

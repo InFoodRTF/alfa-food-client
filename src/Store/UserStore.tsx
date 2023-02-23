@@ -13,8 +13,7 @@ class UserStore {
 
     @action
     async AuthUserByToken() {
-        AuthKey.ExtractFromLocalStorage();
-        this.User = await apiClient.TryGetUser(AuthKey);
+        this.User = await apiClient.TryGetUser(AuthKey.ExtractFromLocalStorage());
     }
 
 }

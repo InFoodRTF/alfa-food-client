@@ -3,7 +3,7 @@ import MealCategory from "../Enum/MealCategory";
 import Student from "../Student";
 import student from "../Student";
 
-class Order {
+class Order{
     id: number = 0;
     order_items: OrderItem[] = [];
     order_date: Date = new Date();

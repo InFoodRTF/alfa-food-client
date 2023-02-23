@@ -1,16 +1,15 @@
-import TokenServer from "./ServerWork/TokenServer";
 import IToken from "./Interface/IToken";
 
-class AuthKey extends TokenServer {
+class AuthKey implements IToken{
     token: string | null = null;
 
-    ExtractFromLocalStorage(): void {
-        const token = localStorage.getItem('token');
+    ExtractFromLocalStorage(): IToken {
+        this.token = localStorage.getItem('token');
 
-        if (token === null)
+        if (this.token === null)
             console.log("ой ай в стораже нету токена")
 
-        this.token = token;
+        return this;
     }
 
     LoadToLocalStorage(token: IToken): void {
