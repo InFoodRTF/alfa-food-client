@@ -1,5 +1,5 @@
 import React from "react";
-import IApiAuth from "./IApiAuth";
+import IUserApi from "./IUserApi";
 import IToken from "../Model/Interface/IToken";
 import AuthUser from "../Model/AuthUser";
 import StatusResponse from "./StatusResponse";

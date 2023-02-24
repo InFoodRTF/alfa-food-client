@@ -31,7 +31,7 @@ class UserMenu extends React.Component {
     }
 
     async componentDidMount() {
-        await this.injected.userStore.AuthUserByToken();
+        await this.injected.userStore.AuthByToken();
 
         console.log("DinMount");
     }

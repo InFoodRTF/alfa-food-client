@@ -17,6 +17,7 @@ class ParentMenu extends React.Component<{ user: IParent }, any> {
         console.log("это меню родителя")
         return (
             <Header/>
+
         );
     }
 }

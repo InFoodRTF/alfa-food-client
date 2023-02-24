@@ -21,7 +21,7 @@ class OrdersMenu extends React.Component {
 
     async componentDidMount() {
         await this.injected.orderStore.Loader.LoadData();
-        await this.injected.userStore.AuthUserByToken();
+        await this.injected.userStore.AuthByToken();
     }
 
     componentWillUnmount() {
@@ -39,6 +39,8 @@ class OrdersMenu extends React.Component {
                                 dataLength={orderStore.Loader.List.length}>
                     {orderStore.Loader.List.map(order => <OrderView key={order.id} order={order} user={userStore.User}/>)}
                 </InfiniteScroll>
+                <button onClick={() => userStore.GetStudents() }>{}</button>
+                {userStore.Students.map(st => <p>{st.last_name} {st.middle_name} </p>)}
             </div>
         );
     }

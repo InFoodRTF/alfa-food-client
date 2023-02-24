@@ -18,7 +18,7 @@ class LoaderPagination<T> implements ILoaderPagination {
         let {
             newData,
             totalLoad
-        } = await this.Api.GetData<T>(this.Token, this.Url + `?limit=${this.Limit}&offset=${this.OffSet}`)   // ApiClient можно вынести, тогда этот класс будет полностью независимы
+        } = await this.Api.GetDataByPagination<T>(this.Token, this.Url + `?limit=${this.Limit}&offset=${this.OffSet}`)   // ApiClient можно вынести, тогда этот класс будет полностью независимы
         this.List = [...this.List, ...newData];
         this.LoaderUpdate(totalLoad)
     }

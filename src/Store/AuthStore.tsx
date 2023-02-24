@@ -4,7 +4,7 @@ import {action, makeAutoObservable, observable} from "mobx";
 import ApiClient from "../Api/ApiClient";
 import statusResponse from "../Api/StatusResponse";
 import AuthKey from "../Model/AuthKey";
-import IApiAuth from "../Api/IApiAuth";
+import IUserApi from "../Api/IUserApi";
 
 class AuthStore {
     @observable
@@ -12,7 +12,7 @@ class AuthStore {
     @observable
     public User: AuthUser = new AuthUser();
     @observable
-    public Api: IApiAuth = new ApiClient();
+    public Api: IUserApi = new ApiClient();
     constructor() {
         makeAutoObservable(this)
     }

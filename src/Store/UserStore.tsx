@@ -2,22 +2,30 @@ import {action, makeAutoObservable, observable} from "mobx";
 import NotAuthUser from "../Model/Role/NotAuthUser";
 import IUser from "../Model/Interface/IUser";
 import AuthKey from "../Model/AuthKey";
-import IApiAuth from "../Api/IApiAuth";
+import IUserApi from "../Api/IUserApi";
 import ApiClient from "../Api/ApiClient";
+import Student from "../Model/Student";
+
 class UserStore {
     @observable
     public User: IUser = new NotAuthUser();
     @observable
-    public Api: IApiAuth = new ApiClient();
+    public Api: IUserApi = new ApiClient();
+    @observable
+    public Students: Student[] = [];
     constructor() {
         makeAutoObservable(this)
     }
 
     @action
-    async AuthUserByToken() {
-        this.User = await this.Api.TryGetUser(AuthKey.GetFromLocalStorage());
+    async AuthByToken() {
+        this.User = await this.Api.TryGetUser(AuthKey.GetFromLocalStorage());  // реализация AuthKey напрягает
     }
 
+    @action
+    async GetStudents() {
+         this.Students = await this.Api.GetEntity<Student[]>(AuthKey.GetFromLocalStorage(), "/students/" )
+    }
 }
 
 export default UserStore;
