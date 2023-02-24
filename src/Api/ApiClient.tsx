@@ -3,8 +3,10 @@ import IToken from "../Model/Interface/IToken";
 import StatusResponse from "./StatusResponse";
 import IUser from "../Model/Interface/IUser";
 import AuthUser from "../Model/AuthUser";
+import IApiAuth from "./IApiAuth";
+import IPagination from "../Lib/IPaginatonLoad";
 
-class ApiClient {
+class ApiClient implements IApiAuth, IPagination{
 
     async TryGetToken(user: AuthUser): Promise<{ token: IToken, statusResponse: StatusResponse }> {
         try {
@@ -44,4 +46,4 @@ class ApiClient {
 }
 
 
-export default new ApiClient();
+export default ApiClient;

@@ -3,7 +3,7 @@ import IToken from "./Interface/IToken";
 class AuthKey implements IToken{
     token: string | null = null;
 
-    ExtractFromLocalStorage(): IToken {
+    GetFromLocalStorage(): IToken {
         this.token = localStorage.getItem('token');
 
         if (this.token === null)

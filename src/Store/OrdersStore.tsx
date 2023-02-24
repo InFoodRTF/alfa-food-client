@@ -1,14 +1,12 @@
-import {action, makeAutoObservable, observable} from "mobx";
+import {makeAutoObservable, observable} from "mobx";
 import Order from "../Model/Order/Order";
-import ApiClient from "../Api/ApiClient";
 import AuthKey from "../Model/AuthKey";
-import LoaderPagination from "../Model/LoaderPagination";
-import ILoaderPagination from "../Model/Interface/ILoaderPagination";
-import ListPagination from "../Model/ListPagination";
+import LoaderPagination from "../Lib/LoaderPagination";
+import ApiClient from "../Api/ApiClient";
 
 class OrdersStore {
     @observable
-    Loader: LoaderPagination<Order> = new LoaderPagination<Order>(2, AuthKey.ExtractFromLocalStorage(), "/Orders/");
+    Loader: LoaderPagination<Order> = new LoaderPagination<Order>(2, AuthKey.GetFromLocalStorage(), "/orders/", new ApiClient());
 
     constructor() {
         makeAutoObservable(this);

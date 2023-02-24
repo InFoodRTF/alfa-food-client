@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
-import ILoaderPagination from "./Interface/ILoaderPagination";
-import ApiClient from "../Api/ApiClient";
-import IToken from "./Interface/IToken";
+import ILoaderPagination from "../Model/Interface/ILoaderPagination";
+import IToken from "../Model/Interface/IToken";
+import IPagination from "./IPaginatonLoad";
 
 class LoaderPagination<T> implements ILoaderPagination {
     private CanLoad: boolean = true;
@@ -15,12 +15,15 @@ class LoaderPagination<T> implements ILoaderPagination {
 
     async LoadData(): Promise<void> {
         console.log("пошли заказы")
-        let {newData, totalLoad} = await ApiClient.GetData<T>(this.Token, this.Url + `?limit=${this.Limit}&offset=${this.OffSet}`)   // ApiClient можно вынести, тогда этот класс будет полностью независимы
+        let {
+            newData,
+            totalLoad
+        } = await this.Api.GetData<T>(this.Token, this.Url + `?limit=${this.Limit}&offset=${this.OffSet}`)   // ApiClient можно вынести, тогда этот класс будет полностью независимы
         this.List = [...this.List, ...newData];
         this.LoaderUpdate(totalLoad)
     }
 
-    constructor(private readonly Limit: number, public Token: IToken,  public Url: string = "") {
+    constructor(private readonly Limit: number, private Token: IToken, private Url: string = "", private Api: IPagination) {
         makeAutoObservable(this)
     }
 

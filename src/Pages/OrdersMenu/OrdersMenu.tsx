@@ -1,5 +1,5 @@
 import React from "react";
-import OrderView from "../../componets/Order/Order";
+import OrderView from "../../componets/Order/OrderView";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {inject, observer} from "mobx-react";
 import OrdersStore from "../../Store/OrdersStore";

@@ -45,5 +45,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://alfafood.servehttp.com:25565"
+  "proxy": "http://alfafood.servehttp.com:25565",
+  "devDependencies": {
+    "jest-mock-axios": "^4.7.0-beta4"
+  }
 }
