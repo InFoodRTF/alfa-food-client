@@ -1,9 +1,9 @@
 import React from 'react';
 import {observer} from "mobx-react";
 import {Route, Routes} from "react-router-dom";
-import UserMenu from "./Pages/UserMenu/UserMenu";
+import Profile from "./Pages/UserMenu/Profile";
 import LoginMenu from "./Pages/LoginMenu/LoginMenu";
-import OrdersMenu from "./Pages/OrdersMenu/OrdersMenu";
+import OrdersMenu from "./Pages/Orders/OrdersMenu";
 import httpPages from "./Pages/HttpPages";
 import PageNotFound from "./Pages/PageNotFound/PageNotFound";
 
@@ -16,7 +16,7 @@ class App extends React.Component {
             <div>
                 <Routes>
                         <Route path={httpPages.Auth} element={<LoginMenu/>}/>
-                        <Route path={httpPages.Profile} element={<UserMenu/>}/>
+                        <Route path={httpPages.Profile} element={<Profile/>}/>
                         <Route path={httpPages.Orders} element={<OrdersMenu/>}/>
                         <Route path={httpPages.NotFound} element={<PageNotFound/>}/>;
                 </Routes>

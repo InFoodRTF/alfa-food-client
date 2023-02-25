@@ -8,7 +8,7 @@ import Header from "../../../componets/Header/Header";
 
 @observer
 class ParentMenu extends React.Component<{ user: IParent }, any> {
-//TODO придумать норм реализацию layout а это это кринж лютый писать шакбки в каждой и плюс постоянно их рендерить - кринж один словом
+//TODO придумать норм реализацию layout а это это кринж лютый писать шабки в каждой и постоянно их рендерить - кринж один словом
 
 
     render() {

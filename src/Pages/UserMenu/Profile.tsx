@@ -25,7 +25,7 @@ type props = {
 
 @inject('userStore')
 @observer
-class UserMenu extends React.Component {
+class Profile extends React.Component {
     get injected(): props {
         return this.props as props;
     }
@@ -40,6 +40,7 @@ class UserMenu extends React.Component {
         const {userStore} = this.injected;
         console.log(userStore.User.role)
         return (
+
             <div>
                 {userStore.User.role === Role.Parent && <ParentMenu user={userStore.User as parent}/>}
                 {userStore.User.role === Role.Cooker && <CookerMenu user={userStore.User as Cooker}/>}
@@ -49,4 +50,4 @@ class UserMenu extends React.Component {
     }
 }
 
-export default UserMenu
+export default Profile

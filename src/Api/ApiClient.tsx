@@ -22,18 +22,6 @@ class ApiClient extends ApiRequest implements IUserApi, IPagination {
         }
     }
 
-    async TryGetUser(token: IToken): Promise<IUser> {
-        try {
-            let response = await this.GetByToken<IUser>("/user/", token)
-            console.log("Юзер получен")
-            return response.data
-        } catch (err) {
-            const e = err as AxiosError<IUser, any>;
-            // return new NotAuthUser(); пока на уровне идей, вместо исключение будем получать страницу типа 401
-            throw new Error(`юзер не получен ${e.status}`);
-        }
-    }
-
     async GetDataByPagination<T>(token: IToken, url: string): Promise<{ newData: T[], totalLoad: number }> {
         try {
             let response = await this.GetByToken<T[]>(url, token)
@@ -47,8 +35,14 @@ class ApiClient extends ApiRequest implements IUserApi, IPagination {
     }
 
     async GetEntity<TE>(token: IToken, url: string): Promise<TE> {
-        let response = await this.GetByToken<TE>(url, token);
-        return response.data;
+        try {
+            let response = await this.GetByToken<TE>(url, token)
+            console.log("все окей!")
+            return response.data
+        } catch (err) {
+            const e = err as AxiosError<IUser, any>;
+            throw new Error(`юзер не получен ${e.status}`);
+        }
     }
 }
 

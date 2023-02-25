@@ -20,8 +20,8 @@ class OrdersMenu extends React.Component {
     }
 
     async componentDidMount() {
-        await this.injected.orderStore.Loader.LoadData();
         await this.injected.userStore.AuthByToken();
+        await this.injected.orderStore.Loader.LoadData();
     }
 
     componentWillUnmount() {
@@ -29,7 +29,6 @@ class OrdersMenu extends React.Component {
 
     render() {
         let {orderStore, userStore} = this.injected;
-        console.log("i here")
         return (
             <div>
                 <Header/>

@@ -5,6 +5,7 @@ import AuthKey from "../Model/AuthKey";
 import IUserApi from "../Api/IUserApi";
 import ApiClient from "../Api/ApiClient";
 import Student from "../Model/Student";
+import Requests from "../Api/Requests";
 
 class UserStore {
     @observable
@@ -13,13 +14,14 @@ class UserStore {
     public Api: IUserApi = new ApiClient();
     @observable
     public Students: Student[] = [];
+
     constructor() {
         makeAutoObservable(this)
     }
 
     @action
     async AuthByToken() {
-        this.User = await this.Api.TryGetUser(AuthKey.GetFromLocalStorage());  // реализация AuthKey напрягает
+        this.User = await this.Api.GetEntity<IUser>(AuthKey.GetFromLocalStorage(),Requests.GetUser);  // реализация AuthKey напрягает
     }
 
     @action
