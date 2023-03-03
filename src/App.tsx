@@ -1,7 +1,7 @@
 import React from 'react';
 import {observer} from "mobx-react";
 import {Route, Routes} from "react-router-dom";
-import Profile from "./Pages/UserMenu/Profile";
+import Profile from "./Pages/Profile/Profile";
 import LoginMenu from "./Pages/LoginMenu/LoginMenu";
 import OrdersMenu from "./Pages/Orders/OrdersMenu";
 import httpPages from "./Pages/HttpPages";
@@ -27,4 +27,4 @@ class App extends React.Component {
 
 export default App;
 
-//<Route path={"/Profile//*"} element={<UserMenu/>}>   //* для того, чтоб внутри делать routes.
+//<Route path={"/Profile//*"} element={<Profile/>}>   //* для того, чтоб внутри делать routes.

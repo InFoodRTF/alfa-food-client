@@ -1,9 +1,9 @@
 
 class Requests {
 
-    GetTokenFromServer = "auth/login/";
-    GetUser = "/user/"
-    GetOrders = "/orders/"
+    TokenFromServer = "auth/login/";
+    User = "/user/"
+    Orders = "/orders/"
 }
 
 export default new Requests();

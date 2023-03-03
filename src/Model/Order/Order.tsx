@@ -3,6 +3,7 @@ import MealCategory from "../Enum/MealCategory";
 import Student from "../Student";
 import student from "../Student";
 
+// зачем классы если из можно сделать интерфейсами?
 class Order{
     id: number = 0;
     order_items: OrderItem[] = [];

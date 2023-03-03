@@ -2,30 +2,28 @@ import axios, {AxiosError} from "axios";
 import IToken from "../Model/Interface/IToken";
 import StatusResponse from "./StatusResponse";
 import IUser from "../Model/Interface/IUser";
-import AuthUser from "../Model/AuthUser";
-import IUserApi from "./IUserApi";
 import IPagination from "../Lib/IPaginatonLoad";
 import ApiRequest from "./ApiRequest";
-import Requests from "./Requests";
 
-class ApiClient extends ApiRequest implements IUserApi, IPagination {
+// кринж handlera ошибок просто бл нету - очень удобно искать ошибки прям капец
+class ApiClient extends ApiRequest implements IPagination {
 
-    async TryGetToken(user: AuthUser): Promise<{ token: IToken, statusResponse: StatusResponse }> {
+    async GetDataWithResult<TGet, TPost>(url: string, user: TPost): Promise<{ token: TGet, statusResponse: StatusResponse }> {
         try {
-            let response = await axios.post<IToken>(Requests.GetTokenFromServer, user)
+            let response = await axios.post<TGet>(url, user)
             console.log('запрос прошел')
             return {token: response.data, statusResponse: response.status};
         } catch (err) {
-            const e = err as AxiosError<IToken, any>;
+            const e = err as AxiosError<TGet, any>;
             console.log('запрос не прошел')
-            return {token: e.response!.data, statusResponse: e.response!.status}
+            return {token: e.response!.data, statusResponse: e.response!.status}  // можно написать обрабочек ошибок типа hadlerError как в angular
         }
     }
 
     async GetDataByPagination<T>(token: IToken, url: string): Promise<{ newData: T[], totalLoad: number }> {
         try {
             let response = await this.GetByToken<T[]>(url, token)
-            console.log('Данные получены')
+            console.log('Данные получены c пагинаций')
             return {newData: response.data, totalLoad: Number(response.headers["orders-total-count"])}; // а может просто orders-total
         } catch (err) {
             const e = err as AxiosError<T[], null>
