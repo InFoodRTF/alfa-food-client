@@ -1,23 +1,26 @@
-import StatusResponse from "../Api/StatusResponse/StatusResponse";
+import StatusResponse from "../Api/StatusResponse";
 import AuthUser from "../Model/AuthUser";
-import {action, makeAutoObservable, observable} from "mobx";
-import ApiClient from "../Api/ApiClient";
-import statusResponse from "../Api/StatusResponse/StatusResponse";
+import {action, makeObservable, observable} from "mobx";
+import statusResponse from "../Api/StatusResponse";
 import AuthKey from "../Model/AuthKey";
+import baseStoreToken from "./BaseStoreToken";
+import IToken from "../Model/Interface/IToken";
 
-class AuthStore {
+class AuthStore extends baseStoreToken{
     @observable
     public ResponseStatus: StatusResponse = statusResponse.Wait;
     @observable
     public User: AuthUser = new AuthUser();
+    private url: string = "auth/login/"
 
     constructor() {
-        makeAutoObservable(this)
+        super()
+        makeObservable(this)
     }
 
     @action
     async UserAuth(): Promise<void> {
-        let {token, statusResponse} = await ApiClient.TryGetToken(this.User);
+        let {token, statusResponse} = await this.PostWithResult<IToken, AuthUser>(this.url ,this.User);        // можно зарефакторить
         AuthKey.LoadToLocalStorage(token);
         this.ResponseStatus = statusResponse
     }

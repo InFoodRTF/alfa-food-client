@@ -1,13 +1,15 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
 import UserStore from "../../Store/UserStore";
-import ParentMenu from "./ParentMenu/ParentMenu";
+import ParentProfile from "./Parent/ParentProfile";
 import parent from "../../Model/Role/Parent";
 import Role from "../../Model/Enum/Role";
-import CookerMenu from "./CookerMenu/CookerMenu";
+import CookerMenu from "./Cooker/CookerMenu";
 import Cooker from "../../Model/Role/Cooker";
 import Teacher from "../../Model/Role/Teacher";
-import TeacherMenu from "./TeacherMenu/TeacherMenu";
+import TeacherMenu from "./Teacher/TeacherMenu";
+import {Navbar} from "react-bootstrap";
+import Navibar from "../../componets/Navbar/Navibar";
 
 /*
 type defaultProps = {
@@ -25,13 +27,13 @@ type props = {
 
 @inject('userStore')
 @observer
-class UserMenu extends React.Component {
+class Profile extends React.Component {
     get injected(): props {
         return this.props as props;
     }
 
     async componentDidMount() {
-        await this.injected.userStore.AuthUserByToken();
+        await this.injected.userStore.AuthByToken();
 
         console.log("DinMount");
     }
@@ -41,7 +43,7 @@ class UserMenu extends React.Component {
         console.log(userStore.User.role)
         return (
             <div>
-                {userStore.User.role === Role.Parent && <ParentMenu user={userStore.User as parent}/>}
+                {userStore.User.role === Role.Parent && <ParentProfile user={userStore.User as parent}/>}
                 {userStore.User.role === Role.Cooker && <CookerMenu user={userStore.User as Cooker}/>}
                 {userStore.User.role === Role.Teacher && <TeacherMenu user={userStore.User as Teacher}/>}
             </div>
@@ -49,4 +51,4 @@ class UserMenu extends React.Component {
     }
 }
 
-export default UserMenu
+export default Profile
