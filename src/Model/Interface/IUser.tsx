@@ -1,4 +1,3 @@
-import React from "react";
 import Role from "../Enum/Role";
 
 interface IUser {

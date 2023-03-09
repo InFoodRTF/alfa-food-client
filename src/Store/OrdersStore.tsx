@@ -1,29 +1,16 @@
-import {action, makeAutoObservable, observable} from "mobx";
+import {makeAutoObservable, observable} from "mobx";
 import Order from "../Model/Order/Order";
-import ApiClient from "../Api/ApiClient";
 import AuthKey from "../Model/AuthKey";
+import LoaderPagination from "../Lib/LoaderPagination";
+import ApiClient from "../Api/ApiClient";
+import Requests from "../Api/Requests";
 
 class OrdersStore {
     @observable
-    Orders: Order[] = []
-    @observable
-    TotalCount: number = 0;
-    @observable
-    offSet: number = 0; // есть идея сделать класс токен статиком, чтоб не создавть его буквально везде, а так пару строчек и все, и можно было бы вообще убрать токен как класс, но я не уверне, что с ним не будут еще какие-то махинаций сделаны
+    Loader: LoaderPagination<Order> = new LoaderPagination<Order>(2, AuthKey.GetFromLocalStorage(), Requests.Orders, new ApiClient()); // сомнительно выглядит ulr отдельно от apiclient: такое когда такие вещи назависмы таким образом
+
     constructor() {
         makeAutoObservable(this);
-    }
-    // TODO может соmputed для скролла ?
-    @action
-    async GetOrder(): Promise<void> {
-        console.log("пошли заказы")
-        if (this.TotalCount !== 0 && this.Orders.length >= this.TotalCount) return;
-
-        AuthKey.ExtractFromLocalStorage()
-        let {orders, totalCount} = await ApiClient.GetOrders(AuthKey, this.offSet)
-        this.offSet += 2;
-        this.TotalCount = totalCount;
-        this.Orders = [...this.Orders, ...orders];
     }
 }
 

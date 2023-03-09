@@ -1,0 +1,91 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #F8F8F8;
+    font-family: 'Inter', sans-serif;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    background: #FFFFFF;
+    border-radius: 40px;
+}
+
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="login"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.logo{
+    margin-top: 83px;
+}
+/* Login and password */
+
+.enter-customization{
+    font-weight: 700;
+    font-size: 32px;
+    color: #000000;
+    margin-top: 130px;
+}
+
+.form-customization {
+
+}
+
+::placeholder {
+    font-weight: 400;
+    font-size: 16px;
+    color: #000000;
+}
+
+/* Forgot password */
+.fp-link {
+    text-decoration: none;
+    color: #000000;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+/* Button */
+
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #F05654;
+    --bs-btn-border-color: #F05654;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #F05654;
+    --bs-btn-hover-border-color: #F05654;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #F05654;
+    --bs-btn-active-border-color: #F05654;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #F05654;
+    --bs-btn-disabled-border-color: #F05654;
+}
+
+.btn-customization {
+    width: 170px;
+    margin-bottom: 35px;
+}
