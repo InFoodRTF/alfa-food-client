@@ -1,13 +1,16 @@
-import BaseStoreToken from "./BaseStoreToken";
+import StoreTokenBase from "./StoreTokenBase";
 import {action, makeObservable, observable} from "mobx";
 import Student from "../Model/Student";
 import Grade from "../Model/Grade";
+import toggle from "../Model/Toggle";
 
-class StudentsStore extends BaseStoreToken {
+class StudentsStore extends StoreTokenBase {
     @observable
     public Students: Student[] = []; // думать и только думать, как сделать это красиво
     @observable
     public Grades: { [id: string]: Grade; } = {};
+    @observable
+    public Toggle: toggle[] = []
     constructor() {
         super();
         makeObservable(this);
@@ -19,14 +22,13 @@ class StudentsStore extends BaseStoreToken {
     }
 
 
+
     @action
     async LoadInfoGrade(name: string): Promise<void> {
-  /*      console.log(`Я здесь${this.Students[id].grade}`)
-        const result: Grade = await this.GetData<Grade>(`/grades/?name=${this.Students[id].grade}`);
+        const result: Grade = await this.GetData<Grade>(`/grades/${name}`);
+        this.Grades[name] = result // жопа мягко говоря, но да ладно
 
-        console.log(result.meal_time.meal_category) // жопа мягко говоря, но да ладно
-
-        console.log(`${this.Grades[0]}`)*/
+        console.log(`${this.Grades[name].name}`)
     }
 }
 

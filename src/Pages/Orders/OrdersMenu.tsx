@@ -4,7 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {inject, observer} from "mobx-react";
 import OrdersStore from "../../Store/OrdersStore";
 import UserStore from "../../Store/UserStore";
-import Header from "../../componets/Header/Header";
+import Navibar from "../../componets/Navbar/Navibar";
 
 
 type injprops = {
@@ -31,7 +31,7 @@ class OrdersMenu extends React.Component {
         let {orderStore, userStore} = this.injected;
         return (
             <div>
-                <Header/>
+                <Navibar/>
                 <InfiniteScroll hasMore={orderStore.Loader.LoadMore}
                                 loader={"загрузка....."}
                                 next={() => orderStore.Loader.LoadData()}

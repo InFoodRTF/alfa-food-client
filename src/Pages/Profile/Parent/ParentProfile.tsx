@@ -3,8 +3,9 @@ import IParent from "../../../Model/Interface/IParent";
 import {inject, observer} from "mobx-react";
 import "./ParentMenuStyles.css";
 import StudentsStore from "../../../Store/StudentsStore";
-import Header from "../../../componets/Header/Header";
 import StudentParent from "../../../componets/StudentParent";
+import Navibar from "../../../componets/Navbar/Navibar";
+import Toggle from "../../../Model/Toggle";
 
 type injProps = {
     studentStore: StudentsStore;
@@ -13,7 +14,7 @@ type injProps = {
 
 @inject("studentStore")
 @observer
-class ParentProfile extends React.Component<{ user: IParent }, any> {
+class ParentProfile extends React.Component<{ user: IParent }> {
     get injected(): injProps {
         return this.props as injProps;
     }
@@ -27,12 +28,12 @@ class ParentProfile extends React.Component<{ user: IParent }, any> {
         console.log(this.props.user.balance)
         console.log("это меню родителя")
         return <div>
-            <Header/>
-            {studentStore.Students.map((st, index) => <StudentParent id={index} grade={studentStore.Grades[index]} key={index} student={st}
-                                                                     LoadInfoGrade={(e: string) => studentStore.LoadInfoGrade(e)}/>)} //
-            мб можно проще =)))
+            <Navibar/>
+            {studentStore.Students.map((st) => <StudentParent grade={studentStore.Grades[st.grade]} key={st.id} student={st}
+                                                                     LoadInfoGrade={(e: string) => studentStore.LoadInfoGrade(e)}/>)}
+            {user.first_name} {user.middle_name}
         </div>
-            ;
+
     }
 }
 

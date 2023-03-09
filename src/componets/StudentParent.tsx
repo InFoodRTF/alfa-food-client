@@ -1,16 +1,22 @@
 import React from "react";
 import Student from "../Model/Student";
 import {observer} from "mobx-react";
-import grade from "../Model/Grade";
+import Grade from "../Model/Grade";
+import Toggle from "../Model/Toggle";
 
 @observer
-class StudentParent extends React.Component<{grade: grade , id: number, student: Student, LoadInfoGrade: (e: string) => Promise<void>}> {
+class StudentParent extends React.Component<{ grade: Grade, student: Student, LoadInfoGrade: (e: string) => Promise<void> }> {
 
+// придумать как вставить toggle или оставить в store
     render() {
         return (
             <div>
-                <input type={"button"} onClick={() => this.props.LoadInfoGrade(this.props.student.grade)}/>
-                <p></p>
+                <p>{this.props.student.first_name}</p>
+                <input type={"button"} onClick={async () => {
+                    await this.props.LoadInfoGrade(this.props.student.grade)
+
+                }}/>
+                <p>{this.props.grade !== undefined && this.props.grade.name}</p>
             </div>
         );
     }

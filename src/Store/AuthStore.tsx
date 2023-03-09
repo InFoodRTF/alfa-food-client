@@ -3,7 +3,7 @@ import AuthUser from "../Model/AuthUser";
 import {action, makeObservable, observable} from "mobx";
 import statusResponse from "../Api/StatusResponse";
 import AuthKey from "../Model/AuthKey";
-import baseStoreToken from "./BaseStoreToken";
+import baseStoreToken from "./StoreTokenBase";
 import IToken from "../Model/Interface/IToken";
 
 class AuthStore extends baseStoreToken{

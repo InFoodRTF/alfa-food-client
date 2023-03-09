@@ -8,8 +8,6 @@ import CookerMenu from "./Cooker/CookerMenu";
 import Cooker from "../../Model/Role/Cooker";
 import Teacher from "../../Model/Role/Teacher";
 import TeacherMenu from "./Teacher/TeacherMenu";
-import {Navbar} from "react-bootstrap";
-import Navibar from "../../componets/Navbar/Navibar";
 
 /*
 type defaultProps = {
