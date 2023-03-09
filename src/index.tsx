@@ -7,6 +7,13 @@ import AuthStore from "./Store/AuthStore";
 import {BrowserRouter} from "react-router-dom";
 import UserStore from "./Store/UserStore";
 import OrdersStore from "./Store/OrdersStore";
+import StudentsStore from "./Store/StudentsStore";
+import server from "./Api/MockServer";
+
+/*
+server()*/
+const Stores = [new AuthStore(), new UserStore(), new OrdersStore(), new StudentsStore()] // когда нибдуь я впихну через массив
+
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -14,13 +21,13 @@ const root = ReactDOM.createRoot(
 
 // strict.mode убран!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ВАЖНО ОЧЕНЬ ВАЖНО
 root.render(
-        <Provider authStore={new AuthStore()} userStore={new UserStore()} orderStore={new OrdersStore()}>
-            <BrowserRouter>
-                <App/>
-            </BrowserRouter>
+    <Provider authStore={new AuthStore()} userStore={new UserStore()} orderStore={new OrdersStore()}
+              studentStore={new StudentsStore()}>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
 
-        </Provider>
-
+    </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -6,7 +6,7 @@ class Parent extends BaseUser implements IParent {
     readonly role = Role.Parent;
     balance: number = 0;
 
-
+    
     BuyFood(): void {
     }
 }

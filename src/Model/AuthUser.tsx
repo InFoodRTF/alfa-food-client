@@ -1,7 +1,4 @@
-import UserServer from "./ServerWork/UserServer";
-
-
-export default class AuthUser extends UserServer {
+export default class AuthUser{
     username: string = ''
     password: string = ''
 
