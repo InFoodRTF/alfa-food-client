@@ -1,36 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import User from "./ViewModel/User";
 import {observer} from "mobx-react";
-import Token from "./ViewModel/Token";
+import {Route, Routes} from "react-router-dom";
+import UserMenu from "./Pages/UserMenu/UserMenu";
+import LoginMenu from "./Pages/LoginMenu/LoginMenu";
 
-let log = new User();
-let x = new Token();
 
 @observer
-class App extends React.Component{
-  render() {
-    return (
-        <div>
-          <div className="App">
-            <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-              <p>
-                Edit <code>src/App.tsx</code> {log.username}.
-              </p>
-              <input type='text' defaultValue='' onChange={(e) => {
-                  log.ChangeName(e.target.value)
+class App extends React.Component {
 
-              }}/>
-                <input type='text' onChange={(e) =>  log.ChangePassword(e.target.value)}/>
-                <input type='button' onClick={() => x.CheckInServer(log)}/>
-              Learn React
-            </header>
-          </div>
-        </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <Routes>
+                    <Route path={'/'} element={<LoginMenu/>}/>
+                    <Route path={'/Profile'} element={<UserMenu/>}/>
+                </Routes>
+            </div>
+        );
+    }
 }
 
 export default App;
