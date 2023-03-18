@@ -1,9 +1,8 @@
 import React from "react";
-import ITeacher from "../../../Model/Interface/ITeacher";
-import InfiniteScroll from "react-infinite-scroll-component";
+import ITeacher from "../../../../Model/Interface/ITeacher";
 
 
-class TeacherMenu extends React.Component<{ user: ITeacher }> {/*
+class TeacherProfile extends React.Component<{ user: ITeacher }> {/*
     render() {
      //   return (
 /!*          <div>
@@ -16,4 +15,4 @@ class TeacherMenu extends React.Component<{ user: ITeacher }> {/*
 
 }
 
-export default TeacherMenu;
+export default TeacherProfile;

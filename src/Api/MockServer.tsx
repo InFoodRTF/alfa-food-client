@@ -6,9 +6,7 @@ import Role from "../Model/Enum/Role";
 import Order from "../Model/Order/Order";
 import MealCategory from "../Model/Enum/MealCategory";
 import Student from "../Model/Student";
-import grade from "../Model/Grade";
 import Grade from "../Model/Grade";
-import {MealTime} from "../Model/meal-time";
 
 export default function server(): void {
 
@@ -48,6 +46,7 @@ export default function server(): void {
                     }
                 ]
             })
+
 
             this.get<Grade>("/grades/?name=8 В", () => {
                 return {
@@ -110,6 +109,7 @@ export default function server(): void {
                     }
                 ];
             });
+
             this.passthrough()
         }
     })

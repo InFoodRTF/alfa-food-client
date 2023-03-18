@@ -1,9 +1,9 @@
-import React from "react";
+
 import {action, makeAutoObservable, observable} from "mobx";
 
 class Toggle {
     @observable
-    IsOpen: string = '';
+    IsOpen: boolean = false;
 
     constructor() {
         makeAutoObservable(this)
@@ -11,8 +11,7 @@ class Toggle {
 
     @action
     ChangeToggle(): void {
-        this.IsOpen += "A"
-        console.log(this.IsOpen)
+        this.IsOpen = !this.IsOpen
     }
 }
 

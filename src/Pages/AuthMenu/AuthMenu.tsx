@@ -5,14 +5,13 @@ import AuthStore from "../../Store/AuthStore";
 import {Link, Navigate} from "react-router-dom";
 import statusResponse from "../../Api/StatusResponse";
 import httpPages from "../HttpPages";
-
 type props = {
     authStore: AuthStore;
 }
 
 @inject("authStore")
 @observer
-export default class LoginMenu extends React.Component {
+export default class AuthMenu extends React.Component {
     get injected(): props {
         return this.props as props;
     }

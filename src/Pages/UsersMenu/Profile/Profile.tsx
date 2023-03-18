@@ -1,13 +1,13 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
-import UserStore from "../../Store/UserStore";
+import UserStore from "../../../Store/UserStore";
 import ParentProfile from "./Parent/ParentProfile";
-import parent from "../../Model/Role/Parent";
-import Role from "../../Model/Enum/Role";
-import CookerMenu from "./Cooker/CookerMenu";
-import Cooker from "../../Model/Role/Cooker";
-import Teacher from "../../Model/Role/Teacher";
-import TeacherMenu from "./Teacher/TeacherMenu";
+import parent from "../../../Model/Role/Parent";
+import Role from "../../../Model/Enum/Role";
+import CookerProfile from "./Cooker/CookerMenu";
+import Cooker from "../../../Model/Role/Cooker";
+import Teacher from "../../../Model/Role/Teacher";
+import TeacherProfile from "./Teacher/TeacherProfile";
 
 /*
 type defaultProps = {
@@ -42,8 +42,8 @@ class Profile extends React.Component {
         return (
             <div>
                 {userStore.User.role === Role.Parent && <ParentProfile user={userStore.User as parent}/>}
-                {userStore.User.role === Role.Cooker && <CookerMenu user={userStore.User as Cooker}/>}
-                {userStore.User.role === Role.Teacher && <TeacherMenu user={userStore.User as Teacher}/>}
+                {userStore.User.role === Role.Cooker && <CookerProfile user={userStore.User as Cooker}/>}
+                {userStore.User.role === Role.Teacher && <TeacherProfile user={userStore.User as Teacher}/>}
             </div>
         );
     }

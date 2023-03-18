@@ -9,9 +9,10 @@ import UserStore from "./Store/UserStore";
 import OrdersStore from "./Store/OrdersStore";
 import StudentsStore from "./Store/StudentsStore";
 import server from "./Api/MockServer";
+import ProductsStore from "./Store/ProductsStore";
 
-/*
-server()*/
+
+/*server()*/
 const Stores = [new AuthStore(), new UserStore(), new OrdersStore(), new StudentsStore()] // когда нибдуь я впихну через массив
 
 
@@ -22,7 +23,7 @@ const root = ReactDOM.createRoot(
 // strict.mode убран!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ВАЖНО ОЧЕНЬ ВАЖНО
 root.render(
     <Provider authStore={new AuthStore()} userStore={new UserStore()} orderStore={new OrdersStore()}
-              studentStore={new StudentsStore()}>
+              studentStore={new StudentsStore()} takeOrderStore={new ProductsStore()}>
         <BrowserRouter>
             <App/>
         </BrowserRouter>

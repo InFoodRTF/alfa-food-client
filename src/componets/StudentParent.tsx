@@ -5,7 +5,7 @@ import Grade from "../Model/Grade";
 import Toggle from "../Model/Toggle";
 
 @observer
-class StudentParent extends React.Component<{ grade: Grade, student: Student, LoadInfoGrade: (e: string) => Promise<void> }> {
+class StudentParent extends React.Component<{toggle: Toggle, grade: Grade, student: Student, LoadInfoGrade: (e: string) => Promise<void> }> {
 
 // придумать как вставить toggle или оставить в store
     render() {
@@ -14,9 +14,9 @@ class StudentParent extends React.Component<{ grade: Grade, student: Student, Lo
                 <p>{this.props.student.first_name}</p>
                 <input type={"button"} onClick={async () => {
                     await this.props.LoadInfoGrade(this.props.student.grade)
-
+                    this.props.toggle.ChangeToggle();
                 }}/>
-                <p>{this.props.grade !== undefined && this.props.grade.name}</p>
+                <p>{this.props.toggle && this.props.grade.name}</p>
             </div>
         );
     }

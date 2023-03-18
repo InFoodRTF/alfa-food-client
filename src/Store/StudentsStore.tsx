@@ -2,15 +2,16 @@ import StoreTokenBase from "./StoreTokenBase";
 import {action, makeObservable, observable} from "mobx";
 import Student from "../Model/Student";
 import Grade from "../Model/Grade";
-import toggle from "../Model/Toggle";
+import Toggle from "../Model/Toggle";
 
 class StudentsStore extends StoreTokenBase {
     @observable
-    public Students: Student[] = []; // думать и только думать, как сделать это красиво
+    public Students: Student[] = [];
     @observable
     public Grades: { [id: string]: Grade; } = {};
-    @observable
-    public Toggle: toggle[] = []
+    @observable                                   // четё ваще выгдяит кринжово // моэйби какой-нибудь общий класс? типа аккордион бла бла
+    public Toggle: { [id: string]: Toggle; } = {};
+
     constructor() {
         super();
         makeObservable(this);
@@ -18,16 +19,15 @@ class StudentsStore extends StoreTokenBase {
 
     @action
     async LoadStudent(): Promise<void> {
-        this.Students = await this.GetData<Student[]>("/students/"); // вся надежда на dict
+        this.Students = await this.GetData<Student[]>("/students/");
     }
-
 
 
     @action
     async LoadInfoGrade(name: string): Promise<void> {
         const result: Grade = await this.GetData<Grade>(`/grades/${name}`);
-        this.Grades[name] = result // жопа мягко говоря, но да ладно
-
+        this.Grades[name] = result
+        this.Toggle[name] = new Toggle();  // официально - это самый лютый кринж который я делал, название функций делает ваще другое все каой тугл зочем он здесь? ватт?
         console.log(`${this.Grades[name].name}`)
     }
 }

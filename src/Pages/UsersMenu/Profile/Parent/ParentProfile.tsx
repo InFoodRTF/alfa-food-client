@@ -1,11 +1,11 @@
 import React from "react";
-import IParent from "../../../Model/Interface/IParent";
+import IParent from "../../../../Model/Interface/IParent";
 import {inject, observer} from "mobx-react";
 import "./ParentMenuStyles.css";
-import StudentsStore from "../../../Store/StudentsStore";
-import StudentParent from "../../../componets/StudentParent";
-import Navibar from "../../../componets/Navbar/Navibar";
-import Toggle from "../../../Model/Toggle";
+import StudentsStore from "../../../../Store/StudentsStore";
+import StudentParent from "../../../../componets/StudentParent";
+import Navibar from "../../../../componets/Navbar/Navibar";
+import FieldProfile from "../../../../componets/FieldProfile/FieldProfile";
 
 type injProps = {
     studentStore: StudentsStore;
@@ -23,13 +23,15 @@ class ParentProfile extends React.Component<{ user: IParent }> {
         await this.injected.studentStore.LoadStudent();
     }
 
+
     render() {
         let {studentStore, user} = this.injected;
         console.log(this.props.user.balance)
         console.log("это меню родителя")
         return <div>
             <Navibar/>
-            {studentStore.Students.map((st) => <StudentParent grade={studentStore.Grades[st.grade]} key={st.id} student={st}
+            <FieldProfile descr={"имя"} info={user.username}/>
+            {studentStore.Students.map((st) => <StudentParent toggle={studentStore.Toggle[st.grade]} grade={studentStore.Grades[st.grade]} key={st.id} student={st}
                                                                      LoadInfoGrade={(e: string) => studentStore.LoadInfoGrade(e)}/>)}
             {user.first_name} {user.middle_name}
         </div>

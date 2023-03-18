@@ -1,10 +1,10 @@
 import React from "react";
-import OrderView from "../../componets/Order/OrderView";
+import OrderView from "../../../componets/Order/OrderView";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {inject, observer} from "mobx-react";
-import OrdersStore from "../../Store/OrdersStore";
-import UserStore from "../../Store/UserStore";
-import Navibar from "../../componets/Navbar/Navibar";
+import OrdersStore from "../../../Store/OrdersStore";
+import UserStore from "../../../Store/UserStore";
+import Navibar from "../../../componets/Navbar/Navibar";
 
 
 type injprops = {
