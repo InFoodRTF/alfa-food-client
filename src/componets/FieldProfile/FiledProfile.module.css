@@ -1,0 +1,81 @@
+/* surname */
+.username {
+    position: absolute;
+    width: 453px;
+    height: 40px;
+    left: 402px;
+    top: 284px;
+}
+
+
+
+/* field */
+.field {
+    position: absolute;
+    width: 265px;
+    height: 40px;
+    left: 590px;
+    top: 284px;
+}
+
+.descr {
+    position: absolute;
+    width: 168px;
+    height: 19px;
+    left: 402px;
+    top: 295px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+
+    /* black */
+    color: #000000;
+}
+/* bg */
+.bg {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 265px;
+    height: 40px;
+    left: 590px;
+    top: 284px;
+
+    /* white */
+    background: #FFFFFF;
+    /* grey_field_stroke */
+    border: 1px solid #B3B3B3;
+    border-radius: 10px;
+}
+
+.cardBody {
+    position: absolute;
+    width: 58px;
+    height: 18.54px;
+    left: 610px;
+    top: 295px;
+
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    /* black */
+    color: #000000;
+
+}
+
+/* Иванов */
+
+
+
+
+/* Фамилия */
+
+
+

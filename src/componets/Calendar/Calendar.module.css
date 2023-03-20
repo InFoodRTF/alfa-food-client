@@ -1,0 +1,38 @@
+.blockDate{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding-left: 10px;
+    gap: 15px;
+    width: 233px;
+    height: 32px;
+}
+
+.Ignore {
+    padding: 0;
+    border: none;
+    background: none;
+}
+.textDate{
+    height: 30px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 36px;
+    text-align: center;
+    padding-top:  10px;
+    color: #000000;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.blockImage{
+    width: 32px;
+    height: 32px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}

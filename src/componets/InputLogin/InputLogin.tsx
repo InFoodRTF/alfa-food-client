@@ -1,5 +1,5 @@
 import React from "react";
-import AuthUser from "../../Model/AuthUser";
+import AuthUser from "../../Pages/AuthMenu/Model/AuthUser";
 import {observer} from "mobx-react";
 
 @observer

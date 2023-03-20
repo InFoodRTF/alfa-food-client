@@ -1,0 +1,46 @@
+.cardFood{
+    width: 110px;
+    height: 17px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+}
+
+.food{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+}
+
+.addFood{
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 9px;
+    color: #000000;
+}
+
+.smallButton{
+    width: 13px;
+    height: 13px;
+    background: #E8E8E8;
+    border-radius: 3px;
+    margin-bottom: 0;
+    font-weight: 500;
+}
+
+.price{
+    width: 54px;
+    height: 17px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: right;
+    color: #000000;
+}

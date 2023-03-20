@@ -1,0 +1,120 @@
+:root { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+    :root { font-family: 'Inter var', sans-serif; }
+}
+
+.foodCard {
+    width: 170px;
+    height: 280px;
+    border-radius: 10px;
+    border-color: white;
+}
+
+.imgForm{
+    width: 150px;
+    height: 104.31px;
+    border-radius: 20px;
+}
+
+.infBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: left;
+    padding: 10px 9px 0;
+}
+
+.cardBlock{
+    display: flex;
+    flex-direction: column;
+}
+
+.foodName{
+    width: 150px;
+    height: 45px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+}
+
+.cardButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 152px;
+    height: 42.48px;
+    border-radius: 10px;
+    background: #E8E8E8;
+    border-color: #E8E8E8;
+}
+
+.cardButton:hover{
+    background: #E8E8E8;
+    border-color: #E8E8E8;
+}
+
+.cardButton:active{
+    background: #E8E8E8 !important;
+    border-color: #E8E8E8 !important;
+}
+
+.addInfBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 8px;
+}
+
+.gramBlock{
+    margin-bottom: 0;
+    padding: 0 9px 10px;
+}
+
+.costBlock{
+    width: 68px;
+    height: 24px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.gramText{
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #BDBDBD;
+}
+
+.text{
+    width: 10px;
+    height: 17px;
+    margin-bottom: 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+}
+
+.textAdd{
+    margin-bottom: 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+}
