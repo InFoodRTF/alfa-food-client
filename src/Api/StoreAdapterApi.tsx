@@ -1,10 +1,10 @@
 import React from "react";
 import AuthKey from "../Model/AuthKey";
 import IToken from "../Model/Interface/IToken";
-import ApiClient from "../Api/ApiClient";
-import StatusResponse from "../Api/StatusResponse";
+import ApiClient from "./ApiClient";
+import StatusResponse from "./StatusResponse";
 
-abstract class StoreTokenBase {
+abstract class StoreAdapterApi {
     private Token: IToken = AuthKey.GetFromLocalStorage();
     private _api: ApiClient = new ApiClient();
 
@@ -18,4 +18,4 @@ abstract class StoreTokenBase {
     }
 }
 
-export default StoreTokenBase
+export default StoreAdapterApi

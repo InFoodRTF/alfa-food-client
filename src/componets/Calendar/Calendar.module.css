@@ -10,7 +10,9 @@
 }
 
 .Ignore {
-    padding: 0px;
+    padding: 0;
+    border: none;
+    background: none;
 }
 .textDate{
     height: 30px;

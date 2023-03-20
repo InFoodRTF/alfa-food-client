@@ -1,12 +1,12 @@
-import StoreTokenBase from "./StoreTokenBase";
+import StoreAdapterApi from "../../../../../Api/StoreAdapterApi";
 import {action, makeObservable, observable} from "mobx";
-import Student from "../Model/Student";
-import Grade from "../Model/Grade";
-import Toggle from "../Model/Toggle";
+import Grade from "./Grade";
+import Toggle from "../../../../../Model/Toggle";
+import {IStudent} from "./IStudent";
 
-class StudentsStore extends StoreTokenBase {
+class StudentsStore extends StoreAdapterApi {
     @observable
-    public Students: Student[] = [];
+    public Students: IStudent[] = [];
     @observable
     public Grades: { [id: string]: Grade; } = {};
     @observable                                   // четё ваще выгдяит кринжово // моэйби какой-нибудь общий класс? типа аккордион бла бла
@@ -19,7 +19,7 @@ class StudentsStore extends StoreTokenBase {
 
     @action
     async LoadStudent(): Promise<void> {
-        this.Students = await this.GetData<Student[]>("/students/");
+        this.Students = await this.GetData<IStudent[]>("/students/");
     }
 
 

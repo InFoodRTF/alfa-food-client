@@ -1,8 +1,8 @@
 import {makeAutoObservable, observable} from "mobx";
-import Order from "../Model/Order/Order";
-import AuthKey from "../Model/AuthKey";
-import LoaderPagination from "../Lib/LoaderPagination";
-import Requests from "../Api/Requests";
+import Order from "../../../Model/Order/Order";
+import AuthKey from "../../../Model/AuthKey";
+import LoaderPagination from "../../../Lib/LoaderPagination";
+import Requests from "../../../Api/Requests";
 
 class OrdersStore {
     @observable

@@ -1,12 +1,12 @@
-import StatusResponse from "../Api/StatusResponse";
-import AuthUser from "../Model/AuthUser";
+import StatusResponse from "../../Api/StatusResponse";
+import AuthUser from "./Model/AuthUser";
 import {action, makeObservable, observable} from "mobx";
-import statusResponse from "../Api/StatusResponse";
-import AuthKey from "../Model/AuthKey";
-import baseStoreToken from "./StoreTokenBase";
-import IToken from "../Model/Interface/IToken";
+import statusResponse from "../../Api/StatusResponse";
+import AuthKey from "../../Model/AuthKey";
+import IToken from "../../Model/Interface/IToken";
+import StoreAdapterApi from "../../Api/StoreAdapterApi";
 
-class AuthStore extends baseStoreToken{
+class AuthStore extends StoreAdapterApi {
     @observable
     public ResponseStatus: StatusResponse = statusResponse.Wait;
     @observable
@@ -20,7 +20,7 @@ class AuthStore extends baseStoreToken{
 
     @action
     async UserAuth(): Promise<void> {
-        let {token, statusResponse} = await this.PostWithResult<IToken, AuthUser>(this.url ,this.User);        // можно зарефакторить
+        let {token, statusResponse} = await this.PostWithResult<IToken, AuthUser>(this.url, this.User);
         AuthKey.LoadToLocalStorage(token);
         this.ResponseStatus = statusResponse
     }

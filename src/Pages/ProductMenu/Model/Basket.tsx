@@ -1,10 +1,11 @@
-import IProduct from "./Interface/IFoodMainInfo";
 import {action, computed, makeAutoObservable, observable} from "mobx";
+import {IProduct} from "../../../componets/FoodCard/CardFood";
 
 export default class Basket {
     @observable
-    private cards: IProduct[] = [];
-
+    public cards: IProduct[] = []; // возможно отдельный интерфейсы с count отдельно
+    @observable
+    public sum: number = 0;
     constructor() {
         makeAutoObservable(this)
     }
@@ -14,7 +15,8 @@ export default class Basket {
     }
 
     @action
-    add(product: IProduct): void {
+    Add(product: IProduct): void {
         this.cards.push(product);
+        this.sum += product.price;
     }
 }

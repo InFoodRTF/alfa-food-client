@@ -2,7 +2,7 @@ import React from "react";
 import IParent from "../../../../Model/Interface/IParent";
 import {inject, observer} from "mobx-react";
 import "./ParentMenuStyles.css";
-import StudentsStore from "../../../../Store/StudentsStore";
+import StudentsStore from "./Store/StudentsStore";
 import StudentParent from "../../../../componets/StudentParent";
 import Navibar from "../../../../componets/Navbar/Navibar";
 import FieldProfile from "../../../../componets/FieldProfile/FieldProfile";

@@ -17,12 +17,13 @@ class CalendarView extends React.Component<{ calendar: CalendarSwitch }> {
                 <div className={styles.blockDate}>
                     <p className={styles.textDate}>
                         <button
-                            className={styles.Ignore} onClick={() => this.props.calendar.ChangeOpen()}>{dayjs(this.props.calendar.Date).format('DD.MM.YYYY')} </button>
+                            className={styles.Ignore}
+                            onClick={() => this.props.calendar.ChangeOpen()}>{dayjs(this.props.calendar.Date).format('DD.MM.YYYY')} </button>
                     </p>
                     <button className={styles.Ignore} onClick={() => this.props.calendar.ChangeOpen()}><Image
                         src={calendarIcon} className={styles.blockImage}></Image></button>
                 </div>
-                {this.props.calendar.IsOpen && <Calendar onChange={(e: Date) => this.props.calendar.ChangeDate(e) }
+                {this.props.calendar.IsOpen && <Calendar onChange={(e: Date) => this.props.calendar.ChangeDate(e)}
                                                          value={this.props.calendar.Date}/>
                 }
             </div>

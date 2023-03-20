@@ -6,7 +6,7 @@ import AuthMenu from "./Pages/AuthMenu/AuthMenu";
 import OrdersMenu from "./Pages/UsersMenu/Orders/OrdersMenu";
 import httpPages from "./Pages/HttpPages";
 import PageNotFound from "./Pages/PageNotFound/PageNotFound";
-import TakeOrderMenu from "./Pages/TakeOrderMenu/TakeOrderMenu";
+import ProductMenu from "./Pages/ProductMenu/ProductMenu";
 
 
 @observer
@@ -19,7 +19,7 @@ class App extends React.Component {
                         <Route path={httpPages.Auth} element={<AuthMenu/>}/>
                         <Route path={httpPages.Profile} element={<Profile/>}/>
                         <Route path={httpPages.Orders} element={<OrdersMenu/>}/>
-                        <Route path={httpPages.MenuUsers} element={<TakeOrderMenu/>}/>
+                        <Route path={httpPages.MenuUsers} element={<ProductMenu/>}/>
                         <Route path={httpPages.NotFound} element={<PageNotFound/>}/>;
                 </Routes>
             </div>

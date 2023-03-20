@@ -1,11 +1,11 @@
 import React from "react";
-import Student from "../Model/Student";
 import {observer} from "mobx-react";
-import Grade from "../Model/Grade";
+import Grade from "../Pages/UsersMenu/Profile/Parent/Store/Grade";
 import Toggle from "../Model/Toggle";
+import {IStudent} from "../Pages/UsersMenu/Profile/Parent/Store/IStudent";
 
 @observer
-class StudentParent extends React.Component<{toggle: Toggle, grade: Grade, student: Student, LoadInfoGrade: (e: string) => Promise<void> }> {
+class StudentParent extends React.Component<{ toggle: Toggle, grade: Grade, student: IStudent, LoadInfoGrade: (e: string) => Promise<void> }> {
 
 // придумать как вставить toggle или оставить в store
     render() {
@@ -20,7 +20,6 @@ class StudentParent extends React.Component<{toggle: Toggle, grade: Grade, stude
             </div>
         );
     }
-
 }
 
 export default StudentParent;

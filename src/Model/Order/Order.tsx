@@ -1,6 +1,7 @@
 import OrderItem from "./OrderItem";
 import MealCategory from "../Enum/MealCategory";
-import Student from "../Student";
+import {IStudent} from "../../Pages/UsersMenu/Profile/Parent/Store/IStudent";
+
 
 // зачем классы если из можно сделать интерфейсами?
 class Order {
@@ -9,7 +10,7 @@ class Order {
     order_date: Date = new Date();
     date_ordered: Date = new Date();
     meal_category: MealCategory = MealCategory.DontKnow;
-    student: Student = new Student();
+    student!: IStudent;
 }
 
 export default Order

@@ -1,6 +1,6 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
-import UserStore from "../../../Store/UserStore";
+import UserStore from "../UserStore";
 import ParentProfile from "./Parent/ParentProfile";
 import parent from "../../../Model/Role/Parent";
 import Role from "../../../Model/Enum/Role";

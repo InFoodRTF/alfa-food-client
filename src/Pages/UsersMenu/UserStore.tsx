@@ -1,7 +1,7 @@
 import {action, makeAutoObservable, makeObservable, observable} from "mobx";
-import NotAuthUser from "../Model/Role/NotAuthUser";
-import IUser from "../Model/Interface/IUser";
-import baseStoreToken from "./StoreTokenBase";
+import NotAuthUser from "../../Model/Role/NotAuthUser";
+import IUser from "../../Model/Interface/IUser";
+import baseStoreToken from "../../Api/StoreAdapterApi";
 
 class UserStore extends baseStoreToken {
     @observable

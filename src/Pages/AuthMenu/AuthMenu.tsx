@@ -1,7 +1,7 @@
 import React from "react";
 import InputLogin from "../../componets/InputLogin/InputLogin";
 import {inject, observer} from "mobx-react";
-import AuthStore from "../../Store/AuthStore";
+import AuthStore from "./AuthStore";
 import {Link, Navigate} from "react-router-dom";
 import statusResponse from "../../Api/StatusResponse";
 import httpPages from "../HttpPages";

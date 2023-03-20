@@ -1,12 +1,12 @@
-import React from "react";
 import {createServer, Response} from "miragejs";
 import IUser from "../Model/Interface/IUser";
 import Requests from "./Requests";
 import Role from "../Model/Enum/Role";
 import Order from "../Model/Order/Order";
 import MealCategory from "../Model/Enum/MealCategory";
-import Student from "../Model/Student";
-import Grade from "../Model/Grade";
+import Grade from "../Pages/UsersMenu/Profile/Parent/Store/Grade";
+import {IProduct} from "../componets/FoodCard/CardFood";
+import {IStudent} from "../Pages/UsersMenu/Profile/Parent/Store/IStudent";
 
 export default function server(): void {
 
@@ -24,12 +24,42 @@ export default function server(): void {
                 }
             })
 
+            this.get<IProduct[]>("/products", () => {
+                return [{
+                    id: 1,
+                    name: "Каша",
+                    price: 100,
+                    description: "каша вкусная",
+                    grams: 200,
+                    image: "https://avatars.dzeninfra.ru/get-zen_doc/3401641/pub_5f6c490fd2daf865cca18014_5f6c4933d2daf865cca1bbda/scale_1200",
+                    meal_category: 1
+                },
+                    {
+                        id: 2,
+                        name: "Каша",
+                        price: 100,
+                        description: "каша вкусная",
+                        grams: 200,
+                        image: "https://avatars.dzeninfra.ru/get-zen_doc/3401641/pub_5f6c490fd2daf865cca18014_5f6c4933d2daf865cca1bbda/scale_1200",
+                        meal_category: 1
+                    },
+                    {
+                        id: 3,
+                        name: "Каша",
+                        price: 100,
+                        description: "каша вкусная",
+                        grams: 200,
+                        image: "https://avatars.dzeninfra.ru/get-zen_doc/3401641/pub_5f6c490fd2daf865cca18014_5f6c4933d2daf865cca1bbda/scale_1200",
+                        meal_category: 1
+                    },
 
+                ]
+            })
             this.post(Requests.GetTokenByUser, () => {
-                return new Response(200,{},{token: "faskjdffsd" })
-            }, )
+                return new Response(200, {}, {token: "faskjdffsd"})
+            },)
 
-            this.get<Student[]>(Requests.GetStudets, () => {
+            this.get<IStudent[]>(Requests.GetStudets, () => {
                 return [{
                     id: 1,
                     last_name: "Черт",
@@ -50,11 +80,11 @@ export default function server(): void {
 
             this.get<Grade>("/grades/?name=8 В", () => {
                 return {
-                        name: "8 Б",
-                        shift: 2,
-                        teacher: "valoda",
-                        meal_time: [{meal_category: "обед", meal_end: "10", meal_start: "9"}]
-                    }
+                    name: "8 Б",
+                    shift: 2,
+                    teacher: "valoda",
+                    meal_time: [{meal_category: "обед", meal_end: "10", meal_start: "9"}]
+                }
 
             })
             this.get<Order[]>("http://localhost:3000/orders/?limit=2&offset=0", () => { // не работает хз почему
