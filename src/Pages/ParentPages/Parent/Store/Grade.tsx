@@ -1,4 +1,4 @@
-import {MealTime} from "../../../../../Model/meal-time";
+import {MealTime} from "../../../../Model/meal-time";
 interface Grade {
     name: string;
     shift: number;

@@ -1,11 +1,11 @@
 import React from "react";
-import IParent from "../../../../Model/Interface/IParent";
+import IParent from "../../../Model/Interface/IParent";
 import {inject, observer} from "mobx-react";
 import "./ParentMenuStyles.css";
 import StudentsStore from "./Store/StudentsStore";
-import StudentParent from "../../../../componets/StudentParent";
-import Navibar from "../../../../componets/Navbar/Navibar";
-import FieldProfile from "../../../../componets/FieldProfile/FieldProfile";
+import StudentParent from "../../../componets/StudentParent";
+import FieldProfile from "../../../componets/FieldProfile/FieldProfile";
+import { Navibar } from "../../../componets/Navbar/Navibar";
 
 type injProps = {
     studentStore: StudentsStore;
@@ -29,7 +29,6 @@ class ParentProfile extends React.Component<{ user: IParent }> {
         console.log(this.props.user.balance)
         console.log("это меню родителя")
         return <div>
-            <Navibar/>
             <FieldProfile descr={"имя"} info={user.username}/>
             {studentStore.Students.map((st) => <StudentParent toggle={studentStore.Toggle[st.grade]} grade={studentStore.Grades[st.grade]} key={st.id} student={st}
                                                                      LoadInfoGrade={(e: string) => studentStore.LoadInfoGrade(e)}/>)}

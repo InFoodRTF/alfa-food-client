@@ -3,8 +3,8 @@ import OrderView from "../../../componets/Order/OrderView";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {inject, observer} from "mobx-react";
 import OrdersStore from "./OrdersStore";
-import UserStore from "../UserStore";
-import Navibar from "../../../componets/Navbar/Navibar";
+import UserStore from "../../UsersMenu/UserStore";
+import { Navibar } from "../../../componets/Navbar/Navibar";
 
 
 type injprops = {
@@ -31,7 +31,6 @@ class OrdersMenu extends React.Component {
         let {orderStore, userStore} = this.injected;
         return (
             <div>
-                <Navibar/>
                 <InfiniteScroll hasMore={orderStore.Loader.LoadMore}
                                 loader={"загрузка....."}
                                 next={() => orderStore.Loader.LoadData()}

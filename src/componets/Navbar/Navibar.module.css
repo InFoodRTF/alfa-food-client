@@ -3,6 +3,14 @@
     :root { font-family: 'Inter var', sans-serif; }
 }
 
+.nav{
+    background: #FFFFFF !important;
+    height: 120px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .navBrand{
     display: flex;
     flex-direction: row;
@@ -10,8 +18,6 @@
     justify-content: center;
     padding: 0;
     gap: 12.47px;
-
-    position: absolute;
     left: 20.89%;
     right: 70.35%;
     top: 28.33%;
@@ -19,10 +25,12 @@
 }
 
 .navbarCustom {
+    display: flex;
+    flex-direction: row;
+    gap: 256px;
     background: #FFFFFF !important;
-    align-items: center;
-    justify-content: center;
     height: 120px;
+    width: 1120px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -33,8 +41,6 @@
     padding-top: 0;
     padding-bottom: 0;
     margin-right: 0;
-    /* Inside auto layout */
-
     flex: none;
     order: 0;
     flex-grow: 0;
@@ -49,14 +55,7 @@
     font-weight: 700;
     font-size: 19.653px;
     line-height: 24px;
-
-    /* black */
-
     color: #000000;
-
-
-    /* Inside auto layout */
-
     flex: none;
     order: 1;
     flex-grow: 0;
@@ -67,14 +66,13 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;
-    padding: 10px 8px;
     gap: 40px;
+}
 
-    position: absolute;
-    left: 35.52%;
-    right: 40.73%;
-    top: 24.17%;
-    bottom: 24.17%;
+.navBlockLeft{
+    display: flex;
+    flex-direction: row;
+    gap: 112px;
 }
 
 .navBlockRight{
@@ -82,114 +80,32 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 10px 8px;
     gap: 20px;
-    position: absolute;
-    left: 70.73%;
-    right: 20.83%;
-    top: 24.17%;
-    bottom: 24.17%;
 }
 
-.navItemFood{
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    text-align: center;
-    padding: 10px 20px;
-    gap: 10px;
-    width: 200px;
-    height: 42px;
-
-
-    /* red */
-
+.red{
     background: #F05654 !important;
-    border-radius: 10px;
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-.navLinkFood {
-    width: 200px;
-    height: 22px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
-    /* identical to box height */
-
-
-    /* white */
-
-    color: #FFFFFF !important;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-
-.navLinkFood:hover {
     color: #FFFFFF !important;
 }
 
-.navLinkFood:active {
-    color: #FFFFFF !important;
-}
-
-.navLinkOrder{
-    width: 180px;
-    height: 22px;
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
-    /* identical to box height */
-
-
-    /* black */
-
-    color: #000000;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-}
-
-.navLinkOrder:hover{
-    color: black;
-}
-
-.navItemOrder{
+.navItem{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
     gap: 10px;
-
     width: 200px;
     height: 42px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 1;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: black;
     flex-grow: 0;
 }
 
@@ -198,56 +114,19 @@
     padding: 10px;
     width: 102px;
     height: 42px;
-    flex: none;
     order: 0;
     flex-grow: 0;
-}
-
-.navLinkProfile{
-    width: 82px;
-    height: 22px;
-
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
-
-    /* identical to box height */
-
-
-    /* black */
-
     color: #000000;
-
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
 }
 
 .navItemExit{
     width: 24px;
     height: 24px;
-
-
-    /* Inside auto layout */
-
-    flex: none;
     order: 1;
     flex-grow: 0;
 }
 
-.navLinkMenuRightImage{
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    left: 270px;
-    top: 20px;
-
-
-    /* black */
-
-    /*background: #000000;*/
-}

@@ -1,13 +1,16 @@
 import React from "react";
 import {inject, observer} from "mobx-react";
 import UserStore from "../UserStore";
-import ParentProfile from "./Parent/ParentProfile";
+import ParentProfile from "../../ParentPages/Parent/ParentProfile";
 import parent from "../../../Model/Role/Parent";
 import Role from "../../../Model/Enum/Role";
 import CookerProfile from "./Cooker/CookerMenu";
 import Cooker from "../../../Model/Role/Cooker";
 import Teacher from "../../../Model/Role/Teacher";
 import TeacherProfile from "./Teacher/TeacherProfile";
+import {Navibar} from "../../../componets/Navbar/Navibar";
+import {Route, Routes} from "react-router-dom";
+import IUser from "../../../Model/Interface/IUser";
 
 /*
 type defaultProps = {
@@ -19,31 +22,27 @@ type props = {
 } & defaultProps
 */
 
-type props = {
-    userStore: UserStore;
-}
+
 
 @inject('userStore')
 @observer
-class Profile extends React.Component {
-    get injected(): props {
-        return this.props as props;
-    }
+class Profile extends React.Component<{user: IUser}> {
 
-    async componentDidMount() {
-        await this.injected.userStore.AuthByToken();
 
-        console.log("DinMount");
+    private SwitchUser(role: Role) {
+        switch (role) {
+            case Role.Parent:
+
+        }
     }
 
     render() {
-        const {userStore} = this.injected;
-        console.log(userStore.User.role)
+        console.log("role : " + this.props.user.role)
         return (
             <div>
-                {userStore.User.role === Role.Parent && <ParentProfile user={userStore.User as parent}/>}
-                {userStore.User.role === Role.Cooker && <CookerProfile user={userStore.User as Cooker}/>}
-                {userStore.User.role === Role.Teacher && <TeacherProfile user={userStore.User as Teacher}/>}
+                {this.props.user.role === Role.Parent && <ParentProfile user={this.props.user as parent}/>}
+                {this.props.user.role === Role.Cooker && <CookerProfile user={this.props.user as Cooker}/>}
+                {this.props.user.role === Role.Teacher && <TeacherProfile user={this.props.user as Teacher}/>}
             </div>
         );
     }

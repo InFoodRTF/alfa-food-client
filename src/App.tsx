@@ -3,24 +3,21 @@ import {observer} from "mobx-react";
 import {Route, Routes} from "react-router-dom";
 import Profile from "./Pages/UsersMenu/Profile/Profile";
 import AuthMenu from "./Pages/AuthMenu/AuthMenu";
-import OrdersMenu from "./Pages/UsersMenu/Orders/OrdersMenu";
+import OrdersMenu from "./Pages/ParentPages/Orders/OrdersMenu";
 import httpPages from "./Pages/HttpPages";
-import PageNotFound from "./Pages/PageNotFound/PageNotFound";
-import ProductMenu from "./Pages/ProductMenu/ProductMenu";
+import ProductMenu from "./Pages/ParentPages/ProductMenu/ProductMenu";
+import {RecognizeRole} from "./Pages/SwitherRole/RecognizeRole";
 
 
-@observer
+@observer // пиздец здесь происходит ваще жесть, ааааааааааааааа
 class App extends React.Component {
 
     render() {
         return (
             <div>
                 <Routes>
-                        <Route path={httpPages.Auth} element={<AuthMenu/>}/>
-                        <Route path={httpPages.Profile} element={<Profile/>}/>
-                        <Route path={httpPages.Orders} element={<OrdersMenu/>}/>
-                        <Route path={httpPages.MenuUsers} element={<ProductMenu/>}/>
-                        <Route path={httpPages.NotFound} element={<PageNotFound/>}/>;
+                    <Route path={httpPages.Auth} element={<AuthMenu/>}/>
+                    <Route path={"*"} element={<RecognizeRole/>}/>
                 </Routes>
             </div>
         );

@@ -1,8 +1,8 @@
 import {action, makeObservable, observable} from "mobx";
-import CalendarSwitch from "../../Model/CalendarSwitch";
-import StoreAdapterApi from "../../Api/StoreAdapterApi";
+import CalendarSwitch from "../../../Model/CalendarSwitch";
+import StoreAdapterApi from "../../../Api/StoreAdapterApi";
 import Basket from "./Model/Basket";
-import {IProduct} from "../../componets/FoodCard/CardFood";
+import {IProduct} from "../../../componets/FoodCard/CardFood";
 
 export default class ProductsStore extends StoreAdapterApi {
     @observable

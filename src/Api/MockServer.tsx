@@ -4,9 +4,9 @@ import Requests from "./Requests";
 import Role from "../Model/Enum/Role";
 import Order from "../Model/Order/Order";
 import MealCategory from "../Model/Enum/MealCategory";
-import Grade from "../Pages/UsersMenu/Profile/Parent/Store/Grade";
+import Grade from "../Pages/ParentPages/Parent/Store/Grade";
 import {IProduct} from "../componets/FoodCard/CardFood";
-import {IStudent} from "../Pages/UsersMenu/Profile/Parent/Store/IStudent";
+import {IStudent} from "../Pages/ParentPages/Parent/Store/IStudent";
 
 export default function server(): void {
 
@@ -36,12 +36,12 @@ export default function server(): void {
                 },
                     {
                         id: 2,
-                        name: "Каша",
+                        name: "боршь",
                         price: 100,
                         description: "каша вкусная",
                         grams: 200,
-                        image: "https://avatars.dzeninfra.ru/get-zen_doc/3401641/pub_5f6c490fd2daf865cca18014_5f6c4933d2daf865cca1bbda/scale_1200",
-                        meal_category: 1
+                        image: "http://3.bp.blogspot.com/-8OqhrhZHROQ/TmNe78zU-0I/AAAAAAAAAk8/o2kVYVkh-Ek/s1600/DSC_9234.JPG",
+                        meal_category: 2
                     },
                     {
                         id: 3,
@@ -87,7 +87,7 @@ export default function server(): void {
                 }
 
             })
-            this.get<Order[]>("http://localhost:3000/orders/?limit=2&offset=0", () => { // не работает хз почему
+            /*this.get<Order[]>("http://localhost:3000/orders/?limit=2&offset=0", () => { // не работает хз почему
                 return [
                     {
                         id: 1,
@@ -137,8 +137,8 @@ export default function server(): void {
                         ],
                         meal_category: MealCategory.dinner
                     }
-                ];
-            });
+                ];*/
+           /* });*/
 
             this.passthrough()
         }

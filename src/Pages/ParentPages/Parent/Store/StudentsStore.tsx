@@ -1,7 +1,7 @@
-import StoreAdapterApi from "../../../../../Api/StoreAdapterApi";
+import StoreAdapterApi from "../../../../Api/StoreAdapterApi";
 import {action, makeObservable, observable} from "mobx";
 import Grade from "./Grade";
-import Toggle from "../../../../../Model/Toggle";
+import Toggle from "../../../../Model/Toggle";
 import {IStudent} from "./IStudent";
 
 class StudentsStore extends StoreAdapterApi {
