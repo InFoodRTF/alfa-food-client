@@ -25,8 +25,7 @@ class StudentsStore extends StoreAdapterApi {
 
     @action
     async LoadInfoGrade(name: string): Promise<void> {
-        const result: Grade = await this.GetData<Grade>(`/grades/${name}`);
-        this.Grades[name] = result
+        this.Grades[name] = await this.GetData<Grade>(`/grades/${name}`);
         this.Toggle[name] = new Toggle();  // официально - это самый лютый кринж который я делал, название функций делает ваще другое все каой тугл зочем он здесь? ватт?
         console.log(`${this.Grades[name].name}`)
     }
