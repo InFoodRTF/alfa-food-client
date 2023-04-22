@@ -1,6 +1,6 @@
 import OrderItem from "./OrderItem";
 import MealCategory from "../Enum/MealCategory";
-import {IStudent} from "../../Pages/ParentPages/Parent/Store/IStudent";
+import {IStudent} from "../../Pages/ParentPages/ParentProfile/Store/IStudent";
 
 
 // зачем классы если из инз можно сделать интерфейсами?

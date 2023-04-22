@@ -1,5 +1,5 @@
 import React from "react";
-import Grade from "../Pages/ParentPages/Parent/Store/Grade";
+import Grade from "../Pages/ParentPages/ParentProfile/Store/Grade";
 
 class InfoClass extends React.Component<{ grade: Grade }> {
     render() {

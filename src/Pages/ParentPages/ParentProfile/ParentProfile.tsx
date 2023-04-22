@@ -5,7 +5,6 @@ import "./ParentMenuStyles.css";
 import StudentsStore from "./Store/StudentsStore";
 import StudentParent from "../../../componets/StudentParent";
 import FieldProfile from "../../../componets/FieldProfile/FieldProfile";
-import { Navibar } from "../../../componets/Navbar/Navibar";
 
 type injProps = {
     studentStore: StudentsStore;

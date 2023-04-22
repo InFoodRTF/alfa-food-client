@@ -5,7 +5,7 @@ interface IUser {
     first_name: string;
     last_name: string;
     middle_name: string;
-    readonly role: Role;
+    role: Role;
 }
 
 export default IUser;

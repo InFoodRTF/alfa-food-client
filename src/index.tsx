@@ -7,14 +7,14 @@ import AuthStore from "./Pages/AuthMenu/AuthStore";
 import {BrowserRouter} from "react-router-dom";
 import UserStore from "./Pages/UsersMenu/UserStore";
 import OrdersStore from "./Pages/ParentPages/Orders/OrdersStore";
-import StudentsStore from "./Pages/ParentPages/Parent/Store/StudentsStore";
+import StudentsStore from "./Pages/ParentPages/ParentProfile/Store/StudentsStore";
 
 import ProductsStore from "./Pages/ParentPages/ProductMenu/ProductsStore";
 import server from "./Api/MockServer";
 
 // TODO почему та роле станвоится на 1 больше хз почему но это факт
 server()
-const Stores = [new AuthStore(), new UserStore(), new OrdersStore(), new StudentsStore()] // когда нибдуь я впихну через массив
+    //const Stores = [new AuthStore(), new UserStore(), new OrdersStore(), new StudentsStore()] // когда нибдуь я впихну через массив
 
 
 const root = ReactDOM.createRoot(

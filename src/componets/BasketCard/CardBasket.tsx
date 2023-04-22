@@ -16,11 +16,21 @@ export default class CardBasket extends React.Component<{basket: Basket}>{
                 <div style={{display: "flex", flexDirection: "column", gap: "22px", marginTop:"54px"}}>
                     <div className={styles.mealCategory}>
                         <Card.Text className={styles.cardText}><p>Завтрак</p></Card.Text>
-                        {this.props.basket.BreakfastProducts.map(product => <Product key={product.id} countProduct={this.props.basket.countItems[product.id]} product={product}/>)}
+                        {this.props.basket.BreakfastProducts.map(product =>
+                            <Product key={product.id}
+                                     productCount={this.props.basket.countItems[product.id]}
+                                     product={product}
+                                     put={e => this.props.basket.Put(e)}
+                                     extract={e => this.props.basket.Extract(e)}/>)}
                     </div>
                     <div className={styles.mealCategory}>
                         <Card.Text className={styles.cardText}>Обед</Card.Text>
-                        {this.props.basket.LunchProducts.map(product => <Product key={product.id} countProduct={this.props.basket.countItems[product.id]} product={product}/>)}
+                        {this.props.basket.LunchProducts.map(product =>
+                            <Product key={product.id}
+                                     productCount={this.props.basket.countItems[product.id]}
+                                     product={product}
+                                     put={e => this.props.basket.Put(e)}
+                                     extract={e => this.props.basket.Extract(e)}/>)}
                     </div>
                 </div>
                 <div style={{position: "absolute", bottom: "76px", left: "20px", display: "flex", flexDirection: "row", gap: "15px"}}>

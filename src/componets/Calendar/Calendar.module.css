@@ -9,6 +9,7 @@
     height: 32px;
 }
 
+
 .Ignore {
     padding: 0;
     border: none;
@@ -35,4 +36,9 @@
     flex: none;
     order: 1;
     flex-grow: 0;
+}
+.calendar {
+    position: fixed;
+    width: 100%;
+    z-index:99;
 }

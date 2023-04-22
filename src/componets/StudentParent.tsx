@@ -1,8 +1,8 @@
 import React from "react";
 import {observer} from "mobx-react";
-import Grade from "../Pages/ParentPages/Parent/Store/Grade";
+import Grade from "../Pages/ParentPages/ParentProfile/Store/Grade";
 import Toggle from "../Model/Toggle";
-import {IStudent} from "../Pages/ParentPages/Parent/Store/IStudent";
+import {IStudent} from "../Pages/ParentPages/ParentProfile/Store/IStudent";
 
 @observer
 class StudentParent extends React.Component<{ toggle: Toggle, grade: Grade, student: IStudent, LoadInfoGrade: (e: string) => Promise<void> }> {

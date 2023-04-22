@@ -3,39 +3,39 @@ import OrderView from "../../../componets/Order/OrderView";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {inject, observer} from "mobx-react";
 import OrdersStore from "./OrdersStore";
-import UserStore from "../../UsersMenu/UserStore";
-import { Navibar } from "../../../componets/Navbar/Navibar";
+import IParent from "../../../Model/Interface/IParent";
 
 
-type injprops = {
+type props = {
     orderStore: OrdersStore;
-    userStore: UserStore;
+    user: IParent;
 }
 
-@inject("orderStore", "userStore")
+
+@inject("orderStore")
 @observer
-class OrdersMenu extends React.Component {
-    get injected(): injprops {
-        return this.props as injprops;
+class OrdersMenu extends React.Component<{ user: IParent }> {
+    get injected(): props {
+        return this.props as props;
     }
 
     async componentDidMount() {
         await this.injected.orderStore.Loader.LoadData();
-        await this.injected.userStore.AuthByToken();        // поменять местами, а то кринж
     }
 
     componentWillUnmount() {
     }
 
     render() {
-        let {orderStore, userStore} = this.injected;
+        let {orderStore} = this.injected;
         return (
             <div>
                 <InfiniteScroll hasMore={orderStore.Loader.LoadMore}
                                 loader={"загрузка....."}
                                 next={() => orderStore.Loader.LoadData()}
                                 dataLength={orderStore.Loader.List.length}>
-                    {orderStore.Loader.List.map(order => <OrderView key={order.id} order={order} user={userStore.User}/>)}
+                    {orderStore.Loader.List.map(order => <OrderView key={order.id} order={order}
+                                                                    user={this.props.user}/>)}
                 </InfiniteScroll>
             </div>
         );

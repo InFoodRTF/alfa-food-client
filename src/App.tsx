@@ -1,11 +1,8 @@
 import React from 'react';
 import {observer} from "mobx-react";
 import {Route, Routes} from "react-router-dom";
-import Profile from "./Pages/UsersMenu/Profile/Profile";
 import AuthMenu from "./Pages/AuthMenu/AuthMenu";
-import OrdersMenu from "./Pages/ParentPages/Orders/OrdersMenu";
 import httpPages from "./Pages/HttpPages";
-import ProductMenu from "./Pages/ParentPages/ProductMenu/ProductMenu";
 import {RecognizeRole} from "./Pages/SwitherRole/RecognizeRole";
 
 

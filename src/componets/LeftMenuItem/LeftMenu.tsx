@@ -1,8 +1,8 @@
 import React from "react";
 import LeftButtonItem from "./LeftButtonItem";
 import CalendarView from "../Calendar/CalendarView";
-import CalendarSwitch from "../../Model/CalendarSwitch";
-import {IStudent} from "../../Pages/ParentPages/Parent/Store/IStudent";
+import CalendarSwitch from "../../Pages/ParentPages/ProductMenu/Model/CalendarSwitch";
+import {IStudent} from "../../Pages/ParentPages/ParentProfile/Store/IStudent";
 
 
 class LeftMenu extends React.Component<{ calendar: CalendarSwitch, student: IStudent[] }> {

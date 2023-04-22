@@ -6,6 +6,7 @@ import baseStoreToken from "../../Api/StoreAdapterApi";
 class UserStore extends baseStoreToken {
     @observable
     public User: IUser = new NotAuthUser();
+    public loading: boolean = true;
     private urlGetUser = "/user/"
 
     constructor() {
@@ -16,6 +17,10 @@ class UserStore extends baseStoreToken {
     @action
     async AuthByToken() {
         this.User = await this.GetData(this.urlGetUser);
+    }
+
+    public ChangeLoad(){
+        this.loading = !this.loading
     }
 }
 

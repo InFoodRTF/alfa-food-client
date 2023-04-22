@@ -1,15 +1,12 @@
 import React from "react";
-import {inject, observer} from "mobx-react";
-import UserStore from "../UserStore";
-import ParentProfile from "../../ParentPages/Parent/ParentProfile";
+import {observer} from "mobx-react";
+import ParentProfile from "../../ParentPages/ParentProfile/ParentProfile";
 import parent from "../../../Model/Role/Parent";
 import Role from "../../../Model/Enum/Role";
 import CookerProfile from "./Cooker/CookerMenu";
 import Cooker from "../../../Model/Role/Cooker";
 import Teacher from "../../../Model/Role/Teacher";
 import TeacherProfile from "./Teacher/TeacherProfile";
-import {Navibar} from "../../../componets/Navbar/Navibar";
-import {Route, Routes} from "react-router-dom";
 import IUser from "../../../Model/Interface/IUser";
 
 /*
@@ -24,11 +21,10 @@ type props = {
 
 
 
-@inject('userStore')
 @observer
 class Profile extends React.Component<{user: IUser}> {
 
-
+    // TODO доделать этот свич
     private SwitchUser(role: Role) {
         switch (role) {
             case Role.Parent:

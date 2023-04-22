@@ -5,26 +5,36 @@ import exit from "./Img/r_m_exit.png";
 import {Image, Nav, Navbar} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import httpPages from "../../Pages/HttpPages";
-export class Navibar extends React.Component{
+
+
+// вообще это мы переместить в сторе, но аха, мне лень, поэтому будет так
+const TakeProducts = () => {
+    const order = document.getElementById('order')
+    const watch = document.getElementById('watch')
+    if (order !== null && watch !== null && watch.classList.contains(styles.red)) {
+        order.classList.toggle(styles.red)
+        watch.classList.remove(styles.red)
+    }
+
+}
+
+const orderCheck = () => {
+    const order = document.getElementById('order')
+    const watch = document.getElementById('watch')
+    if (order !== null && watch !== null && order.classList.contains(styles.red)) {
+        order.classList.remove(styles.red)
+        watch.classList.toggle(styles.red)
+    }
+}
+
+export class Navibar extends React.Component {
+
+    componentDidMount() {
+        if (window.location.pathname === httpPages.Orders)
+            orderCheck();
+    }
+
     render() {
-        const TakeProducts = () => {
-            const order = document.getElementById('order')
-            const watch = document.getElementById('watch')
-            if (order !== null && watch !== null && watch.classList.contains(styles.red)) {
-                order.classList.toggle(styles.red)
-                watch.classList.remove(styles.red)
-            }
-
-        }
-
-        const orderCheck = () => {
-            const order = document.getElementById('order')
-            const watch = document.getElementById('watch')
-            if (order !== null && watch !== null && order.classList.contains(styles.red)) {
-                order.classList.remove(styles.red)
-                watch.classList.toggle(styles.red)
-            }
-        }
 
         return (
             <Navbar className={styles.nav}>
@@ -41,7 +51,8 @@ export class Navibar extends React.Component{
                     </Nav.Item>
                     <Nav.Item className={styles.navBlockRight}>
                         <Nav.Link as={Link} to={httpPages.Profile} className={styles.navItemProfile}>Профиль</Nav.Link>
-                        <Nav.Link as={Link} to={httpPages.Auth} className={styles.navItemExit}><Image src={exit}></Image></Nav.Link>
+                        <Nav.Link as={Link} to={httpPages.Auth} className={styles.navItemExit}><Image
+                            src={exit}></Image></Nav.Link>
                     </Nav.Item>
                 </Nav.Item>
             </Navbar>

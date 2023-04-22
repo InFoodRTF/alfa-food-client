@@ -4,9 +4,8 @@ import {inject, observer} from "mobx-react";
 import ProductsStore from "./ProductsStore";
 import CardFood, {IProduct} from "../../../componets/FoodCard/CardFood";
 import LeftMenu from "../../../componets/LeftMenuItem/LeftMenu";
-import StudentsStore from "../Parent/Store/StudentsStore";
+import StudentsStore from "../ParentProfile/Store/StudentsStore";
 import CardBasket from "../../../componets/BasketCard/CardBasket";
-import {Navibar} from "../../../componets/Navbar/Navibar";
 import {FilterFoodItem} from "../../../componets/FilterFoodItem/FilterFoodItem";
 
 type props = {
@@ -26,6 +25,7 @@ class ProductMenu extends React.Component {
         await this.injected.productsStore.GetProduct();        // ченки lifecycly hooks и сделай все красиво бро
     }
 
+    //Todo можно сделать штуку, с map, который хранит кол во колонок!
     render() {
         let {productsStore, studentStore} = this.injected;
 
@@ -44,10 +44,17 @@ class ProductMenu extends React.Component {
                     <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                         <FilterFoodItem/>
                         <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
-                            <div style={{display: "flex", flexDirection: "row", gap: "20px"}}>
-                                {productsStore.FoodCards.map(food => <CardFood key={food.id} product={food}
-                                                                               addToBasket={(e: IProduct) => productsStore.SelectProduct(e)}/>)}
-                            </div>
+                            {productsStore.FoodCards.map(foodColumn =>
+                                <div style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    gap: "20px"
+                                }}> {foodColumn.map(food =>
+                                    <CardFood
+                                        key={food.id}
+                                        product={food}
+                                        addToBasket={(e: IProduct) => productsStore.SelectProduct(e)}/>)}
+                                </div>)}
                         </div>
                     </div>
                     <CardBasket basket={productsStore.Basket}/>
