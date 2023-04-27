@@ -5,6 +5,7 @@ import statusResponse from "../../Api/StatusResponse";
 import AuthKey from "../../Model/AuthKey";
 import IToken from "../../Model/Interface/IToken";
 import StoreAdapterApi from "../../Api/StoreAdapterApi";
+import {ResponseData} from "../../Api/ApiClient";
 
 class AuthStore extends StoreAdapterApi {
     @observable
@@ -20,9 +21,9 @@ class AuthStore extends StoreAdapterApi {
 
     @action
     async UserAuth(): Promise<void> {
-        let {token, statusResponse} = await this.PostWithResult<IToken, AuthUser>(this.url, this.User);
-        AuthKey.LoadToLocalStorage(token);
-        this.ResponseStatus = statusResponse
+        const resp : ResponseData<IToken> = await this.PostWithResult<IToken, AuthUser>(this.url, this.User);
+        AuthKey.LoadToLocalStorage(resp.data);
+        this.ResponseStatus = resp.status;
     }
 }
 

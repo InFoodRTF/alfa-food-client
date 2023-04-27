@@ -11,9 +11,8 @@ import StudentsStore from "./Pages/ParentPages/ParentProfile/Store/StudentsStore
 
 import ProductsStore from "./Pages/ParentPages/ProductMenu/ProductsStore";
 import server from "./Api/MockServer";
-
-// TODO почему та роле станвоится на 1 больше хз почему но это факт
-server()
+import CartStore from "./Pages/ParentPages/ProductMenu/CartStore";
+//server()
     //const Stores = [new AuthStore(), new UserStore(), new OrdersStore(), new StudentsStore()] // когда нибдуь я впихну через массив
 
 
@@ -24,7 +23,7 @@ const root = ReactDOM.createRoot(
 // strict.mode убран!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ВАЖНО ОЧЕНЬ ВАЖНО
 root.render(
     <Provider authStore={new AuthStore()} userStore={new UserStore()} orderStore={new OrdersStore()}
-              studentStore={new StudentsStore()} productsStore={new ProductsStore()}>
+              studentStore={new StudentsStore()} productsStore={new ProductsStore()} cartStore={new CartStore()}>
         <BrowserRouter>
             <App/>
         </BrowserRouter>

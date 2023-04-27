@@ -2,11 +2,11 @@ import React from "react";
 import {Button, Card} from "react-bootstrap";
 import styles from "./CardBasket.module.css";
 import Product from "./Product";
-import Basket from "../../Pages/ParentPages/ProductMenu/Model/Basket";
+import CartStore from "../../Pages/ParentPages/ProductMenu/CartStore";
 import {observer} from "mobx-react";
 
 @observer
-export default class CardBasket extends React.Component<{basket: Basket}>{
+export default class CardBasket extends React.Component<{basket: CartStore}>{
     render() {
         return(
             <Card className={styles.basCard}>

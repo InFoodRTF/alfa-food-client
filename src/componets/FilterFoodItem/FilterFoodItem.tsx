@@ -1,13 +1,14 @@
 import { ButItem } from "./ButItem";
 import React from "react";
+import mealCategory from "../../Model/Enum/MealCategory";
 
-export class FilterFoodItem extends React.Component {
+export class FilterFoodItem extends React.Component<{ChangeMealCategory: (e: mealCategory) => void}> {
     render() {
         return (
             <div style={{display: "flex", flexDirection: "row", gap: "20px", height: "44px"}}>
-                <ButItem w={124} h={44} text={"Завтрак"}/>
-                <ButItem w={94} h={44} text={"Обед"}/>
-                <ButItem w={129} h={44} text={"Полдник"}/>
+                <ButItem w={124} h={44} text={"Завтрак"} ChangeMealCategory={() => this.props.ChangeMealCategory(mealCategory.breakfast)}/>
+                <ButItem w={94} h={44} text={"Обед"} ChangeMealCategory={() => this.props.ChangeMealCategory(mealCategory.lunch)}/>
+                <ButItem w={129} h={44} text={"Полдник"} ChangeMealCategory={() => this.props.ChangeMealCategory(mealCategory.dinner)}/>
             </div>
         )
     }

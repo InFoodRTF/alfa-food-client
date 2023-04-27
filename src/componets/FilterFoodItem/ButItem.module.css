@@ -1,21 +1,27 @@
-.orderButton{
+.orderButtonMenu{
     padding: 10px 20px;
     gap: 10px;
-    left: 1307px;
-    top: 644px;
     background: white !important;
     text-align: center;
     border-radius: 10px;
-}
-
-.buttonText{
     font-family: 'Inter', sans-serif;
     font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
     color: black;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
     margin: 0;
+}
+
+.orderButtonMenu:hover{
+    border-color: white !important;
+}
+
+.redMenu{
+    background-color: #F05654 !important;
+    color: white !important;
+}
+
+.redMenu:hover{
+    border-color: #F05654 !important;
 }

@@ -17,7 +17,7 @@ class OrderView extends React.Component<{ order: Order, user: IUser }> {
                 <h3>ребенок: {this.props.order.student.middle_name} {this.props.order.student.first_name[0]}. {this.props.order.student.last_name[0]}</h3>
                 <h3>Состав заказа:</h3>
                 <p>
-                    {this.props.order.order_items.map(product => <ItemOrder product={product}/>)}
+                    {this.props.order.order_items.map(product => <ItemOrder key={product.id} product={product}/>)}
                 </p>
 
             </div>

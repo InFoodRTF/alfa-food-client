@@ -50,7 +50,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://alfafood.servehttp.com:25565",
+  "proxy": "https://alfafood.gamerzombar.repl.co",
   "devDependencies": {
     "jest-mock-axios": "^4.7.0-beta4",
     "miragejs": "^0.1.47"

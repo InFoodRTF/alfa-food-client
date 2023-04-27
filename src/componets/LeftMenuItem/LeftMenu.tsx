@@ -5,18 +5,18 @@ import CalendarSwitch from "../../Pages/ParentPages/ProductMenu/Model/CalendarSw
 import {IStudent} from "../../Pages/ParentPages/ParentProfile/Store/IStudent";
 
 
-class LeftMenu extends React.Component<{ calendar: CalendarSwitch, student: IStudent[] }> {
-    GetFullName(student: IStudent): string {
-        return `${student.first_name} ${student.middle_name} ${student.last_name}` // ваще можно было бы ватащить и в класс, ибо так то много где нужно это
-    }
-
+class LeftMenu extends React.Component<{
+    calendar: CalendarSwitch,
+    student: IStudent[],
+    ChangeId: (e: number) => void
+}> {
     render() {
         return (
             <div style={{display: "flex", flexDirection: "column", gap: "52px"}}>
                 <CalendarView calendar={this.props.calendar}/>
                 <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
-                    {this.props.student.map(student => <LeftButtonItem key={student.id} w={265} h={49}
-                                                                       text={this.GetFullName(student)}/>)}
+                    {this.props.student.map(student =>
+                        <LeftButtonItem key={student.id} w={265} h={49} student={student} ChangeId={(e) => this.props.ChangeId(e)}/>)}
                 </div>
             </div>
         )

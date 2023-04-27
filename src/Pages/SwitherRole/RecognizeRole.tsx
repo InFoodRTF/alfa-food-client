@@ -4,7 +4,7 @@ import {Navibar} from "../../componets/Navbar/Navibar";
 import Profile from "../UsersMenu/Profile/Profile";
 import HttpPages from "../HttpPages";
 import OrdersMenu from "../ParentPages/Orders/OrdersMenu";
-import ProductMenu from "../ParentPages/ProductMenu/ProductMenu";
+import ProductMenu from "../ParentPages/ProductMenu/ProductsMenu";
 import {inject, observer} from "mobx-react";
 import IUser from "../../Model/Interface/IUser";
 import Role from "../../Model/Enum/Role";

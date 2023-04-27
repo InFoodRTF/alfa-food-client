@@ -1,10 +1,11 @@
 import React from "react";
-import Product from "./Product";
-
-class OrderItem {
-    quantity: number = 0;
-    data_added: Date = new Date();
-    product: Product = new Product();
+interface OrderItem {
+    id: number;
+    quantity: number;
+    data_added: Date;
+    meal_category: string;
+    product_name: string;
+    price: number;
 }
 
 export default OrderItem;

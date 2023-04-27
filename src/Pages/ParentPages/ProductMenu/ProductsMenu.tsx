@@ -7,27 +7,53 @@ import LeftMenu from "../../../componets/LeftMenuItem/LeftMenu";
 import StudentsStore from "../ParentProfile/Store/StudentsStore";
 import CardBasket from "../../../componets/BasketCard/CardBasket";
 import {FilterFoodItem} from "../../../componets/FilterFoodItem/FilterFoodItem";
+import MealCategory from "../../../Model/Enum/MealCategory";
+import CartStore from "./CartStore";
 
 type props = {
     productsStore: ProductsStore;
     studentStore: StudentsStore;
+    cartStore: CartStore;
 }
 
-@inject("productsStore", 'studentStore')
+export interface ItemOrder {
+    items: { [id: string]: Item[]; }
+}
+
+export interface Item {
+    id: number;
+    quantity: number;
+    meal_category: MealCategory;
+    product: IProduct
+}
+
+@inject("productsStore", 'studentStore', 'cartStore')
 @observer
 class ProductMenu extends React.Component {
+    private GetFilteredProduct(mealCategory: MealCategory): IProduct[][] {
+        switch (mealCategory) {
+            case MealCategory.breakfast:
+               return this.injected.productsStore.ProductCardBreakfast;
+            case MealCategory.lunch:
+                return this.injected.productsStore.ProductCardLunch;
+            default :
+                return []
+        }
+
+    }
+
     get injected(): props {
         return this.props as props;
     }
 
     async componentDidMount() {
         await this.injected.studentStore.LoadStudent();
-        await this.injected.productsStore.GetProduct();        // ченки lifecycly hooks и сделай все красиво бро
+        await this.injected.productsStore.LoadMenu();
+        // ченки lifecycly hooks и сделай все красиво бро
     }
 
-    //Todo можно сделать штуку, с map, который хранит кол во колонок!
     render() {
-        let {productsStore, studentStore} = this.injected;
+        const {productsStore, studentStore, cartStore} = this.injected;
 
         return (
             <div>
@@ -40,11 +66,12 @@ class ProductMenu extends React.Component {
                     marginLeft: "auto",
                     marginRight: "auto"
                 }}>
-                    <LeftMenu calendar={productsStore.Calendar} student={studentStore.Students}/>
+                    <LeftMenu calendar={productsStore.Calendar} student={studentStore.Students}
+                              ChangeId={(e) => cartStore.ChangeStudentId(e)}/>
                     <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
-                        <FilterFoodItem/>
+                        <FilterFoodItem ChangeMealCategory={(e) => productsStore.ChangeMealCategory(e)}/>
                         <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
-                            {productsStore.FoodCards.map(foodColumn =>
+                            {this.GetFilteredProduct(productsStore.SelectedMealCategory).map(foodColumn =>
                                 <div style={{
                                     display: "flex",
                                     flexDirection: "row",
@@ -53,11 +80,11 @@ class ProductMenu extends React.Component {
                                     <CardFood
                                         key={food.id}
                                         product={food}
-                                        addToBasket={(e: IProduct) => productsStore.SelectProduct(e)}/>)}
+                                        addToBasket={(e: IProduct) => cartStore.Put(e)}/>)}
                                 </div>)}
                         </div>
                     </div>
-                    <CardBasket basket={productsStore.Basket}/>
+                    <CardBasket basket={cartStore}/>
                 </div>
             </div>
         );
