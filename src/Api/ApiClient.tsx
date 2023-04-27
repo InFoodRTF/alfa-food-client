@@ -1,32 +1,43 @@
 import axios, {AxiosError} from "axios";
 import IToken from "../Model/Interface/IToken";
-import StatusResponse from "./StatusResponse";
 import IUser from "../Model/Interface/IUser";
 import ApiRequest from "./ApiRequest";
 
-// кринж handlera ошибокок нужно сделать или что-то похожее
+
+// концепия интересная, но пока не могу сказать, не мусорный ли это просто код
+export type ResponseData<T> = {
+    data: T,
+    status: number;
+}
+
 class ApiClient extends ApiRequest {
 
-    async PostDataWithResult<TGet, TPost>(url: string, user: TPost): Promise<{ token: TGet, statusResponse: StatusResponse }> {
-        try {
-            let response = await axios.post<TGet>(url, user)
-            console.log('запрос прошел')
-            return {token: response.data, statusResponse: response.status};
-        } catch (err) {
-            const e = err as AxiosError<TGet, any>;
-            console.log('запрос не прошел')
-            return {token: e.response!.data, statusResponse: e.response!.status}  // можно написать обрабочек ошибок типа hadlerError как в angular
-        }
+    async PostDataWithResult<TGet, TPost>(url: string, dataPost: TPost): Promise<ResponseData<TGet>> {
+        const resp = await axios.post<TGet>(url, dataPost)
+            .catch(this.CatchError<TGet>)
+            .then(resp => resp);
+
+        return {data: resp.data, status: resp.status};
     }
 
-    async GetEntityByToken<TE>(token: IToken, url: string): Promise<TE> {
+    // TODO ужас здесь повторяется код!!!
+    async PostDataWithResultByToken<TGet, TPost>(url: string, token: IToken, dataPost: TPost): Promise<ResponseData<TGet>> {
+        const resp = await axios.post(url, dataPost, {headers: {Authorization: `token ${token.token}`}})
+            .catch(this.CatchError<TGet>)
+            .then(resp => resp);
+
+        return {data: resp.data, status: resp.status};
+    }
+
+    // TODo переделеать, в более универальный случай
+    async GetEntityByToken<TGet>(token: IToken, url: string): Promise<TGet> {
         try {
-            let response = await this.GetByToken<TE>(url, token)
+            const response = await this.GetByToken<TGet>(url, token)
             console.log("все окей!")
             return response.data
         } catch (err) {
             const e = err as AxiosError<IUser, any>;
-            throw new Error(`юзер не получен ${e.status}`);
+            throw new Error(`Данные не получены ${e.status}`);
         }
     }
 }
