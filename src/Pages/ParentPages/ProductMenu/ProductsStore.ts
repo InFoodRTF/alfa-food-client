@@ -1,10 +1,10 @@
 import {action, makeObservable, observable} from "mobx";
 import CalendarSwitch from "./Model/CalendarSwitch";
 import StoreAdapterApi from "../../../Api/StoreAdapterApi";
-import CartStore from "./CartStore";
 import {IProduct} from "../../../componets/FoodCard/CardFood";
 import {Item, ItemOrder} from "./ProductsMenu";
 import MealCategory from "../../../Model/Enum/MealCategory";
+
 export default class ProductsStore extends StoreAdapterApi {
     @observable
     Calendar: CalendarSwitch = new CalendarSwitch();
@@ -13,10 +13,10 @@ export default class ProductsStore extends StoreAdapterApi {
     @observable
     ProductCardBreakfast: IProduct[][] = [];
     @observable
-    ProductCardLuncDinner: IProduct[][] = [];
+    ProductCardDinner: IProduct[][] = [];
     @observable
     SelectedMealCategory: MealCategory = MealCategory.breakfast;
-    private _getMenuUrl = (date: string) => `/menu/?date=2023-04-30` // дату если что смени брать из
+    private _getMenuUrl = (date: string) => `/menu/?date=${date}` // дату если что смени брать из
 
 
     constructor() {
@@ -24,20 +24,34 @@ export default class ProductsStore extends StoreAdapterApi {
         makeObservable(this)
     }
 
+    @action
     public ChangeMealCategory(mealCategory: MealCategory): void {
         this.SelectedMealCategory = mealCategory;
     }
+
     @action
     public async LoadMenu(): Promise<void> {
-        const curDate = this.Calendar.Date.toLocaleString().split(',')[0];
+        let curDate = this.Calendar.Date.toLocaleString().split(',')[0];
         const menu: ItemOrder = await this.GetData<ItemOrder>(this._getMenuUrl(curDate));
-        console.log("здесь items")
 
+        this.ClearProducts();
         this.ProductCardBreakfast = this.GetItems(menu.items["Завтрак"]);
         this.ProductCardLunch = this.GetItems(menu.items["Обед"]);
     }
 
-    // TODO название ля поменяй эти item ахуеть как много говорят, прям классная абстракция, сразу одно в голове, а не 1000 разные вещей НЕ ЗАБУДЬ А ТО БУДЕТ КРРИНЖ
+    @action
+    private ClearProducts(): void {
+        this.ProductCardBreakfast = [];
+        this.ProductCardLunch = [];
+        this.ProductCardDinner = [];
+    }
+
+    // формально не нужен, ну а вдруг нуже
+    private ChangeFormat(curDate: string) {
+        let data = curDate.split('.')
+        return `${data[2]}-${data[1]}-${data[0]}`
+    }
+
     private GetItems(items: Item[]): IProduct[][] {
         const AvailableProduct = this.GetAvailableProduct(items);
         return this.GetInColumn(AvailableProduct, 3);

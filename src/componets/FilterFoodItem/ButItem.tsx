@@ -13,6 +13,8 @@ const changeClass = (event: React.MouseEvent) => {
 }
 
 export class ButItem extends React.Component<{ h: number, w: number, text: string, ChangeMealCategory: () => void }> {
+
+
     render() {
         return (
             <Button onClick={(e) => {changeClass(e); this.props.ChangeMealCategory() }} variant={''} bsPrefix={''} className={styles.orderButtonMenu}

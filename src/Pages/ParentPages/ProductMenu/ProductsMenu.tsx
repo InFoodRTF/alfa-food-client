@@ -33,7 +33,7 @@ class ProductMenu extends React.Component {
     private GetFilteredProduct(mealCategory: MealCategory): IProduct[][] {
         switch (mealCategory) {
             case MealCategory.breakfast:
-               return this.injected.productsStore.ProductCardBreakfast;
+                return this.injected.productsStore.ProductCardBreakfast;
             case MealCategory.lunch:
                 return this.injected.productsStore.ProductCardLunch;
             default :
@@ -67,7 +67,7 @@ class ProductMenu extends React.Component {
                     marginRight: "auto"
                 }}>
                     <LeftMenu calendar={productsStore.Calendar} student={studentStore.Students}
-                              ChangeId={(e) => cartStore.ChangeStudentId(e)}/>
+                              changeId={(e) => cartStore.ChangeStudentId(e)} loadMenu={() => productsStore.LoadMenu()} />
                     <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                         <FilterFoodItem ChangeMealCategory={(e) => productsStore.ChangeMealCategory(e)}/>
                         <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
@@ -84,7 +84,7 @@ class ProductMenu extends React.Component {
                                 </div>)}
                         </div>
                     </div>
-                    <CardBasket basket={cartStore}/>
+                    <CardBasket cart={cartStore}/>
                 </div>
             </div>
         );

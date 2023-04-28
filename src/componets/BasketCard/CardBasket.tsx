@@ -6,7 +6,7 @@ import CartStore from "../../Pages/ParentPages/ProductMenu/CartStore";
 import {observer} from "mobx-react";
 
 @observer
-export default class CardBasket extends React.Component<{basket: CartStore}>{
+export default class CardBasket extends React.Component<{cart: CartStore}>{
     render() {
         return(
             <Card className={styles.basCard}>
@@ -16,26 +16,26 @@ export default class CardBasket extends React.Component<{basket: CartStore}>{
                 <div style={{display: "flex", flexDirection: "column", gap: "22px", marginTop:"54px"}}>
                     <div className={styles.mealCategory}>
                         <Card.Text className={styles.cardText}><p>Завтрак</p></Card.Text>
-                        {this.props.basket.BreakfastProducts.map(product =>
+                        {this.props.cart.BreakfastProducts.map(product =>
                             <Product key={product.id}
-                                     productCount={this.props.basket.countItems[product.id]}
+                                     productCount={this.props.cart.countItems[product.id]}
                                      product={product}
-                                     put={e => this.props.basket.Put(e)}
-                                     extract={e => this.props.basket.Extract(e)}/>)}
+                                     put={e => this.props.cart.Put(e)}
+                                     extract={e => this.props.cart.Extract(e)}/>)}
                     </div>
                     <div className={styles.mealCategory}>
                         <Card.Text className={styles.cardText}>Обед</Card.Text>
-                        {this.props.basket.LunchProducts.map(product =>
+                        {this.props.cart.LunchProducts.map(product =>
                             <Product key={product.id}
-                                     productCount={this.props.basket.countItems[product.id]}
+                                     productCount={this.props.cart.countItems[product.id]}
                                      product={product}
-                                     put={e => this.props.basket.Put(e)}
-                                     extract={e => this.props.basket.Extract(e)}/>)}
+                                     put={e => this.props.cart.Put(e)}
+                                     extract={e => this.props.cart.Extract(e)}/>)}
                     </div>
                 </div>
                 <div style={{position: "absolute", bottom: "76px", left: "20px", display: "flex", flexDirection: "row", gap: "15px"}}>
                     <Card.Title className={styles.cardTitle} style={{width: "69px", marginBottom: "0px"}}>Итого:</Card.Title>
-                    <Card.Title className={styles.cardTitle} style={{width: "140px", height: "24px", textAlign: "right", marginBottom: "0px"}}>{this.props.basket.sum}</Card.Title>
+                    <Card.Title className={styles.cardTitle} style={{width: "140px", height: "24px", textAlign: "right", marginBottom: "0px"}}>{this.props.cart.sum}</Card.Title>
                 </div>
                 <div style={{position: "absolute", textAlign: "center", width: "264px", bottom: "19px"}}>
                     <Button variant={''} bsPrefix={''} className={styles.orderButton}><p className={styles.buttonText}>к оформлению</p></Button>

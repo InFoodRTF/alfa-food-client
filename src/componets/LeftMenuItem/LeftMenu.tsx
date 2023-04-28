@@ -8,15 +8,16 @@ import {IStudent} from "../../Pages/ParentPages/ParentProfile/Store/IStudent";
 class LeftMenu extends React.Component<{
     calendar: CalendarSwitch,
     student: IStudent[],
-    ChangeId: (e: number) => void
+    changeId: (e: number) => void,
+    loadMenu: () => void
 }> {
     render() {
         return (
             <div style={{display: "flex", flexDirection: "column", gap: "52px"}}>
-                <CalendarView calendar={this.props.calendar}/>
+                <CalendarView calendar={this.props.calendar} loadMenu={() => this.props.loadMenu()}/>
                 <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                     {this.props.student.map(student =>
-                        <LeftButtonItem key={student.id} w={265} h={49} student={student} ChangeId={(e) => this.props.ChangeId(e)}/>)}
+                        <LeftButtonItem key={student.id} w={265} h={49} student={student} ChangeId={(e) => this.props.changeId(e)}/>)}
                 </div>
             </div>
         )
