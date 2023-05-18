@@ -1,25 +1,39 @@
 import React from "react";
 import LeftButtonItem from "./LeftButtonItem";
-import CalendarView from "../Calendar/CalendarView";
+import CalendarView from "../../Pages/ParentPages/ProductMenu/Component/Calendar/CalendarView";
 import CalendarSwitch from "../../Pages/ParentPages/ProductMenu/Model/CalendarSwitch";
-import {IStudent} from "../../Pages/ParentPages/ParentProfile/Store/IStudent";
 
+
+// здесь штука с операторами, ? ! с календарём
+export interface ButtonClick {
+    text: string;
+    choseToChange: number;
+}
 
 class LeftMenu extends React.Component<{
-    calendar: CalendarSwitch,
-    student: IStudent[],
-    changeId: (e: number) => void,
-    loadMenu: () => void
+    calendar?: CalendarSwitch,
+    ButtonsTextChange: ButtonClick[],
+    onChangeButtons: (e: number) => void,
+    onChangeCalendar: () => void,
+    canDataChange: boolean
 }> {
     render() {
         return (
             <div style={{display: "flex", flexDirection: "column", gap: "52px"}}>
-                <CalendarView calendar={this.props.calendar} loadMenu={() => this.props.loadMenu()}/>
+                <CalendarView calendar={this.props.calendar!}
+                              onDataChange={() => this.props.onChangeCalendar()}
+                              canDataChange={this.props.canDataChange}
+                              modalIsActive={true}
+                />
                 <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
-                    {this.props.student.map(student =>
-                        <LeftButtonItem key={student.id} w={265} h={49} student={student} ChangeId={(e) => this.props.changeId(e)}/>)}
+
+                    {this.props.ButtonsTextChange.map(button =>
+                        <LeftButtonItem key={button.text} w={265} h={49} student={button.text}
+                                        onDataChange={() => this.props.onChangeButtons(button.choseToChange)}
+                                        canDataChange={this.props.canDataChange}/>)}
                 </div>
             </div>
+
         )
     }
 }

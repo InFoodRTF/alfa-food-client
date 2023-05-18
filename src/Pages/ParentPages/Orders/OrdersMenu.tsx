@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {inject, observer} from "mobx-react";
 import OrdersStore from "./OrdersStore";
 import IParent from "../../../Model/Interface/IParent";
+import {OrderHistoryCard} from "./component/OrderCard/OrderCard";
 
 
 type props = {
@@ -37,6 +38,7 @@ class OrdersMenu extends React.Component<{ user: IParent }> {
                     {orderStore.Loader.List.map(order => <OrderView key={order.id} order={order}
                                                                     user={this.props.user}/>)}
                 </InfiniteScroll>
+                <OrderHistoryCard/>
             </div>
         );
     }

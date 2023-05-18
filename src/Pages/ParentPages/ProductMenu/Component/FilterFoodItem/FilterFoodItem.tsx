@@ -1,6 +1,6 @@
 import { ButItem } from "./ButItem";
 import React from "react";
-import mealCategory from "../../Model/Enum/MealCategory";
+import mealCategory from "../../../../../Model/Enum/MealCategory";
 
 export class FilterFoodItem extends React.Component<{ChangeMealCategory: (e: mealCategory) => void}> {
     render() {

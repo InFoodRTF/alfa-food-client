@@ -1,6 +1,6 @@
 .cardFood{
     width: 110px;
-    height: 17px;
+    height: 14px;
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -12,6 +12,7 @@
 .food{
     display: flex;
     flex-direction: row;
+    margin: 5px;
     align-items: center;
     gap: 2px;
 }

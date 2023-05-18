@@ -1,13 +1,14 @@
-import {action, makeObservable, observable} from "mobx";
+import {action, computed, makeObservable, observable} from "mobx";
 import CalendarSwitch from "./Model/CalendarSwitch";
 import StoreAdapterApi from "../../../Api/StoreAdapterApi";
 import {IProduct} from "../../../componets/FoodCard/CardFood";
 import {Item, ItemOrder} from "./ProductsMenu";
 import MealCategory from "../../../Model/Enum/MealCategory";
+import Requests from "../../../Api/Requests";
 
 export default class ProductsStore extends StoreAdapterApi {
     @observable
-    Calendar: CalendarSwitch = new CalendarSwitch();
+    Calendar: CalendarSwitch;
     @observable
     ProductCardLunch: IProduct[][] = [];
     @observable
@@ -15,13 +16,12 @@ export default class ProductsStore extends StoreAdapterApi {
     @observable
     ProductCardDinner: IProduct[][] = [];
     @observable
-    SelectedMealCategory: MealCategory = MealCategory.breakfast;
-    private _getMenuUrl = (date: string) => `/menu/?date=${date}` // дату если что смени брать из
+    SelectedMealCategory: MealCategory = MealCategory.nothing;
 
-
-    constructor() {
+    constructor(calendarSwitch: CalendarSwitch) {
         super()
         makeObservable(this)
+        this.Calendar = calendarSwitch;
     }
 
     @action
@@ -31,12 +31,25 @@ export default class ProductsStore extends StoreAdapterApi {
 
     @action
     public async LoadMenu(): Promise<void> {
-        let curDate = this.Calendar.Date.toLocaleString().split(',')[0];
-        const menu: ItemOrder = await this.GetData<ItemOrder>(this._getMenuUrl(curDate));
-
+        const menu: ItemOrder = await this.GetDataByToken<ItemOrder>(Requests.GetMenu(this.Calendar.CurDate));
         this.ClearProducts();
-        this.ProductCardBreakfast = this.GetItems(menu.items["Завтрак"]);
-        this.ProductCardLunch = this.GetItems(menu.items["Обед"]);
+
+        // todo эту штуку можно сделать явно проще чем есть сейчас
+        for (let key in menu.items) {
+            console.log(key, "это ключ данных")
+            switch (key) {
+                case "Завтрак":
+                    this.ProductCardBreakfast = this.GetProduct(menu.items[key]);
+                    break;
+                case "Обед":
+                    this.ProductCardLunch = this.GetProduct(menu.items[key]);
+                    break;
+                case "Полдник":
+                    this.ProductCardDinner = this.GetProduct(menu.items[key]);
+                    break;
+            }
+        }
+
     }
 
     @action
@@ -46,20 +59,19 @@ export default class ProductsStore extends StoreAdapterApi {
         this.ProductCardDinner = [];
     }
 
-    // формально не нужен, ну а вдруг нуже
-    private ChangeFormat(curDate: string) {
-        let data = curDate.split('.')
-        return `${data[2]}-${data[1]}-${data[0]}`
-    }
-
-    private GetItems(items: Item[]): IProduct[][] {
+    // название так себе - он еще по колоннам распределяет
+    private GetProduct(items: Item[]): IProduct[][] {
         const AvailableProduct = this.GetAvailableProduct(items);
         return this.GetInColumn(AvailableProduct, 3);
     }
 
+
+    // пока реализцация такая, более красивая когда-нибудь потом
     @action
     private GetAvailableProduct(items: Item[]): IProduct[] {
         let result: IProduct[] = [];
+        if (items == null) return result;
+
         for (let item of items) {
             if (item.quantity === 0) continue;
 

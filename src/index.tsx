@@ -12,6 +12,8 @@ import StudentsStore from "./Pages/ParentPages/ParentProfile/Store/StudentsStore
 import ProductsStore from "./Pages/ParentPages/ProductMenu/ProductsStore";
 import server from "./Api/MockServer";
 import CartStore from "./Pages/ParentPages/ProductMenu/CartStore";
+import CalendarSwitch from "./Pages/ParentPages/ProductMenu/Model/CalendarSwitch";
+import {GradesStore} from "./Pages/TeacherPages/MarkClass/Store/GradesStore";
 //server()
     //const Stores = [new AuthStore(), new UserStore(), new OrdersStore(), new StudentsStore()] // когда нибдуь я впихну через массив
 
@@ -19,11 +21,19 @@ import CartStore from "./Pages/ParentPages/ProductMenu/CartStore";
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
-
+const Calendar = new CalendarSwitch();
+const store = {
+    authStore: new AuthStore(),
+    userStore: new UserStore(),
+    orderStore: new OrdersStore(),
+    studentStore: new StudentsStore(),
+    productsStore: new ProductsStore(Calendar),
+    cartStore: new CartStore(Calendar),
+    gradesStore: new GradesStore(Calendar)
+}
 // strict.mode убран!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ВАЖНО ОЧЕНЬ ВАЖНО
 root.render(
-    <Provider authStore={new AuthStore()} userStore={new UserStore()} orderStore={new OrdersStore()}
-              studentStore={new StudentsStore()} productsStore={new ProductsStore()} cartStore={new CartStore()}>
+    <Provider {...store}>
         <BrowserRouter>
             <App/>
         </BrowserRouter>

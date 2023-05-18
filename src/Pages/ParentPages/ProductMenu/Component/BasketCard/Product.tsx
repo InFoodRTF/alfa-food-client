@@ -1,14 +1,14 @@
 import React from "react";
 import {Button, Card} from "react-bootstrap";
 import styles from "./Food.module.css";
-import {IProduct} from "../FoodCard/CardFood";
+import {IProduct} from "../../../../../componets/FoodCard/CardFood";
 import {observer} from "mobx-react";
 
 @observer
 export class Product extends React.Component<{
     product: IProduct,
     productCount: number,
-    put: (e: IProduct) => void,
+    put: (e: IProduct)  => void,
     extract: (e: IProduct) => void}> {
     render() {
         return (

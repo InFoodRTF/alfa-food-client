@@ -10,6 +10,9 @@ import IUser from "../../Model/Interface/IUser";
 import Role from "../../Model/Enum/Role";
 import userStore from "../UsersMenu/UserStore";
 import IParent from "../../Model/Interface/IParent";
+import httpPages from "../HttpPages";
+import {MarkGrades} from "../TeacherPages/MarkClass/MarkGrades";
+import { Footer } from "../../componets/Footer/Footer";
 
 type props = {
     userStore: userStore;
@@ -32,7 +35,9 @@ export class RecognizeRole extends React.Component {
 
         switch (user.role) {
             case Role.Parent:
-                return <Navibar/>;
+                return <Navibar LeftButton={{name: "Заказать питание", link: HttpPages.Products}} rightButton={{name: "Посмотреть заказы", link: HttpPages.Orders}}/>;
+            case Role.Teacher:
+                return <Navibar LeftButton={{name: "Отметить класс", link: httpPages.MyClass}} rightButton={{name: "Выгрузить отчет", link: httpPages.UploadData}}/>
             default:
                 return <></>
         }
@@ -53,7 +58,9 @@ export class RecognizeRole extends React.Component {
                     <Route path={HttpPages.Profile} element={<Profile user={userStore.User}/>}/>
                     <Route path={HttpPages.Orders} element={<OrdersMenu user={userStore.User as IParent}/>}/>
                     <Route path={HttpPages.Products} element={<ProductMenu/>}/>
+                    <Route path={HttpPages.MyClass} element={<MarkGrades/>}/>
                 </Routes>
+                <Footer/>
             </div>
         );
     }

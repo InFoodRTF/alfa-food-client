@@ -1,0 +1,83 @@
+:root { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+    :root { font-family: 'Inter var', sans-serif; }
+}
+.OrderHistoryContainer{
+    display: flex;
+    width: 60%;
+    justify-content:center;
+    margin:0 auto;
+}
+
+.OrderHistoryCard{
+    width: 738px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: none;
+}
+
+.Title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 20px;
+
+    color: #000000;
+}
+
+.Subtitle {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+
+    color: #000000;
+
+
+}
+
+.CardText {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.Date {
+    display: flex;
+    justify-content: left;
+}
+
+.DescriptionText {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.FoodItem {
+    width: 150px;
+
+    color: #000000;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+
+    margin-left: 70px;
+}
+
+.FoodItemCount {
+    width: 35px;
+    color: #BDBDBD;
+
+    margin-left: auto;
+}
+
+.FoodItemPrice {
+
+    width: 100px;
+
+    color: #000000;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+
+    margin-left: auto;
+}

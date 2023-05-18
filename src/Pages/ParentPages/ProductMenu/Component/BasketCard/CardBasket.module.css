@@ -44,6 +44,12 @@
     border-radius: 10px;
 }
 
+.mealCategory{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .buttonText{
     width: 121px;
     height: 19px;
@@ -56,10 +62,4 @@
     flex: none;
     order: 0;
     flex-grow: 0;
-}
-
-.mealCategory{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }

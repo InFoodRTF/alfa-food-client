@@ -4,6 +4,8 @@ class HttpPages {
     Auth: string = "/Auth"
     NotFound: string = "*";
     Products: string = '/Products'
+    MyClass: string = "/myClasses"
+    UploadData: string = "/UploadData"
 }
 
 export default new HttpPages();

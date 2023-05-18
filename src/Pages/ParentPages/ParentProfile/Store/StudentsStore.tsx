@@ -19,13 +19,13 @@ class StudentsStore extends StoreAdapterApi {
 
     @action
     async LoadStudent(): Promise<void> {
-        this.Students = await this.GetData<IStudent[]>("/students/");
+        this.Students = await this.GetDataByToken<IStudent[]>("/students/");
     }
 
 
     @action
     async LoadInfoGrade(name: string): Promise<void> {
-        this.Grades[name] = await this.GetData<Grade>(`/grades/${name}`);
+        this.Grades[name] = await this.GetDataByToken<Grade>(`/grades/${name}`);
         this.Toggle[name] = new Toggle();  // официально - это самый лютый кринж который я делал, название функций делает ваще другое все каой тугл зочем он здесь? ватт?
         console.log(`${this.Grades[name].name}`)
     }

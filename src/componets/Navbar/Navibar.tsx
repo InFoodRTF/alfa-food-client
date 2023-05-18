@@ -27,7 +27,11 @@ const orderCheck = () => {
     }
 }
 
-export class Navibar extends React.Component {
+interface buttonLink {
+    name: string;
+    link: string;
+}
+export class Navibar extends React.Component<{ LeftButton: buttonLink, rightButton: buttonLink }> {
 
     componentDidMount() {
         if (window.location.pathname === httpPages.Orders)
@@ -45,8 +49,8 @@ export class Navibar extends React.Component {
                             <p className={styles.textBrand}>Школьное Питание</p>
                         </Nav.Item>
                         <Nav.Item className={styles.navBlock}>
-                            <Nav.Link as={Link} to={httpPages.Products} className={[styles.navItem, styles.red].join(' ')} id={'order'} onClick={TakeProducts}>Заказать питание</Nav.Link>
-                            <Nav.Link as={Link} to={httpPages.Orders} className={styles.navItem} id={'watch'} onClick={orderCheck}>Посмотреть заказы</Nav.Link>
+                            <Nav.Link as={Link} to={this.props.LeftButton.link} className={[styles.navItem, styles.red].join(' ')} id={'order'} onClick={TakeProducts}>{this.props.LeftButton.name}</Nav.Link>
+                            <Nav.Link as={Link} to={this.props.rightButton.link} className={styles.navItem} id={'watch'} onClick={orderCheck}>{this.props.rightButton.name}</Nav.Link>
                         </Nav.Item>
                     </Nav.Item>
                     <Nav.Item className={styles.navBlockRight}>

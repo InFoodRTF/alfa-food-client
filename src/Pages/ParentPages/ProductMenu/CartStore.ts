@@ -1,92 +1,113 @@
-import {action, makeObservable, observable} from "mobx";
+import {action, computed, makeObservable, observable} from "mobx";
 import {IProduct} from "../../../componets/FoodCard/CardFood";
-import MealCategory from "../../../Model/Enum/MealCategory";
 import storeAdapterApi from "../../../Api/StoreAdapterApi";
+import {ICartInfo} from "./Component/BasketCard/CartView";
+import CalendarSwitch from "./Model/CalendarSwitch";
+import Requests from "../../../Api/Requests";
 
-export default class CartStore extends storeAdapterApi{
+export default class CartStore extends storeAdapterApi {
     @observable
-    public LunchProducts: IProduct[] = [];
+    public Products: IProduct[] = [];
     @observable
-    public DinnerProducts: IProduct[] = [];
+    public countItems: { [id: number]: number; } = {}; // так же изучить computed
     @observable
-    public BreakfastProducts: IProduct[] = [];
+    public StudentId: number = -1;
     @observable
-    public countItems: { [id: number]: number; } = {};
-    @observable
-    public sum: number = 0;
-    @observable
-    public StudentId: number = 0;
-    private _addProductUlr = () => `/cart/add/`
-    private _removeProductUlr = () => `/cart/remove/`
-    constructor() {
+    public Calendar: CalendarSwitch;
+    constructor(calendar: CalendarSwitch) {
         super();
         makeObservable(this);
+        this.Calendar = calendar;
+    }
+
+    @computed
+    get isEmpty() : boolean{
+        return this.Products.length === 0;
+    }
+
+    @computed
+    get sum() {
+        if (this.Products.length !== 0) {
+            return this.Products.map(prod => prod.price * this.countItems[prod.id]).reduce((prevVal, curVal) => prevVal + curVal)
+        }
+
+        return 0;
     }
 
     @action
-    public async Put(product: IProduct): Promise<void> {
-        // TODO здесь можно получить данные и их использвать
-        await this.PostByToken(this._addProductUlr(), {menuitem_id: product.id});
+    async UpdateCart() {
+        await this.GetDataByToken(Requests.GetCart); // TODO ДУмать как часто нужно кидать запрос на cart
+    }
+
+    @action
+    public async UpLoadProduct(product: IProduct) {
+        await this.PostByToken(Requests.AddProductInCart, {menuitem_id: product.id});
+    }
+
+    @action // хз насчёт годности этого isAsync
+    public async Put(product: IProduct, isConnectedWithServer: boolean): Promise<void> {
+        if (isConnectedWithServer) {
+            await this.UpLoadProduct(product);
+        }
+
         if (!this.IsPutted(product.id)) {
             this.PutNew(product);
         }
 
         this.countItems[product.id]++;
-        this.sum += product.price;
     }
 
     @action
     async Extract(product: IProduct): Promise<void> {
-        await this.PostByToken(this._removeProductUlr(), {menuitem_id: product.id});
+        await this.PostByToken(Requests.RemoveProductFromCart, {menuitem_id: product.id});
         if (this.countItems[product.id] === 1) {
             delete this.countItems[product.id];
-            this.RemoveFromBasket(product);
+            this.Remove(product);
         } else {
             this.countItems[product.id]--;
         }
-
-        this.sum -= product.price;
     }
 
     @action
-    ChangeStudentId(studentId: number) {
-        this.StudentId = studentId;
-        console.log("id сменили: " + studentId)
-    }
+    public async changeCart() {
+        console.log(this.StudentId)
+        if (this.StudentId === -1) return;
 
-    private RemoveFromBasket(product: IProduct): void {
-        switch (product.meal_category) {
-            case MealCategory.breakfast:
-                this.Remove(this.BreakfastProducts, product);
-                break;
-            case MealCategory.dinner:
-                this.Remove(this.DinnerProducts, product);
-                break;
-            case MealCategory.lunch:
-                this.Remove(this.LunchProducts, product)
+        this.Products = []
+        this.countItems = {};
+        let cartInfo = await this.GetDataByToken<ICartInfo>(Requests.SwitchCart(this.StudentId, this.Calendar.CurDate))
+        console.log(cartInfo)
+        for (let item of cartInfo.cart_items) {
+            item.product.price = Number(item.product.price);
+            // TODO Каординально изменить логику countItem не очень та и нужен на самом деле
+            for (let j = 0; j < item.quantity; j++)
+                this.Put(item.product, false)
         }
     }
 
-    private Remove(Products: IProduct[], product: IProduct) {
-        const index = Products.indexOf(product);
-        delete Products[index];
+    @action
+        ChangeStudentId(studentId: number) {
+            this.StudentId = studentId;
+            console.log("id сменили: " + studentId)
     }
 
+    // название очень не нравиться поэтому вот -
+    // убирает из коризины элемент
+    @action
+    private Remove(product: IProduct) {
+        const index = this.Products.indexOf(product);
+        delete this.Products[index];
+    }
+
+    @action
     private IsPutted(id: number) {
         return this.countItems[id] !== undefined && this.countItems[id] !== 0;
     }
 
     //TODO ооо великий рефакторинг, приди и сделай по нормальному плз
+    @action
     private PutNew(product: IProduct) {
         this.countItems[product.id] = 0;
-
-        if (product.meal_category === MealCategory.lunch)
-            this.LunchProducts.push(product);
-
-        else if (product.meal_category === MealCategory.dinner)
-            this.DinnerProducts.push(product);
-
-        else if (product.meal_category === MealCategory.breakfast)
-            this.BreakfastProducts.push(product);
+        this.Products.push(product);
     }
 }

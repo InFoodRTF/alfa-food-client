@@ -20,15 +20,20 @@ type props = {
 */
 
 
-
 @observer
-class Profile extends React.Component<{user: IUser}> {
+class Profile extends React.Component<{ user: IUser }> {
 
     // TODO доделать этот свич
-    private SwitchUser(role: Role) {
-        switch (role) {
+    private SwitchUser(user: IUser) {
+        switch (user.role) {
             case Role.Parent:
-
+                return <ParentProfile user={this.props.user as parent}/>;
+            case Role.Teacher:
+                return <TeacherProfile user={this.props.user as Teacher}/>
+            case Role.Cooker:
+                return <CookerProfile user={this.props.user as Cooker}/>
+            default:
+                return <></>
         }
     }
 
@@ -36,9 +41,7 @@ class Profile extends React.Component<{user: IUser}> {
         console.log("role : " + this.props.user.role)
         return (
             <div>
-                {this.props.user.role === Role.Parent && <ParentProfile user={this.props.user as parent}/>}
-                {this.props.user.role === Role.Cooker && <CookerProfile user={this.props.user as Cooker}/>}
-                {this.props.user.role === Role.Teacher && <TeacherProfile user={this.props.user as Teacher}/>}
+                {this.SwitchUser(this.props.user)}
             </div>
         );
     }

@@ -9,7 +9,7 @@ abstract class StoreAdapterApi {
     private _api: ApiClient = new ApiClient();
 
 
-    protected async GetData<T>(url: string): Promise<T> {
+    protected async GetDataByToken<T>(url: string): Promise<T> {
         return await this._api.GetEntityByToken<T>(this.Token, url); // вроде как выглядит неплохо, если так сделать то куча логике не нужно будет повторять в каждом store
     }
 

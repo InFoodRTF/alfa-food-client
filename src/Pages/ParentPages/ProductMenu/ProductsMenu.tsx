@@ -3,12 +3,14 @@ import React from "react";
 import {inject, observer} from "mobx-react";
 import ProductsStore from "./ProductsStore";
 import CardFood, {IProduct} from "../../../componets/FoodCard/CardFood";
-import LeftMenu from "../../../componets/LeftMenuItem/LeftMenu";
+import LeftMenu, {ButtonClick} from "../../../componets/LeftMenuItem/LeftMenu";
 import StudentsStore from "../ParentProfile/Store/StudentsStore";
-import CardBasket from "../../../componets/BasketCard/CardBasket";
-import {FilterFoodItem} from "../../../componets/FilterFoodItem/FilterFoodItem";
+import CartView from "./Component/BasketCard/CartView";
+import {FilterFoodItem} from "./Component/FilterFoodItem/FilterFoodItem";
 import MealCategory from "../../../Model/Enum/MealCategory";
 import CartStore from "./CartStore";
+import ModalConfirmChange from "../../../componets/ModalView/ModalConfirmChange";
+import {IStudent} from "../ParentProfile/Store/IStudent";
 
 type props = {
     productsStore: ProductsStore;
@@ -23,7 +25,6 @@ export interface ItemOrder {
 export interface Item {
     id: number;
     quantity: number;
-    meal_category: MealCategory;
     product: IProduct
 }
 
@@ -40,6 +41,17 @@ class ProductMenu extends React.Component {
                 return []
         }
 
+    }
+
+    GetFullName(students: IStudent[]): ButtonClick[] {
+        let result: ButtonClick[] = [];
+        for (let student of students)
+            result.push({
+                text: `${student.first_name} ${student.middle_name} ${student.last_name}`,
+                choseToChange: student.id
+            }) // ваще можно было бы ватащить и в класс, ибо так то много где нужно это
+
+        return result;
     }
 
     get injected(): props {
@@ -66,8 +78,16 @@ class ProductMenu extends React.Component {
                     marginLeft: "auto",
                     marginRight: "auto"
                 }}>
-                    <LeftMenu calendar={productsStore.Calendar} student={studentStore.Students}
-                              changeId={(e) => cartStore.ChangeStudentId(e)} loadMenu={() => productsStore.LoadMenu()} />
+                    <LeftMenu calendar={productsStore.Calendar} ButtonsTextChange={this.GetFullName(studentStore.Students)}
+                              onChangeButtons={async (e) => {
+                                  cartStore.ChangeStudentId(e);
+                                  await cartStore.changeCart();
+                              }}
+                              onChangeCalendar={async () => {
+                                  await productsStore.LoadMenu();
+                                  await cartStore.changeCart()
+                              }}
+                              canDataChange={cartStore.isEmpty}/>
                     <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                         <FilterFoodItem ChangeMealCategory={(e) => productsStore.ChangeMealCategory(e)}/>
                         <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
@@ -80,11 +100,11 @@ class ProductMenu extends React.Component {
                                     <CardFood
                                         key={food.id}
                                         product={food}
-                                        addToBasket={(e: IProduct) => cartStore.Put(e)}/>)}
+                                        addToCart={(e: IProduct) => cartStore.Put(e, true)}/>)}
                                 </div>)}
                         </div>
                     </div>
-                    <CardBasket cart={cartStore}/>
+                    <CartView cart={cartStore}/>
                 </div>
             </div>
         );

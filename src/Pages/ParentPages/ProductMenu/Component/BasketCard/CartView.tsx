@@ -2,11 +2,16 @@ import React from "react";
 import {Button, Card} from "react-bootstrap";
 import styles from "./CardBasket.module.css";
 import Product from "./Product";
-import CartStore from "../../Pages/ParentPages/ProductMenu/CartStore";
+import CartStore from "../../CartStore";
 import {observer} from "mobx-react";
+import {Item} from "../../ProductsMenu";
+import mealCategory from "../../../../../Model/Enum/MealCategory";
 
+export interface ICartInfo {
+    cart_items: Item[]
+}
 @observer
-export default class CardBasket extends React.Component<{cart: CartStore}>{
+export default class CartView extends React.Component<{cart: CartStore}>{
     render() {
         return(
             <Card className={styles.basCard}>
@@ -16,20 +21,20 @@ export default class CardBasket extends React.Component<{cart: CartStore}>{
                 <div style={{display: "flex", flexDirection: "column", gap: "22px", marginTop:"54px"}}>
                     <div className={styles.mealCategory}>
                         <Card.Text className={styles.cardText}><p>Завтрак</p></Card.Text>
-                        {this.props.cart.BreakfastProducts.map(product =>
+                        {this.props.cart.Products.filter(pro => pro.meal_category === mealCategory.breakfast).map(product =>
                             <Product key={product.id}
                                      productCount={this.props.cart.countItems[product.id]}
                                      product={product}
-                                     put={e => this.props.cart.Put(e)}
+                                     put={e => this.props.cart.Put(e, true)}
                                      extract={e => this.props.cart.Extract(e)}/>)}
                     </div>
                     <div className={styles.mealCategory}>
                         <Card.Text className={styles.cardText}>Обед</Card.Text>
-                        {this.props.cart.LunchProducts.map(product =>
+                        {this.props.cart.Products.filter(prod => prod.meal_category === mealCategory.lunch).map(product =>
                             <Product key={product.id}
                                      productCount={this.props.cart.countItems[product.id]}
                                      product={product}
-                                     put={e => this.props.cart.Put(e)}
+                                     put={e => this.props.cart.Put(e, true)}
                                      extract={e => this.props.cart.Extract(e)}/>)}
                     </div>
                 </div>
@@ -43,7 +48,6 @@ export default class CardBasket extends React.Component<{cart: CartStore}>{
             </Card>
         )
     }
-
 }
 
 // здесь херня с к оформлению она с МАЛЕНЬКОЙ БУКВЫ ибо с большой багггг
