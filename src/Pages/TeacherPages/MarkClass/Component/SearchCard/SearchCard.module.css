@@ -1,0 +1,45 @@
+.foodCard{
+    width: 642px;
+    height: 49px;
+    border-radius: 10px;
+    border-color: white;
+}
+
+.cardBlock{
+    display: flex;
+    flex-direction: row;
+    padding-left: 24px;
+    gap: 27px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.inputField{
+    border: none;
+}
+
+.inputField:focus{
+    outline: 0;
+}
+
+.inputField:focus::placeholder{
+    color: transparent;
+}
+
+.inputField::placeholder{
+    width: 66px;
+    height: 21px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    color: #BDBDBD;
+}
+
+.findIcon{
+    width: 21.72px;
+    height: 21.72px;
+}

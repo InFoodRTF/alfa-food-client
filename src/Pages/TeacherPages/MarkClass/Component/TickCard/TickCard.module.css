@@ -1,0 +1,190 @@
+:root { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+    :root { font-family: 'Inter var', sans-serif; }
+}
+
+.foodCard {
+    width: 642px;
+    height: 49px;
+    border-radius: 10px;
+    border-color: white;
+}
+
+.customCheckbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+label {
+    padding-left: 22px;
+    cursor: pointer;
+}
+label::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 1000px;
+    border: 3px solid #F05654;
+}
+input[type="checkbox"]:checked + label::before {
+    content: '';
+    background-size: 115%;
+    background-position: center;
+    background-image: url("tick_component.png")
+}
+
+.tickContainer{
+    display: block;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.tickContainer input{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.tickForm{
+    position: absolute;
+    width: 21px;
+    height: 21px;
+    border-radius: 1000px;
+    background-image: url("tick_component.png");
+}
+
+.tickContainer:hover input ~ .tickForm{
+    background-color: #ccc;
+}
+
+.tickContainer input:checked ~ .tickForm{
+    background-color: #F05654;
+}
+
+.tickForm:after{
+    background-image: none;
+    position: absolute;
+    display: none;
+}
+
+.tickContainer input:checked ~ .tickForm:after{
+    display: block;
+}
+
+.infBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: left;
+}
+
+.cardBlock{
+    display: flex;
+    flex-direction: row;
+    gap: 27px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.foodName{
+    width: 150px;
+    height: 45px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+}
+
+.cardButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 152px;
+    height: 42.48px;
+    border-radius: 10px;
+    background: #E8E8E8;
+    border-color: #E8E8E8;
+}
+
+.cardButton:hover{
+    background: #E8E8E8;
+    border-color: #E8E8E8;
+}
+
+.cardButton:active{
+    background: #D6D6D6 !important;
+    border-color: #D6D6D6 !important;
+}
+
+.addInfBlock{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.gramBlock{
+    margin-bottom: 0;
+    padding: 0 9px 10px;
+}
+
+.costBlock{
+    width: 68px;
+    height: 24px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}
+
+.gramText{
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #BDBDBD;
+}
+
+.text{
+    width: 10px;
+    height: 17px;
+    margin-bottom: 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+}
+
+.textAdd{
+    margin-bottom: 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}

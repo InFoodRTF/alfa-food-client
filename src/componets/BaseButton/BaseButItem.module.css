@@ -1,0 +1,21 @@
+.orderButton{
+    padding: 10px 20px;
+    background: #F05654 !important;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+}
+
+.orderButton:hover{
+    color: #FFFFFF;
+}
+
+.orderButton:active{
+    background-color: #F2726F !important;
+    border-color: #F2726F !important;
+    color: #FFFFFF !important;
+}
