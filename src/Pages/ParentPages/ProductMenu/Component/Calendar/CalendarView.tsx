@@ -60,8 +60,8 @@ class CalendarView extends React.Component<Props, { showModal: boolean }> {
                               }}
                               value={this.props.calendar.Date}/>
                 }
-                {this.props.modalIsActive &&<ModalExampleBasic
-                    active={this.state.showModal}
+                <ModalExampleBasic
+                    active={this.state.showModal && this.props.modalIsActive}
                     onClose={() => this.setState({showModal: false})}
                     onSubmit={() => {
                         this.props.calendar.ChangeOpen()
@@ -69,7 +69,6 @@ class CalendarView extends React.Component<Props, { showModal: boolean }> {
                     }}>
                     <span>вы уверены, корзину будет очищена</span>
                 </ModalExampleBasic>
-                }
             </div>
         );
     }

@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./LeftButtonItem.module.css";
 import {Button} from "react-bootstrap";
 import ModalExampleBasic from "../ModalView/ModalConfirmChange";
+import {Observer, observer} from "mobx-react";
 
 interface props {
     h: number,
@@ -11,13 +12,14 @@ interface props {
     canDataChange: boolean
 }
 
+@observer
 export class LeftButtonItem extends React.Component<props, {
     showModal: boolean, selectedButton?: DOMTokenList
 }> {
 
     constructor(props: Readonly<props> | props) {
         super(props);
-        this.state = {showModal: false, selectedButton:  undefined}
+        this.state = {showModal: false, selectedButton: undefined}
     }
 
     SelectedButton = (event: DOMTokenList) => {
@@ -38,7 +40,7 @@ export class LeftButtonItem extends React.Component<props, {
                 if (this.props.canDataChange) {
                     this.props.onDataChange();
                     this.SelectedButton(x.currentTarget.classList);
-                } else {
+                } else if (!this.state.showModal) { // если это убрать кнопка "нет" в модальном не будет работать. как я понял при нажатий и открываний окна постоянно запускается этот onСlick или потому что не сразу обновляет showmodal - я точно хз
                     this.setState({showModal: true, selectedButton: x.currentTarget.classList});
                 }
 
@@ -47,12 +49,13 @@ export class LeftButtonItem extends React.Component<props, {
                 <p className={styles.buttonText}>{this.props.student}</p>
 
                 <ModalExampleBasic active={this.state.showModal}
-                                   onClose={() => this.setState({showModal: false})}
+                                   onClose={() => {
+                                       this.setState({showModal: false})
+                                   }}
                                    onSubmit={async () => {
-                                       this.setState({showModal: false})
                                        this.SelectedButton(this.state.selectedButton!)
-                                       await this.props.onDataChange();
                                        this.setState({showModal: false})
+                                       await this.props.onDataChange();
                                    }}>
                     <span> если вы измените ученика, то корзина будет очищена </span>
                 </ModalExampleBasic>
