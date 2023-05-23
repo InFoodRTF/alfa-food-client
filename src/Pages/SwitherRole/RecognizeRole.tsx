@@ -1,5 +1,5 @@
 import React from "react";
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import {Navibar} from "../../componets/Navbar/Navibar";
 import Profile from "../UsersMenu/Profile/Profile";
 import HttpPages from "../HttpPages";
@@ -12,7 +12,8 @@ import userStore from "../UsersMenu/UserStore";
 import IParent from "../../Model/Interface/IParent";
 import httpPages from "../HttpPages";
 import {MarkGrades} from "../TeacherPages/MarkClass/MarkGrades";
-import { Footer } from "../../componets/Footer/Footer";
+import {Footer} from "../../componets/Footer/Footer";
+import Requests from "../../Api/Requests";
 
 type props = {
     userStore: userStore;
@@ -31,23 +32,26 @@ export class RecognizeRole extends React.Component {
         return this.props as props;
     }
 
-    public GetNaviBarUser(user: IUser): JSX.Element {
+    public GetNaviBarUser(user: IUser): JSX.Element { // todo можно сделать так, чтоб он навигировал на правильную страницу, а не через profile
 
         switch (user.role) {
             case Role.Parent:
-                return <Navibar LeftButton={{name: "Заказать питание", link: HttpPages.Products}} rightButton={{name: "Посмотреть заказы", link: HttpPages.Orders}}/>;
+                return <Navibar LeftButton={{name: "Заказать питание", link: HttpPages.Products}}
+                                rightButton={{name: "Посмотреть заказы", link: HttpPages.Orders}}/>;
             case Role.Teacher:
-                return <Navibar LeftButton={{name: "Отметить класс", link: httpPages.MyClass}} rightButton={{name: "Выгрузить отчет", link: httpPages.UploadData}}/>
+                return <Navibar LeftButton={{name: "Отметить класс", link: httpPages.MyClass}}
+                                rightButton={{name: "Выгрузить отчет", link: httpPages.UploadData}}/>
+
             default:
                 return <></>
         }
         // и так всех остальных
     }
+
     render() {
         let {userStore} = this.injected;
         console.log(userStore.User.role)
-        if (userStore.loading)
-        {
+        if (userStore.loading) {
             return <></>
         }
 

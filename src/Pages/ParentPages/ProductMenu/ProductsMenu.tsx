@@ -78,7 +78,7 @@ class ProductMenu extends React.Component {
                     marginLeft: "auto",
                     marginRight: "auto"
                 }}>
-                    <LeftMenu calendar={productsStore.Calendar} ButtonsTextChange={this.GetFullName(studentStore.Students)}
+                    <LeftMenu calendar={productsStore.Calendar} ButtonsText={this.GetFullName(studentStore.Students)}
                               onChangeButtons={async (e) => {
                                   cartStore.ChangeStudentId(e);
                                   await cartStore.changeCart();

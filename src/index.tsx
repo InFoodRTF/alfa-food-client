@@ -3,7 +3,7 @@ import App from "./App";
 import {Provider} from "mobx-react";
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import AuthStore from "./Pages/AuthMenu/AuthStore";
+import AuthStore from "./Pages/Login/AuthStore";
 import {BrowserRouter} from "react-router-dom";
 import UserStore from "./Pages/UsersMenu/UserStore";
 import OrdersStore from "./Pages/ParentPages/Orders/OrdersStore";

@@ -1,8 +1,9 @@
 class HttpPages {
     Profile: string = "/Profile"
     Orders: string = "/Orders"
-    Auth: string = "/Auth"
-    NotFound: string = "*";
+    Login: string = "/login"
+    Auth: string = "*"
+    NotFound: string = "/NotPages";
     Products: string = '/Products'
     MyClass: string = "/myClasses"
     UploadData: string = "/UploadData"

@@ -1,4 +1,3 @@
-
 class Requests {
     GetTokenByUser = "auth/login/";
     User = "/user/";
@@ -6,8 +5,9 @@ class Requests {
     GetStudets = "/students/";
     FoodCards = "/Food";
     GetCart = `/cart/`;
-    AddProductInCart = `/cart/add/`
-      RemoveProductFromCart =  `/cart/remove/`;
+    AddProductInCart = `/cart/add/`;
+    RemoveProductFromCart = `/cart/remove/`;
+    GetGrades = `/grades/`;
     GetMenu = (date: string) => `/menu/?date=${date}`
     SwitchCart = (studentId: number, date: string) => `/cart?menu_date=${date}&student_id=${studentId}`;
 }

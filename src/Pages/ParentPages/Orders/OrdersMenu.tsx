@@ -35,10 +35,9 @@ class OrdersMenu extends React.Component<{ user: IParent }> {
                                 loader={"загрузка....."}
                                 next={() => orderStore.Loader.LoadData()}
                                 dataLength={orderStore.Loader.List.length}>
-                    {orderStore.Loader.List.map(order => <OrderView key={order.id} order={order}
+                    {orderStore.Loader.List.map(order => <OrderHistoryCard key={order.id} order={order}
                                                                     user={this.props.user}/>)}
                 </InfiniteScroll>
-                <OrderHistoryCard/>
             </div>
         );
     }

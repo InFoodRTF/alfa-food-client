@@ -1,9 +1,9 @@
 import React from 'react';
 import {observer} from "mobx-react";
 import {Route, Routes} from "react-router-dom";
-import AuthMenu from "./Pages/AuthMenu/AuthMenu";
 import httpPages from "./Pages/HttpPages";
 import {RecognizeRole} from "./Pages/SwitherRole/RecognizeRole";
+import {LoginPage} from "./Pages/Login/LoginPage";
 
 
 @observer // пиздец здесь происходит ваще жесть, ааааааааааааааа
@@ -13,7 +13,7 @@ class App extends React.Component {
         return (
             <div>
                 <Routes>
-                    <Route path={httpPages.Auth} element={<AuthMenu/>}/>
+                    <Route path={httpPages.Login} element={<LoginPage/>}/>
                     <Route path={"*"} element={<RecognizeRole/>}/>
                 </Routes>
             </div>

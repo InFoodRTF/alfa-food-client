@@ -6,7 +6,7 @@ import urfu from "./Img/urfu.png";
 import teamproject from "./Img/tp.png";
 
 
-export class Footer extends React.Component{
+export class Footer extends React.Component {
     render() {
         return (
             <ModalFooter className={styles.footer}>

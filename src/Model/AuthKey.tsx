@@ -11,7 +11,9 @@ class AuthKey implements IToken{
 
         return this;
     }
-
+    Remove() : void {
+        localStorage.removeItem('token')
+    }
     LoadToLocalStorage(token: IToken): void {
         localStorage.setItem("token", token.token!)
         console.log("вышли из запроса токена")

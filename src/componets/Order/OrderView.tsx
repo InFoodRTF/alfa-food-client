@@ -1,7 +1,7 @@
 import React from "react";
-import Order from "../../Model/Order/Order";
 import IUser from "../../Model/Interface/IUser";
 import ItemOrder from "./ItemOrder";
+import {Order} from "../../Pages/ParentPages/Orders/component/OrderCard/OrderCard";
 
 
 class OrderView extends React.Component<{ order: Order, user: IUser }> {

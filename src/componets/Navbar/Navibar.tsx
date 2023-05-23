@@ -5,6 +5,7 @@ import exit from "./Img/r_m_exit.png";
 import {Image, Nav, Navbar} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import httpPages from "../../Pages/HttpPages";
+import AuthKey from "../../Model/AuthKey";
 
 
 // вообще это мы переместить в сторе, но аха, мне лень, поэтому будет так
@@ -38,6 +39,10 @@ export class Navibar extends React.Component<{ LeftButton: buttonLink, rightButt
             orderCheck();
     }
 
+    // todo это нужно будет вынести за пределы странички
+    RemoveToken() {
+        AuthKey.Remove();
+    }
     render() {
 
         return (
@@ -55,7 +60,7 @@ export class Navibar extends React.Component<{ LeftButton: buttonLink, rightButt
                     </Nav.Item>
                     <Nav.Item className={styles.navBlockRight}>
                         <Nav.Link as={Link} to={httpPages.Profile} className={styles.navItemProfile}>Профиль</Nav.Link>
-                        <Nav.Link as={Link} to={httpPages.Auth} className={styles.navItemExit}><Image
+                        <Nav.Link as={Link} to={httpPages.Login} onClick={() => this.RemoveToken()} className={styles.navItemExit}><Image
                             src={exit}></Image></Nav.Link>
                     </Nav.Item>
                 </Nav.Item>

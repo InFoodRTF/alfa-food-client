@@ -12,7 +12,7 @@ export interface ButtonClick {
 
 class LeftMenu extends React.Component<{
     calendar?: CalendarSwitch,
-    ButtonsTextChange: ButtonClick[],
+    ButtonsText: ButtonClick[],
     onChangeButtons: (e: number) => void,
     onChangeCalendar: () => void,
     canDataChange: boolean
@@ -27,7 +27,7 @@ class LeftMenu extends React.Component<{
                 />
                 <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
 
-                    {this.props.ButtonsTextChange.map(button =>
+                    {this.props.ButtonsText.map(button =>
                         <LeftButtonItem key={button.text} w={265} h={49} student={button.text}
                                         onDataChange={() => this.props.onChangeButtons(button.choseToChange)}
                                         canDataChange={this.props.canDataChange}/>)}

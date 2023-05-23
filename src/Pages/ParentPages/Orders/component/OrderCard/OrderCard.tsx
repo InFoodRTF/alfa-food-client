@@ -2,20 +2,37 @@ import React from "react";
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import styles from "./OrderHistoryCard.module.css"
+import OrderItem from "../../../../../Model/Order/OrderItem";
+import MealCategory from "../../../../../Model/Enum/MealCategory";
+import {IStudent} from "../../../ParentProfile/Store/IStudent";
+import IParent from "../../../../../Model/Interface/IParent";
+import {getInitial} from "../../../../../Lib/GetInitial";
 
-export class OrderHistoryCard extends React.Component {
+
+export interface Order {
+    id: number;
+    order_items: OrderItem[];
+    order_date: Date;
+    date_ordered: Date;
+    meal_category: MealCategory;
+    student: IStudent;
+}
+
+export class OrderHistoryCard extends React.Component<{ order: Order, user: IParent }> {
+
     render() {
+        let {order, user} = this.props;
         return (
             <Container className={styles.OrderHistoryContainer}>
                 <Card className={styles.OrderHistoryCard}>
                     <Card.Body>
-                        <Card.Title className={styles.Title}>Заказ №12337485683568356</Card.Title>
+                        <Card.Title className={styles.Title}>Заказ №{order.id}</Card.Title>
                         <Card.Text><h4 className={styles.Subtitle}>Дата:</h4><p
-                            className={styles.DescriptionText}>30.01.2023</p></Card.Text>
+                            className={styles.DescriptionText}>{order.date_ordered.toLocaleString()}</p></Card.Text>
                         <Card.Text><h4 className={styles.Subtitle}>Заказчик: </h4><p
-                            className={styles.DescriptionText}>Иванов П. И. </p></Card.Text>
+                            className={styles.DescriptionText}>{getInitial(user)}. </p></Card.Text>
                         <Card.Text><h4 className={styles.Subtitle}>Ребенок: </h4><p
-                            className={styles.DescriptionText}>Иванов И. П. 10 “А” класс</p></Card.Text>
+                            className={styles.DescriptionText}>{getInitial(order.student)} {order.student.grade} класс</p></Card.Text>
                         <Card.Text><h4 className={styles.Subtitle}>Состав заказа: </h4></Card.Text>
                         <Card.Text>
                             <h4 className={styles.Subtitle}>Завтрак: </h4>

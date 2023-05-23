@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./LeftButtonItem.module.css";
 import {Button} from "react-bootstrap";
 import ModalExampleBasic from "../ModalView/ModalConfirmChange";
-import {Observer, observer} from "mobx-react";
+import {observer} from "mobx-react";
 
 interface props {
     h: number,

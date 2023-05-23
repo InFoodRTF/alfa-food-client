@@ -21,6 +21,7 @@ class AuthStore extends StoreAdapterApi {
 
     @action
     async UserAuth(): Promise<void> {
+        console.log("fuckyou")
         const resp : ResponseData<IToken> = await this.PostWithResult<IToken, AuthUser>(Requests.GetTokenByUser, this.User);
         AuthKey.LoadToLocalStorage(resp.data);
         this.ResponseStatus = resp.status;

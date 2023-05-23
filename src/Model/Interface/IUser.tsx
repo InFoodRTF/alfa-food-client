@@ -1,10 +1,8 @@
 import Role from "../Enum/Role";
+import {IPerson} from "./IPerson";
 
-interface IUser {
+interface IUser extends IPerson{
     username: string;
-    first_name: string;
-    last_name: string;
-    middle_name: string;
     role: Role;
 }
 
