@@ -36,7 +36,7 @@ export default class CartStore extends storeAdapterApi {
 
     @action
     async UpdateCart() {
-        await this.GetDataByToken(Requests.GetCart); // TODO ДУмать как часто нужно кидать запрос на cart
+        await this.getDataByToken(Requests.GetCart); // TODO ДУмать как часто нужно кидать запрос на cart
     }
 
     @action
@@ -75,7 +75,7 @@ export default class CartStore extends storeAdapterApi {
 
         this.Products = []
         this.countItems = {};
-        let cartInfo = await this.GetDataByToken<ICartInfo>(Requests.SwitchCart(this.StudentId, this.Calendar.CurDate))
+        let cartInfo = await this.getDataByToken<ICartInfo>(Requests.SwitchCart(this.StudentId, this.Calendar.CurDate))
         console.log(cartInfo)
         for (let item of cartInfo.cart_items) {
             item.product.price = Number(item.product.price);
@@ -86,8 +86,9 @@ export default class CartStore extends storeAdapterApi {
     }
 
     @action
-        ChangeStudentId(studentId: number) {
-            this.StudentId = studentId;
+        ChangeStudentId(studentId: string) {
+
+            this.StudentId = Number(studentId);
             console.log("id сменили: " + studentId)
     }
 

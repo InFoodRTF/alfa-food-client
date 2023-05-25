@@ -3,14 +3,14 @@ import React from "react";
 import {inject, observer} from "mobx-react";
 import ProductsStore from "./ProductsStore";
 import CardFood, {IProduct} from "../../../componets/FoodCard/CardFood";
-import LeftMenu, {ButtonClick} from "../../../componets/LeftMenuItem/LeftMenu";
+import LeftMenu, {ClickChange} from "../../../componets/LeftMenuItem/LeftMenu";
 import StudentsStore from "../ParentProfile/Store/StudentsStore";
 import CartView from "./Component/BasketCard/CartView";
 import {FilterFoodItem} from "./Component/FilterFoodItem/FilterFoodItem";
 import MealCategory from "../../../Model/Enum/MealCategory";
 import CartStore from "./CartStore";
-import ModalConfirmChange from "../../../componets/ModalView/ModalConfirmChange";
 import {IStudent} from "../ParentProfile/Store/IStudent";
+import {getFullName} from "../../../Lib/Transormators";
 
 type props = {
     productsStore: ProductsStore;
@@ -43,12 +43,12 @@ class ProductMenu extends React.Component {
 
     }
 
-    GetFullName(students: IStudent[]): ButtonClick[] {
-        let result: ButtonClick[] = [];
+    GetFullNameClickEvent(students: IStudent[]): ClickChange[] { // я бы назвал это костылём
+        let result: ClickChange[] = [];
         for (let student of students)
             result.push({
-                text: `${student.first_name} ${student.middle_name} ${student.last_name}`,
-                choseToChange: student.id
+                text: getFullName(student),
+                choseToChange: student.id.toString()
             }) // ваще можно было бы ватащить и в класс, ибо так то много где нужно это
 
         return result;
@@ -78,7 +78,7 @@ class ProductMenu extends React.Component {
                     marginLeft: "auto",
                     marginRight: "auto"
                 }}>
-                    <LeftMenu calendar={productsStore.Calendar} ButtonsText={this.GetFullName(studentStore.Students)}
+                    <LeftMenu calendar={productsStore.Calendar} ButtonsText={this.GetFullNameClickEvent(studentStore.Students)}
                               onChangeButtons={async (e) => {
                                   cartStore.ChangeStudentId(e);
                                   await cartStore.changeCart();

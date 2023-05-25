@@ -6,7 +6,7 @@ import OrderItem from "../../../../../Model/Order/OrderItem";
 import MealCategory from "../../../../../Model/Enum/MealCategory";
 import {IStudent} from "../../../ParentProfile/Store/IStudent";
 import IParent from "../../../../../Model/Interface/IParent";
-import {getInitial} from "../../../../../Lib/GetInitial";
+import {getInitials} from "../../../../../Lib/Transormators";
 
 
 export interface Order {
@@ -30,9 +30,9 @@ export class OrderHistoryCard extends React.Component<{ order: Order, user: IPar
                         <Card.Text><h4 className={styles.Subtitle}>Дата:</h4><p
                             className={styles.DescriptionText}>{order.date_ordered.toLocaleString()}</p></Card.Text>
                         <Card.Text><h4 className={styles.Subtitle}>Заказчик: </h4><p
-                            className={styles.DescriptionText}>{getInitial(user)}. </p></Card.Text>
+                            className={styles.DescriptionText}>{getInitials(user)}. </p></Card.Text>
                         <Card.Text><h4 className={styles.Subtitle}>Ребенок: </h4><p
-                            className={styles.DescriptionText}>{getInitial(order.student)} {order.student.grade} класс</p></Card.Text>
+                            className={styles.DescriptionText}>{getInitials(order.student)} {order.student.grade} класс</p></Card.Text>
                         <Card.Text><h4 className={styles.Subtitle}>Состав заказа: </h4></Card.Text>
                         <Card.Text>
                             <h4 className={styles.Subtitle}>Завтрак: </h4>

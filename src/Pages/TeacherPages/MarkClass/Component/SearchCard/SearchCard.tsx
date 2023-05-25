@@ -4,7 +4,7 @@ import {Card, Image} from "react-bootstrap";
 import find from "./Vector.png";
 
 
-export class SearchCard extends React.Component{
+export class SearchCard extends React.Component {
     render() {
         return(
             <Card className={styles.foodCard}>

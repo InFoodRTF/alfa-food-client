@@ -31,7 +31,7 @@ export default class ProductsStore extends StoreAdapterApi {
 
     @action
     public async LoadMenu(): Promise<void> {
-        const menu: ItemOrder = await this.GetDataByToken<ItemOrder>(Requests.GetMenu(this.Calendar.CurDate));
+        const menu: ItemOrder = await this.getDataByToken<ItemOrder>(Requests.GetMenu(this.Calendar.CurDate));
         this.ClearProducts();
 
         // todo эту штуку можно сделать явно проще чем есть сейчас

@@ -16,7 +16,7 @@ class UserStore extends baseStoreToken {
 
     @action
     async AuthByToken() {
-        this.User = await this.GetDataByToken(this.urlGetUser);
+        this.User = await this.getDataByToken(this.urlGetUser);
     }
 
     public ChangeLoad(){

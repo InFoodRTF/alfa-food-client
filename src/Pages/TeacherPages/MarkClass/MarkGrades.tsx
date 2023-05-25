@@ -3,35 +3,37 @@ import styles from "./TeacherStyles.module.css";
 import {TickCard} from "./Component/TickCard/TickCard";
 import {SearchCard} from "./Component/SearchCard/SearchCard";
 import {BaseButItem} from "../../../componets/BaseButton/BaseButItem";
-import {inject} from "mobx-react";
+import {inject, observer} from "mobx-react";
 import {GradesStore} from "./Store/GradesStore";
-import {IStudent} from "../../ParentPages/ParentProfile/Store/IStudent";
-import grade from "../../ParentPages/ParentProfile/Store/Grade";
-import LeftMenu from "../../../componets/LeftMenuItem/LeftMenu";
-
-// TODO здесь стор с учениками этого преподавателя. <LeftMenu/> - это я убрал
+import LeftMenu, {ClickChange} from "../../../componets/LeftMenuItem/LeftMenu";
 // <LeftMenu calendar={gradesStore.calendar} ButtonsTextChange={} onChange={} onDataUpdate={}/>
-inject("gradesStore")
 
 interface injectProps {
     gradesStore: GradesStore
 }
 
-
-
+@inject("gradesStore")
+@observer
 export class MarkGrades extends React.Component {
 
     get injected() {
         return this.props as injectProps;
     }
 
-    componentDidMount() {
-
+    async componentDidMount() {
+        await this.injected.gradesStore.getGrades();
     }
 
-    GetGrade() {
-
+    GetGrades(): ClickChange[] {
+        let result: ClickChange[] = []
+        let {grades} = this.injected.gradesStore;
+        for (let key in this.injected.gradesStore.grades) {
+            result.push({text: `${key} класс`, choseToChange: key})
+        }
+        console.log("ататат")
+        return result;
     }
+
     render() {
         let {gradesStore} = this.injected;
         return (
@@ -45,12 +47,19 @@ export class MarkGrades extends React.Component {
                 marginLeft: "auto",
                 marginRight: "auto"
             }}>
+                <LeftMenu calendar={gradesStore.calendar} ButtonsText={this.GetGrades()} onChangeButtons={async (e) => {
+                    gradesStore.changeSelectGrade(e)
+                    await gradesStore.LoadGrade()
+                }} onChangeCalendar={async () => {
+                    await gradesStore.LoadGrade();
+                }} canDataChange={true}/>
                 <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                     <p className={styles.markClass}>Отметить класс</p>
                     <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                         <SearchCard/>
-                        <TickCard/>
-                        <TickCard/>
+                        {gradesStore.GetGradeStudent.map(student =>
+                            <TickCard key={student.id} student={student}/>)}
+
                         <div style={{width: "642px", paddingTop: "10px", textAlign: "center"}}>
                             <BaseButItem w={218} h={39} text={"Сохранить изменения"}/>
                         </div>

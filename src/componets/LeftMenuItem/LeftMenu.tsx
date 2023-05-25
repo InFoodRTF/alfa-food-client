@@ -5,15 +5,15 @@ import CalendarSwitch from "../../Pages/ParentPages/ProductMenu/Model/CalendarSw
 
 
 // здесь штука с операторами, ? ! с календарём
-export interface ButtonClick {
+export interface ClickChange { // todo выглядит как лютый костыль, но пока и так сойдёт
     text: string;
-    choseToChange: number;
+    choseToChange: string;
 }
 
 class LeftMenu extends React.Component<{
     calendar?: CalendarSwitch,
-    ButtonsText: ButtonClick[],
-    onChangeButtons: (e: number) => void,
+    ButtonsText: ClickChange[],
+    onChangeButtons: (e: string) => void,
     onChangeCalendar: () => void,
     canDataChange: boolean
 }> {

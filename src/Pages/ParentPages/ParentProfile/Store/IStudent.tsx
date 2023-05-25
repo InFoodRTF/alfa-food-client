@@ -1,6 +1,6 @@
-import IUser from "../../../../Model/Interface/IUser";
+import {IPerson} from "../../../../Model/Interface/IPerson";
 
-export interface IStudent {
+export interface IStudent extends IPerson{
     id: number;
     last_name: string;
     first_name: string;

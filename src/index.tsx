@@ -22,7 +22,7 @@ const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 const Calendar = new CalendarSwitch();
-const store = {
+const stores = {
     authStore: new AuthStore(),
     userStore: new UserStore(),
     orderStore: new OrdersStore(),
@@ -33,7 +33,7 @@ const store = {
 }
 // strict.mode убран!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ВАЖНО ОЧЕНЬ ВАЖНО
 root.render(
-    <Provider {...store}>
+    <Provider {...stores}>
         <BrowserRouter>
             <App/>
         </BrowserRouter>
