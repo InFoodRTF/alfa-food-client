@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/alfa-food-client/static/css/main.57c813d5.css",
-    "main.js": "/alfa-food-client/static/js/main.a608a41c.js",
-    "static/js/787.10cbd781.chunk.js": "/alfa-food-client/static/js/787.10cbd781.chunk.js",
-    "static/media/logo.svg": "/alfa-food-client/static/media/logo.b5bfa849c395f1a1311dacc7eafcd12d.svg",
-    "index.html": "/alfa-food-client/index.html",
-    "main.57c813d5.css.map": "/alfa-food-client/static/css/main.57c813d5.css.map",
-    "main.a608a41c.js.map": "/alfa-food-client/static/js/main.a608a41c.js.map",
-    "787.10cbd781.chunk.js.map": "/alfa-food-client/static/js/787.10cbd781.chunk.js.map"
+    "main.css": "/static/css/main.57c813d5.css",
+    "main.js": "/static/js/main.79a4b57c.js",
+    "static/js/787.10cbd781.chunk.js": "/static/js/787.10cbd781.chunk.js",
+    "static/media/logo.svg": "/static/media/logo.b5bfa849c395f1a1311dacc7eafcd12d.svg",
+    "index.html": "/index.html",
+    "main.57c813d5.css.map": "/static/css/main.57c813d5.css.map",
+    "main.79a4b57c.js.map": "/static/js/main.79a4b57c.js.map",
+    "787.10cbd781.chunk.js.map": "/static/js/787.10cbd781.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.57c813d5.css",
-    "static/js/main.a608a41c.js"
+    "static/js/main.79a4b57c.js"
   ]
 }
