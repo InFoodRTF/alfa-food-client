@@ -13,7 +13,7 @@ export type ResponseData<T> = {
 class ApiClient extends ApiRequest {
 
     async PostDataWithResult<TGet, TPost>(url: string, dataPost: TPost): Promise<ResponseData<TGet>> {
-        const resp = await axios.post<TGet>("/api/"+url, dataPost)
+        const resp = await axios.post<TGet>(url, dataPost)
             .catch(this.CatchError<TGet>)
             .then(resp => resp);
 
@@ -22,7 +22,7 @@ class ApiClient extends ApiRequest {
 
     // TODO ужас здесь повторяется код!!!
     async PostDataWithResultByToken<TGet, TPost>(url: string, token: IToken, dataPost: TPost): Promise<ResponseData<TGet>> {
-        const resp = await axios.post("/api/"+url, dataPost, {headers: {Authorization: `token ${token.token}`}})
+        const resp = await axios.post(url, dataPost, {headers: {Authorization: `token ${token.token}`}})
             .catch(this.CatchError<TGet>)
             .then(resp => resp);
 
@@ -32,7 +32,7 @@ class ApiClient extends ApiRequest {
     // TODo переделеать, в более универальный случай
     async GetEntityByToken<TGet>(token: IToken, url: string): Promise<TGet> {
         try {
-            const response = await this.GetByToken<TGet>("/api/"+url, token)
+            const response = await this.GetByToken<TGet>(url, token)
             console.log("все окей!")
             return response.data
         } catch (err) {
