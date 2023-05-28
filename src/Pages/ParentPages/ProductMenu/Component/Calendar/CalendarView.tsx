@@ -55,9 +55,7 @@ class CalendarView extends React.Component<Props, { showModal: boolean }> {
                 {
                     this.props.calendar.IsOpen &&
                     <Calendar className={styles.calendar}
-                              onChange={async (e: Date) => {
-                                  await this.ChangeData(e)
-                              }}
+                              onChange={async (e: Date) => await this.ChangeData(e)}
                               value={this.props.calendar.Date}/>
                 }
                 <ModalExampleBasic

@@ -57,8 +57,8 @@ export class MarkGrades extends React.Component {
                     <p className={styles.markClass}>Отметить класс</p>
                     <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                         <SearchCard/>
-                        {gradesStore.GetGradeStudent.map(student =>
-                            <TickCard key={student.id} student={student}/>)}
+                        {gradesStore.GetSelectedGradeStudent.map(student =>
+                            <TickCard key={student.student!.id} studentAttend={student} onChange={() => gradesStore.changeMarkAttendance(student)} />)}
 
                         <div style={{width: "642px", paddingTop: "10px", textAlign: "center"}}>
                             <BaseButItem w={218} h={39} text={"Сохранить изменения"}/>

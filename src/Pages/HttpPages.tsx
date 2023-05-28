@@ -7,6 +7,7 @@ class HttpPages {
     Products: string = '/Products'
     MyClass: string = "/myClasses"
     UploadData: string = "/UploadData"
+    CreateMenu: string = "Menus"
 }
 
 export default new HttpPages();

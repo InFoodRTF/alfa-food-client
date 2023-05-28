@@ -2,9 +2,8 @@ import StoreAdapterApi from "../../../../Api/StoreAdapterApi";
 import CalendarSwitch from "../../../ParentPages/ProductMenu/Model/CalendarSwitch";
 import Requests from "../../../../Api/Requests";
 import Grade from "../../../ParentPages/ParentProfile/Store/Grade";
-import {action, computed, makeObservable, observable, toJS} from "mobx";
-import {IStudent} from "../../../ParentPages/ParentProfile/Store/IStudent";
-import {AttendedGrade} from "./attendedGrade";
+import {action, computed, makeObservable, observable} from "mobx";
+import {AttendedGrade, AttendedStudent} from "./attendedGrade";
 import MealCategory from "../../../../Model/Enum/MealCategory";
 import {getStringMealCategory} from "../../../../Lib/Transormators";
 
@@ -28,19 +27,24 @@ export class GradesStore extends StoreAdapterApi {
     public ChangeMealCategory(mealCategory: MealCategory): void {
         this.SelectedMealCategory = mealCategory;
     }
+
     @action
-    changeSelectGrade(GradeName: string) {
-        this.SelectedGradeName = GradeName
+    changeSelectGrade(gradeName: string) {
+        this.SelectedGradeName = gradeName
+    }
+    @action
+    changeMarkAttendance(attendStudent: AttendedStudent){
+        console.log("work", this.GetSelectedGradeStudent)
+       attendStudent.mark_attendance = !attendStudent.mark_attendance
     }
 
     @computed
-    get GetGradeStudent(): IStudent[] {
-        if (this.grades[this.SelectedGradeName] === undefined && this.grades[this.SelectedGradeName] === undefined )
+    get GetSelectedGradeStudent(): AttendedStudent[] {
+        if (this.grades[this.SelectedGradeName] === undefined && this.grades[this.SelectedGradeName] === undefined)
             return []
 
-        return this.grades[this.SelectedGradeName].attended_students.map(x => x.student);
+        return this.grades[this.SelectedGradeName].attended_students
     }
-
 
     @action
     async getGrades(): Promise<void> {
@@ -57,6 +61,6 @@ export class GradesStore extends StoreAdapterApi {
                 getStringMealCategory(this.SelectedMealCategory),
                 this.calendar.CurDate))
 
-        this.grades[this.SelectedGradeName].attended_students = attendedGrade.attended_students
+        this.grades[this.SelectedGradeName].attended_students = attendedGrade.attended_students;
     }
 }

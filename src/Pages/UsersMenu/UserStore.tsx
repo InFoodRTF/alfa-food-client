@@ -2,8 +2,9 @@ import {action, makeObservable, observable} from "mobx";
 import NotAuthUser from "../../Model/Role/NotAuthUser";
 import IUser from "../../Model/Interface/IUser";
 import baseStoreToken from "../../Api/StoreAdapterApi";
+import StoreAdapterApi from "../../Api/StoreAdapterApi";
 
-class UserStore extends baseStoreToken {
+class UserStore extends StoreAdapterApi {
     @observable
     public User: IUser = new NotAuthUser();
     public loading: boolean = true;

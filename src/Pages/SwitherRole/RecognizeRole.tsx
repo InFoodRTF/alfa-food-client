@@ -37,11 +37,14 @@ export class RecognizeRole extends React.Component {
         switch (user.role) {
             case Role.Parent:
                 return <Navibar LeftButton={{name: "Заказать питание", link: HttpPages.Products}}
-                                rightButton={{name: "Посмотреть заказы", link: HttpPages.Orders}}/>;
+                                SecondButton={{name: "Посмотреть заказы", link: HttpPages.Orders}}/>;
             case Role.Teacher:
                 return <Navibar LeftButton={{name: "Отметить класс", link: httpPages.MyClass}}
-                                rightButton={{name: "Выгрузить отчет", link: httpPages.UploadData}}/>
-
+                                SecondButton={{name: "Выгрузить отчет", link: httpPages.UploadData}}/>
+            case Role.Cooker:
+                return <Navibar LeftButton={{name: "составить меню", link: httpPages.CreateMenu}}
+                                SecondButton={{name: "Добавить Блюдо", link: "dfasfd"}}
+                                thirdButton={{name: "Выгрузить отчёт", link: "asf"}}/>
             default:
                 return <></>
         }
