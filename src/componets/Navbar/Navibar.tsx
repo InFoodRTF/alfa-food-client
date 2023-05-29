@@ -3,7 +3,7 @@ import React from "react";
 import logo from "./Img/Mask group.png";
 import exit from "./Img/r_m_exit.png";
 import {Image, Nav, Navbar} from "react-bootstrap";
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, redirect, useNavigate} from "react-router-dom";
 import httpPages from "../../Pages/HttpPages";
 import AuthKey from "../../Model/AuthKey";
 
@@ -112,6 +112,8 @@ export class Navibar extends React.Component<{ LeftButton: buttonLink, SecondBut
                         <Nav.Link as={Link} to={httpPages.Profile} className={styles.navItemProfile}>Профиль</Nav.Link>
                         <Nav.Link as={Link} to={httpPages.Login} onClick={() => {
                             this.RemoveToken()
+                            let x = useNavigate()
+                            x(0);
                         }} className={styles.navItemExit}><Image
                             src={exit}></Image></Nav.Link>
                     </Nav.Item>

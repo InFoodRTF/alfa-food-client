@@ -5,14 +5,13 @@ import httpPages from "./Pages/HttpPages";
 import {RecognizeRole} from "./Pages/SwitherRole/RecognizeRole";
 import {LoginPage} from "./Pages/Login/LoginPage";
 
-
 @observer // пиздец здесь происходит ваще жесть, ааааааааааааааа
 class App extends React.Component {
 
     render() {
         return (
             <div>
-                <Routes>
+                <Routes >
                     <Route path={httpPages.Login} element={<LoginPage/>}/>
                     <Route path={"*"} element={<RecognizeRole/>}/>
                 </Routes>

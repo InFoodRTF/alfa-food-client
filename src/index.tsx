@@ -34,7 +34,7 @@ const stores = {
 // strict.mode убран!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ВАЖНО ОЧЕНЬ ВАЖНО
 root.render(
     <Provider {...stores}>
-        <BrowserRouter>
+        <BrowserRouter >
             <App/>
         </BrowserRouter>
 

@@ -14,7 +14,7 @@ import httpPages from "../HttpPages";
 import {MarkGrades} from "../TeacherPages/MarkClass/MarkGrades";
 import {Footer} from "../../componets/Footer/Footer";
 import Requests from "../../Api/Requests";
-
+import { redirect } from 'react-router-dom';
 type props = {
     userStore: userStore;
 }
@@ -66,6 +66,7 @@ export class RecognizeRole extends React.Component {
                     <Route path={HttpPages.Orders} element={<OrdersMenu user={userStore.User as IParent}/>}/>
                     <Route path={HttpPages.Products} element={<ProductMenu/>}/>
                     <Route path={HttpPages.MyClass} element={<MarkGrades/>}/>
+                    <Route path={"*"} element={<Navigate to={HttpPages.Login}/>}/>
                 </Routes>
                 <Footer/>
             </div>
