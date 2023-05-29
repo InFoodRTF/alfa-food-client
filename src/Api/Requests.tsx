@@ -2,7 +2,7 @@ class Requests { // ухх, это выглядит все сложнее и с�
     GetTokenByUser = "/api/auth/login/";
     User = "/api/user/";
     Orders = "/api/orders/";
-    GetStudets = "/api/students/";
+    GetStudets = "/api/students/";   //пропустил N в GetStudeNts
     FoodCards = "/Food";
     GetCart = `/api/cart/`;
     AddProductInCart = `/api/cart/add/`;
