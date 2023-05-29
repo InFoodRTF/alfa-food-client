@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/auth/login/",
-      "destination": "https://alfafood.gamerzombar.repl.co/"
+      "destination": "https://alfafood.gamerzombar.repl.co/auth/login/"
     }
   ]
 }
