@@ -3,6 +3,7 @@ import NotAuthUser from "../../Model/Role/NotAuthUser";
 import IUser from "../../Model/Interface/IUser";
 import baseStoreToken from "../../Api/StoreAdapterApi";
 import StoreAdapterApi from "../../Api/StoreAdapterApi";
+import Requests from "../../Api/Requests";
 
 class UserStore extends StoreAdapterApi {
     @observable
@@ -17,7 +18,7 @@ class UserStore extends StoreAdapterApi {
 
     @action
     async AuthByToken() {
-        this.User = await this.getDataByToken(this.urlGetUser);
+        this.User = await this.getDataByToken(Requests.User);
     }
 
     public ChangeLoad(){
