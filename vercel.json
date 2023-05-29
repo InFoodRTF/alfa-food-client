@@ -6,7 +6,7 @@
     },
     {
       "source": "/static/:path(.*)",
-      "destination": "https://alfafood.gamerzombar.repl.co/staic/:path*"
+      "destination": "https://alfafood.gamerzombar.repl.co/static/:path*"
     }
   ]
 }
