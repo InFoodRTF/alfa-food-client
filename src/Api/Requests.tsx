@@ -1,5 +1,5 @@
 class Requests { // ухх, это выглядит все сложнее и сложнее)))
-    GetTokenByUser = "auth/login/";
+    GetTokenByUser = "/api/auth/login/"; // TODO если что нахуй убрать api бялть
     User = "/user/";
     Orders = "/orders/";
     GetStudets = "/students/";
