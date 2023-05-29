@@ -3,6 +3,7 @@ import {action, makeObservable, observable} from "mobx";
 import Grade from "./Grade";
 import Toggle from "../../../../Model/Toggle";
 import {IStudent} from "./IStudent";
+import Requests from "../../Api/Requests";
 
 class StudentsStore extends StoreAdapterApi {
     @observable
@@ -19,7 +20,7 @@ class StudentsStore extends StoreAdapterApi {
 
     @action
     async LoadStudent(): Promise<void> {
-        this.Students = await this.getDataByToken<IStudent[]>("/students/");
+        this.Students = await this.getDataByToken<IStudent[]>(Requests.GetStudets);
     }
 
 
