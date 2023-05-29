@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/api/auth/login/",
+      "source": "auth/login/",
       "destination": "https://alfafood.gamerzombar.repl.co/auth/login/"
     }
   ]
