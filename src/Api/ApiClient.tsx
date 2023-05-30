@@ -10,6 +10,7 @@ export type ResponseData<T> = {
     status: number;
 }
 
+// TODO ужас здесь повторяется код!!!
 class ApiClient extends ApiRequest {
 
     async PostDataWithResult<TGet, TPost>(url: string, dataPost: TPost): Promise<ResponseData<TGet>> {
@@ -20,7 +21,14 @@ class ApiClient extends ApiRequest {
         return {data: resp.data, status: resp.status};
     }
 
-    // TODO ужас здесь повторяется код!!!
+    async PatchDataWithResult<TGet, TPost>(url: string, token: IToken, dataPost: TPost): Promise<ResponseData<TGet>> { // todo убери токен в правую часть аргуменутом плз!!!
+        const resp = await axios.patch(url, dataPost, {headers: {Authorization: `token ${token.token}`}})
+            .catch(this.CatchError<TGet>)
+            .then(resp => resp);
+
+        return {data: resp.data, status: resp.status};
+    }
+
     async PostDataWithResultByToken<TGet, TPost>(url: string, token: IToken, dataPost: TPost): Promise<ResponseData<TGet>> {
         const resp = await axios.post(url, dataPost, {headers: {Authorization: `token ${token.token}`}})
             .catch(this.CatchError<TGet>)

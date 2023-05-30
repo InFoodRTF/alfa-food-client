@@ -14,14 +14,16 @@ export class TickCard extends React.Component<{ studentAttend: AttendedStudent, 
             <Card className={styles.foodCard}>
                 <div className={styles.cardBlock}>
                     <div className={styles.infBlock}>
-                        <input onChange={() => this.props.onChange()} defaultChecked={this.props.studentAttend.mark_attendance} type="button" id={this.props.studentAttend.student!.id.toString()}/>
-                        <label htmlFor={"student"}></label>
+                        <input onClick={() => this.props.onChange()} defaultChecked={this.props.studentAttend.mark_attendance} type="checkbox" id={this.props.studentAttend.student!.id.toString()}/>
+                        <label htmlFor={this.props.studentAttend.student!.id.toString()}></label>
                     </div>
                     <div className={styles.addInfBlock}>
                         <p className={styles.textAdd}>{getFullName(this.props.studentAttend.student!)}</p>
                     </div>
                 </div>
             </Card>
+
+
         )
     }
 }

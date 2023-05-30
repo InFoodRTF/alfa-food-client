@@ -12,12 +12,16 @@ abstract class StoreAdapterApi {
         return await this._api.GetEntityByToken<T>(this.Token, url); // вроде как выглядит неплохо, если так сделать то куча логике не нужно будет повторять в каждом store
     }
 
-    protected async PostWithResult<TGet, TPost>(url: string, data: TPost): Promise<ResponseData<TGet>> {
+    protected async postWithResult<TGet, TPost>(url: string, data: TPost): Promise<ResponseData<TGet>> {
         return await this._api.PostDataWithResult<TGet, TPost>(url, data);
     }
 
-    protected async PostByToken<TGet, TPost>(url: string, data: TPost): Promise<ResponseData<TGet>> {
+    protected async postByToken<TGet, TPost>(url: string, data: TPost): Promise<ResponseData<TGet>> {
         return await this._api.PostDataWithResultByToken(url, this.Token, data);
+    }
+
+    protected async patchByToken<TGet, TPost>(url: string, data: TPost): Promise<ResponseData<TGet>> {
+        return await this._api.PatchDataWithResult(url, this.Token, data);
     }
 }
 

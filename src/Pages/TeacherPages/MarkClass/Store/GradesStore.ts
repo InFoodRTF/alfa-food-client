@@ -6,6 +6,7 @@ import {action, computed, makeObservable, observable} from "mobx";
 import {AttendedGrade, AttendedStudent} from "./attendedGrade";
 import MealCategory from "../../../../Model/Enum/MealCategory";
 import {getStringMealCategory} from "../../../../Lib/Transormators";
+import grade from "../../../ParentPages/ParentProfile/Store/Grade";
 
 export class GradesStore extends StoreAdapterApi {
     @observable
@@ -32,10 +33,13 @@ export class GradesStore extends StoreAdapterApi {
     changeSelectGrade(gradeName: string) {
         this.SelectedGradeName = gradeName
     }
+
     @action
-    changeMarkAttendance(attendStudent: AttendedStudent){
+    async changeMarkAttendance(attendStudent: AttendedStudent) {
         console.log("work", this.GetSelectedGradeStudent)
-       attendStudent.mark_attendance = !attendStudent.mark_attendance
+        attendStudent.mark_attendance = !attendStudent.mark_attendance
+        await this.patchByToken<{}, {mark_attendance: string}>(Requests.ChangeAttendances(attendStudent.id),
+            {mark_attendance: attendStudent.mark_attendance ? "true": "false"}); // todo здесь очень интересная система
     }
 
     @computed
@@ -48,6 +52,7 @@ export class GradesStore extends StoreAdapterApi {
 
     @action
     async getGrades(): Promise<void> {
+        console.log("градес ")
         let grades = await this.getDataByToken<Grade[]>(Requests.GetGrades)
         for (let grade of grades) {
             this.grades[grade.name] = {attended_students: []};

@@ -6,6 +6,7 @@ export interface AttendedGrade {
 }
 
 export interface AttendedStudent {
+    id: number;
     student?: IStudent;
     mark_attendance: boolean;
     absent_reason: string;

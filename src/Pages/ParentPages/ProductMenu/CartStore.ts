@@ -41,7 +41,7 @@ export default class CartStore extends storeAdapterApi {
 
     @action
     public async UpLoadProduct(product: IProduct) {
-        await this.PostByToken(Requests.AddProductInCart, {menuitem_id: product.id});
+        await this.postByToken(Requests.AddProductInCart, {menuitem_id: product.id});
     }
 
     @action // хз насчёт годности этого isAsync
@@ -59,7 +59,7 @@ export default class CartStore extends storeAdapterApi {
 
     @action
     async Extract(product: IProduct): Promise<void> {
-        await this.PostByToken(Requests.RemoveProductFromCart, {menuitem_id: product.id});
+        await this.postByToken(Requests.RemoveProductFromCart, {menuitem_id: product.id});
         if (this.countItems[product.id] === 1) {
             delete this.countItems[product.id];
             this.Remove(product);
