@@ -1,4 +1,4 @@
-const vercel = ""
+const vercel = "/api/"
 class Requests { // ухх, это выглядит все сложнее и сложнее)))
     GetTokenByUser = "/api/auth/login/";
     User = "/api/user/";

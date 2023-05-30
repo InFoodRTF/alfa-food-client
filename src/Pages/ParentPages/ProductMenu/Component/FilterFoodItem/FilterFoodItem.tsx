@@ -2,6 +2,8 @@ import { ButItem } from "./ButItem";
 import React from "react";
 import mealCategory from "../../../../../Model/Enum/MealCategory";
 
+
+// todo штука с mealcategory устаревшая, она не нужно, если что mealcategory могут быть кастомные!!!!
 export class FilterFoodItem extends React.Component<{ChangeMealCategory: (e: mealCategory) => void}> {
     render() {
         return (

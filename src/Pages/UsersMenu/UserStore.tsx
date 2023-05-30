@@ -9,7 +9,6 @@ class UserStore extends StoreAdapterApi {
     @observable
     public User: IUser = new NotAuthUser();
     public loading: boolean = true;
-    private urlGetUser = "/user/"
 
     constructor() {
         super()

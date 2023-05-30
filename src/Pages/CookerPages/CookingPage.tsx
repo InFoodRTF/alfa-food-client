@@ -1,9 +1,27 @@
 import React from "react";
 import buttonStyles from "../Components/BaseButton/BaseButItem.module.css";
-/*export class CookingPage extends React.Component{
+import CalendarView from "../ParentPages/ProductMenu/Component/Calendar/CalendarView";
+import {inject} from "mobx-react";
+import {MenuStore} from "./Store/MenuStore";
+import calendarView from "../ParentPages/ProductMenu/Component/Calendar/CalendarView";
+import { BaseButItem } from "../../componets/BaseButton/BaseButItem";
+import {FilterFoodItem} from "../ParentPages/ProductMenu/Component/FilterFoodItem/FilterFoodItem";
+
+type props = {
+    menuStore: MenuStore;
+}
+/*
+
+@inject("menuStore")
+export class CookingPage extends React.Component{
+    get injected() {
+        return this.props as props;
+    }
+
     render() {
+        let {menuStore} = this.injected;
         return (
-             <body style={{background:"#F8F8F8"}}>
+            <body style={{background:"#F8F8F8"}}>
             <div style={{
                 display: "flex",
                 flexDirection: "row",
@@ -16,7 +34,7 @@ import buttonStyles from "../Components/BaseButton/BaseButItem.module.css";
                 minHeight: "580px"
             }}>
                 <div style={{display: "flex", flexDirection: "column", gap: "39px"}}>
-                    <Calendar/>
+                    <CalendarView calendar={menuStore.Calendar} />
                     <div style={{display: "flex", flexDirection: "column", gap: "26px", paddingTop: "2.5px"}}>
                         <BaseButItem w={264} h={44} style={buttonStyles.cardButton} text={"Добавить новое меню"}/>
                         <LeftMenuCooking/>
@@ -42,4 +60,5 @@ import buttonStyles from "../Components/BaseButton/BaseButItem.module.css";
             </body>
         )
     }
-}*/
+}
+*/

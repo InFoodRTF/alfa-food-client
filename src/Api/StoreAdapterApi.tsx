@@ -2,7 +2,6 @@ import React from "react";
 import AuthKey from "../Model/AuthKey";
 import IToken from "../Model/Interface/IToken";
 import ApiClient, {ResponseData} from "./ApiClient";
-import StatusResponse from "./StatusResponse";
 
 abstract class StoreAdapterApi {
     private Token: IToken = AuthKey.GetFromLocalStorage();
