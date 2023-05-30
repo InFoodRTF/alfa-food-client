@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/api/:path((?!uk/).*)",
+      "source": "/api/:path(.*)",
       "destination": "https://alfafood.gamerzombar.repl.co/:path*"
+    },
+    {
+      "source": "/static/:path(.*)",
+      "destination": "https://alfafood.gamerzombar.repl.co/static/:path*"
     }
   ]
 }
