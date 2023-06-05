@@ -4,7 +4,7 @@ import {inject, observer} from "mobx-react";
 import OrdersStore from "./OrdersStore";
 import {OrderHistoryCard} from "./component/OrderCard/OrderCard";
 import UserStore from "../../UserStore";
-import {PageComponent} from "../../Injected";
+import {PageComponent} from "../../PageComponent";
 
 
 type props = {

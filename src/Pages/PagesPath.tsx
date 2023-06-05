@@ -1,5 +1,5 @@
 const baseUrl = ""
-class HttpPages {
+class PagesPath {
     Profile: string = baseUrl + "/profile"
     Orders: string = baseUrl + "/orders"
     Login: string = baseUrl +  "/login"
@@ -8,7 +8,7 @@ class HttpPages {
     Products: string = baseUrl + '/Products'
     MyClass: string = baseUrl + "/myClasses"
     UploadData: string = baseUrl + "/uploadData"
-    CreateMenu: string = baseUrl +  "menus"
+    CreateMenu: string = baseUrl +  "/menus"
 }
 
-export default new HttpPages();
+export default new PagesPath();

@@ -1,21 +1,24 @@
 import React from "react";
-import buttonStyles from "../Components/BaseButton/BaseButItem.module.css";
-import CalendarView from "../ParentPages/ProductMenu/Component/Calendar/CalendarView";
+import CalendarView from "../PagesParent/ProductMenu/Component/Calendar/CalendarView";
 import {inject} from "mobx-react";
 import {MenuStore} from "./Store/MenuStore";
-import calendarView from "../ParentPages/ProductMenu/Component/Calendar/CalendarView";
 import { BaseButItem } from "../../componets/BaseButton/BaseButItem";
-import {FilterFoodItem} from "../ParentPages/ProductMenu/Component/FilterFoodItem/FilterFoodItem";
+import {FilterFoodItem} from "../PagesParent/ProductMenu/Component/FilterFoodItem/FilterFoodItem";
+import {PageComponent} from "../PageComponent";
+import {LeftMenuCooking} from "../../componets/LeftMenuCooking/LeftMenuCooking";
+import {InputCook} from "../../componets/InputFieldCooking/InputCook";
+import { CreatingCard } from "../../componets/CreatingFoodCard/CreatingCard";
+import { EditingCard } from "../../componets/EditingFoodCard/EditingCard";
 
 type props = {
     menuStore: MenuStore;
 }
-/*
-
+// todo <BaseButItem w={264} h={44} text={"Изменить"}/> сделать, так, чтоб можно было через chicldrenWithProps все делать!
 @inject("menuStore")
-export class CookingPage extends React.Component{
-    get injected() {
-        return this.props as props;
+export class CookingPage extends PageComponent<props> {
+
+    async componentDidMount() {
+        await this.injected.menuStore.loadAvailableMenu();
     }
 
     render() {
@@ -34,19 +37,19 @@ export class CookingPage extends React.Component{
                 minHeight: "580px"
             }}>
                 <div style={{display: "flex", flexDirection: "column", gap: "39px"}}>
-                    <CalendarView calendar={menuStore.Calendar} />
+                    <CalendarView calendar={menuStore.Calendar} modalIsActive={true} canDataChange={true} onDataChange={() => this.injected.menuStore.loadAvailableMenu()}/>
                     <div style={{display: "flex", flexDirection: "column", gap: "26px", paddingTop: "2.5px"}}>
-                        <BaseButItem w={264} h={44} style={buttonStyles.cardButton} text={"Добавить новое меню"}/>
-                        <LeftMenuCooking/>
-                        <BaseButItem w={264} h={44} style={buttonStyles.cardButton} text={"Изменить"}/>
+                        <BaseButItem w={264} h={44} text={"Добавить новое меню"}/>
+                        {menuStore.Menus.map(menu => <LeftMenuCooking menu={menu} key={menu.id}/>)}
+                        <BaseButItem w={264} h={44} text={"Изменить"}/>
                     </div>
                 </div>
                 <div style={{display: "flex", flexDirection: "column", gap: "23px"}}>
                     <div style={{display: "flex", flexDirection: "column", gap: "18px"}}>
                         <InputCook/>
                         <div style={{display: "flex", flexDirection: "row", gap: "20px"}}>
-                            <FilterFoodItem/>
-                            <BaseButItem w={208} h={44} style={buttonStyles.cardButton} text={"Добавить категорию"}/>
+                            <FilterFoodItem ChangeMealCategory={() => console.log()}/>
+                            <BaseButItem w={208} h={44} text={"Добавить категорию"}/>
                         </div>
                     </div>
                     <div style={{display: "flex", flexDirection: "row", gap: "20px", paddingTop: "2.5px"}}>
@@ -56,9 +59,7 @@ export class CookingPage extends React.Component{
                     </div>
                 </div>
             </div>
-            <FooterCooking firstButtonText={"Составить меню"} secondButtonText={"Добавить блюдо"} thirdButtonText={"Выгрузить отчет"}/>
             </body>
         )
     }
 }
-*/

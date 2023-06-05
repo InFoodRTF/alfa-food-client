@@ -2,9 +2,9 @@ import {createServer, Response} from "miragejs";
 import IUser from "../Model/Interface/IUser";
 import Requests from "./Requests";
 import Role from "../Model/Enum/Role";
-import Grade from "../Pages/ParentPages/ParentProfile/Store/Grade";
+import Grade from "../Pages/Store/Grade";
 import {IProduct} from "../componets/FoodCard/CardFood";
-import {IStudent} from "../Pages/ParentPages/ParentProfile/Store/IStudent";
+import {IStudent} from "../Pages/Store/IStudent";
 
 export default function server(): void {
 

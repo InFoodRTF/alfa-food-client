@@ -1,18 +1,18 @@
 import React from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Navibar} from "../../componets/Navbar/Navibar";
-import HttpPages from "../HttpPages";
-import OrdersMenu from "../ParentPages/Orders/OrdersMenu";
-import ProductMenu from "../ParentPages/ProductMenu/ProductsMenu";
+import HttpPages from "../PagesPath";
+import OrdersMenu from "../PagesParent/Orders/OrdersMenu";
+import ProductMenu from "../PagesParent/ProductMenu/ProductsMenu";
 import {inject, observer} from "mobx-react";
 import IUser from "../../Model/Interface/IUser";
 import Role from "../../Model/Enum/Role";
-import IParent from "../../Model/Interface/IParent";
-import httpPages from "../HttpPages";
-import {MarkGrades} from "../TeacherPages/MarkClass/MarkGrades";
+import httpPages from "../PagesPath";
+import {MarkGrades} from "../PagesTeacher/MarkClass/MarkGrades";
 import {Footer} from "../../componets/Footer/Footer";
 import { Profile } from "../Profile/Profile";
 import UserStore from "../UserStore";
+import {CookingPage} from "../PagesCooker/CookingPage";
 type props = {
     userStore: UserStore;
 }
@@ -20,7 +20,6 @@ type props = {
 @inject("userStore")
 @observer
 export class Router extends React.Component {
-
     async componentDidMount() {
         await this.injected.userStore.AuthByToken();
         await this.injected.userStore.ChangeLoad();
@@ -64,6 +63,7 @@ export class Router extends React.Component {
                     <Route path={HttpPages.Orders} element={<OrdersMenu/>}/>
                     <Route path={HttpPages.Products} element={<ProductMenu/>}/>
                     <Route path={HttpPages.MyClass} element={<MarkGrades/>}/>
+                    <Route path={httpPages.CreateMenu} element={<CookingPage/>}/>
                     <Route path={"*"} element={<Navigate to={HttpPages.Login}/>}/>
                 </Routes>
                 <Footer/>

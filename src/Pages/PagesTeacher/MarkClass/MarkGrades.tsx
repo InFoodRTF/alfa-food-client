@@ -6,7 +6,7 @@ import {BaseButItem} from "../../../componets/BaseButton/BaseButItem";
 import {inject, observer} from "mobx-react";
 import {GradesStore} from "./Store/GradesStore";
 import LeftMenu, {ClickChange} from "../../../componets/LeftMenuItem/LeftMenu";
-import {PageComponent} from "../../Injected";
+import {PageComponent} from "../../PageComponent";
 
 interface InjectProps {
     gradesStore: GradesStore
@@ -22,7 +22,6 @@ export class MarkGrades extends PageComponent<InjectProps> {
 
     GetGrades(): ClickChange[] {
         let result: ClickChange[] = []
-        let {grades} = this.injected.gradesStore;
         for (let key in this.injected.gradesStore.grades) {
             result.push({text: `${key} класс`, choseToChange: key})
         }

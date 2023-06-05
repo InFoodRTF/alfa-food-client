@@ -1,4 +1,4 @@
-import {IStudent} from "../../../ParentPages/ParentProfile/Store/IStudent";
+import {IStudent} from "../../../Store/IStudent";
 import {action, makeObservable, observable} from "mobx";
 
 export interface AttendedGrade {

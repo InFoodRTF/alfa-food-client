@@ -1,7 +1,7 @@
 import React from "react";
 import LeftButtonItem from "./LeftButtonItem";
-import CalendarView from "../../Pages/ParentPages/ProductMenu/Component/Calendar/CalendarView";
-import CalendarSwitch from "../../Pages/ParentPages/ProductMenu/Model/CalendarSwitch";
+import CalendarView from "../../Pages/PagesParent/ProductMenu/Component/Calendar/CalendarView";
+import CalendarSwitch from "../../Pages/PagesParent/ProductMenu/Model/CalendarSwitch";
 
 
 // здесь штука с операторами, ? ! с календарём

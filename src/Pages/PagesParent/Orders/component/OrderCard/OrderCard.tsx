@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import styles from "./OrderHistoryCard.module.css"
 import OrderItem from "../../../../../Model/Order/OrderItem";
 import MealCategory from "../../../../../Model/Enum/MealCategory";
-import {IStudent} from "../../../ParentProfile/Store/IStudent";
+import {IStudent} from "../../../../Store/IStudent";
 import {getInitials} from "../../../../../Lib/Transormators";
 import IUser from "../../../../../Model/Interface/IUser";
 

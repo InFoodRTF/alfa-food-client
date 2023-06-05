@@ -3,8 +3,8 @@ import React from "react";
 import logo from "./Img/Mask group.png";
 import exit from "./Img/r_m_exit.png";
 import {Image, Nav, Navbar} from "react-bootstrap";
-import {Link, Navigate, redirect, useNavigate} from "react-router-dom";
-import httpPages from "../../Pages/HttpPages";
+import {Link, useNavigate} from "react-router-dom";
+import httpPages from "../../Pages/PagesPath";
 import AuthKey from "../../Model/AuthKey";
 
 

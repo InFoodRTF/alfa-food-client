@@ -4,12 +4,12 @@ import {inject, observer} from "mobx-react";
 import ProductsStore from "./ProductsStore";
 import CardFood, {IProduct} from "../../../componets/FoodCard/CardFood";
 import LeftMenu, {ClickChange} from "../../../componets/LeftMenuItem/LeftMenu";
-import StudentsStore from "../ParentProfile/Store/StudentsStore";
+import StudentsStore from "../../Store/StudentsStore";
 import CartView from "./Component/BasketCard/CartView";
 import {FilterFoodItem} from "./Component/FilterFoodItem/FilterFoodItem";
 import MealCategory from "../../../Model/Enum/MealCategory";
 import CartStore from "./CartStore";
-import {IStudent} from "../ParentProfile/Store/IStudent";
+import {IStudent} from "../../Store/IStudent";
 import {getFullName} from "../../../Lib/Transormators";
 
 type props = {

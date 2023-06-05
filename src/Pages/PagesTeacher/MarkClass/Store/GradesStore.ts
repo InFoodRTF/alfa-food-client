@@ -1,12 +1,12 @@
 import StoreAdapterApi from "../../../../Api/StoreAdapterApi";
-import CalendarSwitch from "../../../ParentPages/ProductMenu/Model/CalendarSwitch";
+import CalendarSwitch from "../../../PagesParent/ProductMenu/Model/CalendarSwitch";
 import Requests from "../../../../Api/Requests";
-import Grade from "../../../ParentPages/ParentProfile/Store/Grade";
+import Grade from "../../../Store/Grade";
 import {action, computed, makeObservable, observable} from "mobx";
 import {AttendedGrade, AttendedStudent} from "./attendedGrade";
 import MealCategory from "../../../../Model/Enum/MealCategory";
 import {getStringMealCategory} from "../../../../Lib/Transormators";
-import grade from "../../../ParentPages/ParentProfile/Store/Grade";
+import grade from "../../../Store/Grade";
 
 export class GradesStore extends StoreAdapterApi {
     @observable

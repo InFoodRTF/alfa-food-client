@@ -2,7 +2,7 @@ import React from "react";
 import { Account } from "./component/Account/Account";
 import { BaseButItem } from "../../componets/BaseButton/BaseButItem";
 import {inject, observer} from "mobx-react";
-import {PageComponent} from "../Injected";
+import {PageComponent} from "../PageComponent";
 import UserStore from "../UserStore";
 import styles from "./profile.module.css"
 

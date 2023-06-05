@@ -6,15 +6,14 @@ import ReactDOM from 'react-dom/client';
 import AuthStore from "./Pages/Login/AuthStore";
 import {BrowserRouter} from "react-router-dom";
 import UserStore from "./Pages/UserStore";
-import OrdersStore from "./Pages/ParentPages/Orders/OrdersStore";
-import StudentsStore from "./Pages/ParentPages/ParentProfile/Store/StudentsStore";
+import OrdersStore from "./Pages/PagesParent/Orders/OrdersStore";
+import StudentsStore from "./Pages/Store/StudentsStore";
 
-import ProductsStore from "./Pages/ParentPages/ProductMenu/ProductsStore";
-import server from "./Api/MockServer";
-import CartStore from "./Pages/ParentPages/ProductMenu/CartStore";
-import CalendarSwitch from "./Pages/ParentPages/ProductMenu/Model/CalendarSwitch";
-import {GradesStore} from "./Pages/TeacherPages/MarkClass/Store/GradesStore";
-import {MenuStore} from "./Pages/CookerPages/Store/MenuStore";
+import ProductsStore from "./Pages/PagesParent/ProductMenu/ProductsStore";
+import CartStore from "./Pages/PagesParent/ProductMenu/CartStore";
+import CalendarSwitch from "./Pages/PagesParent/ProductMenu/Model/CalendarSwitch";
+import {GradesStore} from "./Pages/PagesTeacher/MarkClass/Store/GradesStore";
+import {MenuStore} from "./Pages/PagesCooker/Store/MenuStore";
 //server()
     //const Stores = [new AuthStore(), new UserStore(), new OrdersStore(), new StudentsStore()] // когда нибдуь я впихну через массив
 
