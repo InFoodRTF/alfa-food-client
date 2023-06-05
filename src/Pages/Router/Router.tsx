@@ -44,7 +44,7 @@ export class Router extends React.Component {
                                 SecondButton={{name: "Добавить Блюдо", link: "dfasfd"}}
                                 thirdButton={{name: "Выгрузить отчёт", link: "asf"}}/>
             default:
-                return <Navigate to={httpPages.Login}/>
+                return <></>
         }
         // и так всех остальных
     }
