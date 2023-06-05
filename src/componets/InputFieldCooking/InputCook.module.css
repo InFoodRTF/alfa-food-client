@@ -1,0 +1,75 @@
+.foodCard{
+    width: 835px;
+    height: 56px;
+    border-radius: 10px;
+    border-color: white;
+}
+
+.cardBlock{
+    display: flex;
+    flex-direction: row;
+    padding-left: 40px;
+    gap: 25px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.imgBlock{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.inputField{
+    width: 625px;
+    height: 36px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 36px;
+    border: none;
+}
+
+.inputField:focus{
+    outline: 0;
+}
+
+.inputField:focus::placeholder{
+    color: transparent;
+}
+
+.inputField::placeholder{
+    width: 625px;
+    height: 36px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 36px;
+    display: flex;
+    align-items: center;
+    color: #BDBDBD;
+}
+
+.btn{
+    border: none;
+}
+
+.btn:hover{
+    border: none;
+}
+
+.btn:active{
+    border: none;
+}
+
+.penIcon{
+    width: 20px;
+    height: 20px;
+}
+
+.binIcon{
+    width: 22.5px;
+    height: 23.75px;
+}

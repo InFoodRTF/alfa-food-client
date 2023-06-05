@@ -1,0 +1,70 @@
+:root { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+    :root { font-family: 'Inter var', sans-serif; }
+}
+
+.foodCard {
+    width: 265px;
+    height: 406px;
+    border-radius: 10px;
+    border-color: white;
+}
+
+.imgForm{
+    width: 233px;
+    height: 233px;
+    border-radius: 20px;
+}
+
+.infBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: left;
+    padding: 15px 16px 0 16px;
+}
+
+.cardBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 84px;
+}
+
+.cardButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 232px;
+    height: 56px;
+    border-radius: 10px;
+    background: #E8E8E8;
+    border-color: #E8E8E8;
+}
+
+.cardButton:hover{
+    background: #E8E8E8;
+    border-color: #E8E8E8;
+}
+
+.cardButton:active{
+    background: #D6D6D6 !important;
+    border-color: #D6D6D6 !important;
+}
+
+.gramBlock{
+    margin-bottom: 0;
+    padding: 0 9px 10px;
+}
+
+.textAdd{
+    margin-bottom: 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #000000;
+}

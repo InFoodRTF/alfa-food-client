@@ -1,0 +1,64 @@
+.orderButton{
+    padding: 10px 20px;
+    gap: 10px;
+    background: white !important;
+    text-align: left;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    color: black !important;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0;
+}
+
+.orderButton:hover{
+    border-color: white !important;
+}
+
+.red{
+    background-color: #F05654 !important;
+    color: white !important;
+}
+
+.red:hover{
+    border-color: #F05654 !important;
+}
+
+.InputField[type="checkbox"] {
+    display: none;
+}
+
+.InputLabel {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.InputLabel::before {
+    content: '';
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 1000px;
+    border: 3px solid #F05654;
+}
+
+.InputField[type="checkbox"]:checked + .InputLabel::before {
+    content: '';
+    background-size: 115%;
+    background-position: center;
+    background-image: url("./tick_component.svg")
+}
+
+.infBlock{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
