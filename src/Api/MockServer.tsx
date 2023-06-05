@@ -111,7 +111,7 @@ export default function server(): void {
                 return new Response(200, {}, {token: "faskjdffsd"})
             },)
 
-            this.get<IStudent[]>(Requests.GetStudets, () => {
+            this.get<IStudent[]>(Requests.GetStudents, () => {
                 return [{
                     id: 1,
                     last_name: "Черт",

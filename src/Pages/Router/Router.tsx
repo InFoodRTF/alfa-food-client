@@ -1,27 +1,25 @@
 import React from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Navibar} from "../../componets/Navbar/Navibar";
-import Profile from "../UsersMenu/Profile/Profile";
 import HttpPages from "../HttpPages";
 import OrdersMenu from "../ParentPages/Orders/OrdersMenu";
 import ProductMenu from "../ParentPages/ProductMenu/ProductsMenu";
 import {inject, observer} from "mobx-react";
 import IUser from "../../Model/Interface/IUser";
 import Role from "../../Model/Enum/Role";
-import userStore from "../UsersMenu/UserStore";
 import IParent from "../../Model/Interface/IParent";
 import httpPages from "../HttpPages";
 import {MarkGrades} from "../TeacherPages/MarkClass/MarkGrades";
 import {Footer} from "../../componets/Footer/Footer";
-import Requests from "../../Api/Requests";
-import { redirect } from 'react-router-dom';
+import { Profile } from "../Profile/Profile";
+import UserStore from "../UserStore";
 type props = {
-    userStore: userStore;
+    userStore: UserStore;
 }
 
 @inject("userStore")
 @observer
-export class RecognizeRole extends React.Component {
+export class Router extends React.Component {
 
     async componentDidMount() {
         await this.injected.userStore.AuthByToken();
@@ -62,8 +60,8 @@ export class RecognizeRole extends React.Component {
             <div>
                 {this.GetNaviBarUser(userStore.User)}
                 <Routes>
-                    <Route path={HttpPages.Profile} element={<Profile user={userStore.User}/>}/>
-                    <Route path={HttpPages.Orders} element={<OrdersMenu user={userStore.User as IParent}/>}/>
+                    <Route path={HttpPages.Profile} element={<Profile/>}/>
+                    <Route path={HttpPages.Orders} element={<OrdersMenu/>}/>
                     <Route path={HttpPages.Products} element={<ProductMenu/>}/>
                     <Route path={HttpPages.MyClass} element={<MarkGrades/>}/>
                     <Route path={"*"} element={<Navigate to={HttpPages.Login}/>}/>

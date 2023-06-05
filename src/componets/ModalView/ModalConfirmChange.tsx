@@ -17,6 +17,8 @@ interface IModal {
     onClose: () => void,
     onSubmit: () => void
 }
+
+// TOdo сделать красивее
 class ModalExampleBasic extends React.Component<PropsWithChildren<IModal>, {}> {
 
 

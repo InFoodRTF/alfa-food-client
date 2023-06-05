@@ -1,25 +1,21 @@
 import React from "react";
-import OrderView from "../../../componets/Order/OrderView";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {inject, observer} from "mobx-react";
 import OrdersStore from "./OrdersStore";
-import IParent from "../../../Model/Interface/IParent";
 import {OrderHistoryCard} from "./component/OrderCard/OrderCard";
+import UserStore from "../../UserStore";
+import {PageComponent} from "../../Injected";
 
 
 type props = {
     orderStore: OrdersStore;
-    user: IParent;
+    userStore: UserStore;
 }
 
 
-@inject("orderStore")
+@inject("orderStore", "userStore")
 @observer
-class OrdersMenu extends React.Component<{ user: IParent }> {
-    get injected(): props {
-        return this.props as props;
-    }
-
+class OrdersMenu extends PageComponent<props> {
     async componentDidMount() {
         await this.injected.orderStore.Loader.LoadData();
     }
@@ -28,7 +24,7 @@ class OrdersMenu extends React.Component<{ user: IParent }> {
     }
 
     render() {
-        let {orderStore} = this.injected;
+        let {orderStore, userStore} = this.injected;
         return (
             <div>
                 <InfiniteScroll hasMore={orderStore.Loader.LoadMore}
@@ -36,7 +32,7 @@ class OrdersMenu extends React.Component<{ user: IParent }> {
                                 next={() => orderStore.Loader.LoadData()}
                                 dataLength={orderStore.Loader.List.length}>
                     {orderStore.Loader.List.map(order => <OrderHistoryCard key={order.id} order={order}
-                                                                    user={this.props.user}/>)}
+                                                                    user={userStore.User}/>)}
                 </InfiniteScroll>
             </div>
         );

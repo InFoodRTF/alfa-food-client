@@ -6,19 +6,15 @@ import {BaseButItem} from "../../../componets/BaseButton/BaseButItem";
 import {inject, observer} from "mobx-react";
 import {GradesStore} from "./Store/GradesStore";
 import LeftMenu, {ClickChange} from "../../../componets/LeftMenuItem/LeftMenu";
-// <LeftMenu calendar={gradesStore.calendar} ButtonsTextChange={} onChange={} onDataUpdate={}/>
+import {PageComponent} from "../../Injected";
 
-interface injectProps {
+interface InjectProps {
     gradesStore: GradesStore
 }
 
 @inject("gradesStore")
 @observer
-export class MarkGrades extends React.Component {
-
-    get injected() {
-        return this.props as injectProps;
-    }
+export class MarkGrades extends PageComponent<InjectProps> {
 
     async componentDidMount() {
         await this.injected.gradesStore.getGrades();

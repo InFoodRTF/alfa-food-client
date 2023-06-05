@@ -5,8 +5,8 @@ import styles from "./OrderHistoryCard.module.css"
 import OrderItem from "../../../../../Model/Order/OrderItem";
 import MealCategory from "../../../../../Model/Enum/MealCategory";
 import {IStudent} from "../../../ParentProfile/Store/IStudent";
-import IParent from "../../../../../Model/Interface/IParent";
 import {getInitials} from "../../../../../Lib/Transormators";
+import IUser from "../../../../../Model/Interface/IUser";
 
 
 export interface Order {
@@ -18,7 +18,9 @@ export interface Order {
     student: IStudent;
 }
 
-export class OrderHistoryCard extends React.Component<{ order: Order, user: IParent }> {
+
+// Todo рефакторнуть код. много повторений да и вообще сделать его рабочим))
+export class OrderHistoryCard extends React.Component<{ order: Order, user: IUser }> {
 
     render() {
         let {order, user} = this.props;

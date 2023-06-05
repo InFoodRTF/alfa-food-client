@@ -5,7 +5,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import AuthStore from "./Pages/Login/AuthStore";
 import {BrowserRouter} from "react-router-dom";
-import UserStore from "./Pages/UsersMenu/UserStore";
+import UserStore from "./Pages/UserStore";
 import OrdersStore from "./Pages/ParentPages/Orders/OrdersStore";
 import StudentsStore from "./Pages/ParentPages/ParentProfile/Store/StudentsStore";
 

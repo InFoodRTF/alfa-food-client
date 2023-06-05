@@ -6,6 +6,8 @@ import urfu from "./Img/urfu.png";
 import teamproject from "./Img/tp.png";
 
 
+
+// todo сделать fotter
 export class Footer extends React.Component {
     render() {
         return (

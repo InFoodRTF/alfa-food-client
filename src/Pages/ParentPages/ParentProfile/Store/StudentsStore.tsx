@@ -20,7 +20,7 @@ class StudentsStore extends StoreAdapterApi {
 
     @action
     async LoadStudent(): Promise<void> {
-        this.Students = await this.getDataByToken<IStudent[]>(Requests.GetStudets);
+        this.Students = await this.getDataByToken<IStudent[]>(Requests.GetStudents);
     }
 
 
