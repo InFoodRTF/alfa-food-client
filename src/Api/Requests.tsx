@@ -1,7 +1,6 @@
 
 let api = ""
-if (process.env.NODE_ENV === "production")
-    api = "api"
+api = "api"
 
 class Requests { // ухх, это выглядит все сложнее и сложнее)))
     GetTokenByUser = api + "auth/login/";
