@@ -44,8 +44,8 @@ class ApiClient extends ApiRequest {
             console.log("все окей!")
             return response.data
         } catch (err) {
-            const e = err as AxiosError<IUser, any>;
-            throw new Error(`Данные не получены ${e.status}`);
+            const e = err as AxiosError<TGet, any>;
+            return e.response!.data;
         }
     }
 }

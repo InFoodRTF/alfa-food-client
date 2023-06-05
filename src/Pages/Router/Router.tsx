@@ -13,6 +13,7 @@ import {Footer} from "../../componets/Footer/Footer";
 import { Profile } from "../Profile/Profile";
 import UserStore from "../UserStore";
 import {CookingPage} from "../PagesCooker/CookingPage";
+import userStore from "../UserStore";
 type props = {
     userStore: UserStore;
 }
@@ -43,7 +44,7 @@ export class Router extends React.Component {
                                 SecondButton={{name: "Добавить Блюдо", link: "dfasfd"}}
                                 thirdButton={{name: "Выгрузить отчёт", link: "asf"}}/>
             default:
-                return <></>
+                return <Navigate to={httpPages.Login}/>
         }
         // и так всех остальных
     }
