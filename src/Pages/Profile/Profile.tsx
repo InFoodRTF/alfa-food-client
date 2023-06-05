@@ -13,8 +13,10 @@ type injProps = {
 @observer
 export class Profile extends PageComponent<injProps> {
 
+
     render() {
         const {userStore} = this.injected;
+        console.log("профайл!!")
         return (
             <div style={{
                 display: "flex",

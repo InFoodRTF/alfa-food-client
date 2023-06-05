@@ -1,4 +1,4 @@
-import {action, makeObservable, observable} from "mobx";
+import {action, makeObservable, observable, runInAction} from "mobx";
 import NotAuthUser from "../Model/Role/NotAuthUser";
 import IUser from "../Model/Interface/IUser";
 import StoreAdapterApi from "../Api/StoreAdapterApi";
@@ -16,7 +16,8 @@ class UserStore extends StoreAdapterApi {
 
     @action
     async AuthByToken() {
-        this.User = await this.getDataByToken(Requests.User);
+        const user  = await this.getDataByToken<IUser>(Requests.User);
+        runInAction(() => this.User = user)
     }
 
     public ChangeLoad(){

@@ -10,10 +10,11 @@ import Role from "../../Model/Enum/Role";
 import httpPages from "../PagesPath";
 import {MarkGrades} from "../PagesTeacher/MarkClass/MarkGrades";
 import {Footer} from "../../componets/Footer/Footer";
-import { Profile } from "../Profile/Profile";
+import {Profile} from "../Profile/Profile";
 import UserStore from "../UserStore";
 import {CookingPage} from "../PagesCooker/CookingPage";
 import userStore from "../UserStore";
+
 type props = {
     userStore: UserStore;
 }
@@ -23,7 +24,7 @@ type props = {
 export class Router extends React.Component {
     async componentDidMount() {
         await this.injected.userStore.AuthByToken();
-        await this.injected.userStore.ChangeLoad();
+        this.injected.userStore.ChangeLoad();
     }
 
     get injected() {
@@ -52,9 +53,7 @@ export class Router extends React.Component {
     render() {
         let {userStore} = this.injected;
         console.log(userStore.User.role)
-        if (userStore.loading) {
-            return <></>
-        }
+
 
         return (
             <div>

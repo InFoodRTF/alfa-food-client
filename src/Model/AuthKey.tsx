@@ -7,7 +7,7 @@ class AuthKey implements IToken{
         this.token = localStorage.getItem('token');
 
         if (this.token === null)
-            return {token: "sfad"}
+            console.log("Токена нету")
 
         return this;
     }

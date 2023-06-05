@@ -41,7 +41,7 @@ class ApiClient extends ApiRequest {
     async GetEntityByToken<TGet>(token: IToken, url: string): Promise<TGet> {
         try {
             const response = await this.GetByToken<TGet>(url, token)
-            console.log("все окей!")
+            console.log("все окей!", response)
             return response.data
         } catch (err) {
             const e = err as AxiosError<TGet, any>;

@@ -7,8 +7,8 @@ import {Button, Form} from "react-bootstrap";
 import {inject, observer} from "mobx-react";
 import AuthStore from "./AuthStore";
 import statusResponse from "../../Api/StatusResponse";
-import {Navigate} from "react-router-dom";
 import StatusResponse from "../../Api/StatusResponse";
+import {Navigate} from "react-router-dom";
 import HttpPages from "../PagesPath";
 import {PageComponent} from "../PageComponent";
 
@@ -67,7 +67,7 @@ export class LoginPage extends PageComponent<props> {
                                 <Button type={"button"} className="mb-5 w-50 btn btn-danger"
                                         onClick={() => authStore.UserAuth()}>Войти</Button>
                             </div>
-                            {this.CheckResponse(authStore.ResponseStatus)}
+                            {authStore.ResponseStatus !== StatusResponse.Wait && this.CheckResponse(authStore.ResponseStatus)}
                         </div>
 
                     </Card>
