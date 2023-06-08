@@ -19,7 +19,7 @@ export class MenuStore extends BaseMenuStore {
     }
 
     @action
-    async ChangeSelectedMenu(menuId: number) {
+    ChangeSelectedMenu(menuId: number) {
         this.SelectedMenuId = menuId;
     }
 
