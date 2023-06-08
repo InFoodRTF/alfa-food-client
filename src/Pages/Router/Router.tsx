@@ -12,7 +12,7 @@ import {MarkGrades} from "../PagesTeacher/MarkClass/MarkGrades";
 import {Footer} from "../../componets/Footer/Footer";
 import {Profile} from "../Profile/Profile";
 import UserStore from "../UserStore";
-import {CookingPage} from "../PagesCooker/CookingPage";
+import {AssembleMenu} from "../PagesCooker/AssembleMenu";
 import userStore from "../UserStore";
 
 type props = {
@@ -42,7 +42,7 @@ export class Router extends React.Component {
                                 SecondButton={{name: "Выгрузить отчет", link: httpPages.UploadData}}/>
             case Role.Cooker:
                 return <Navibar LeftButton={{name: "составить меню", link: httpPages.CreateMenu}}
-                                SecondButton={{name: "Добавить Блюдо", link: "dfasfd"}}
+                                SecondButton={{name: "Создать Блюдо", link: "dfasfd"}}
                                 thirdButton={{name: "Выгрузить отчёт", link: "asf"}}/>
             default:
                 return <></>
@@ -52,7 +52,7 @@ export class Router extends React.Component {
 
     render() {
         let {userStore} = this.injected;
-        console.log(userStore.User.role)
+        console.log("получин тип пользователя:",userStore.User.role)
 
 
         return (
@@ -63,7 +63,7 @@ export class Router extends React.Component {
                     <Route path={HttpPages.Orders} element={<OrdersMenu/>}/>
                     <Route path={HttpPages.Products} element={<ProductMenu/>}/>
                     <Route path={HttpPages.MyClass} element={<MarkGrades/>}/>
-                    <Route path={httpPages.CreateMenu} element={<CookingPage/>}/>
+                    <Route path={httpPages.CreateMenu} element={<AssembleMenu/>}/>
                     <Route path={"*"} element={<Navigate to={HttpPages.Login}/>}/>
                 </Routes>
                 <Footer/>

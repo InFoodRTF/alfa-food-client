@@ -1,8 +1,8 @@
 import React from "react";
 import {Button, Card} from "react-bootstrap";
 import styles from "./CardFood.module.css";
-import MealCategory from "../../Model/Enum/MealCategory";
 import {observer} from "mobx-react";
+import MealCategory from "../../Model/Enum/MealCategory";
 
 export interface IProduct {
     id: number

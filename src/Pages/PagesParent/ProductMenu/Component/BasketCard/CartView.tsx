@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Card} from "react-bootstrap";
 import styles from "./CardBasket.module.css";
-import Product from "./Product";
+import ProductView from "./ProductView";
 import CartStore from "../../CartStore";
 import {observer} from "mobx-react";
 import {Item} from "../../ProductsMenu";
@@ -22,20 +22,20 @@ export default class CartView extends React.Component<{cart: CartStore}>{
                     <div className={styles.mealCategory}>
                         <Card.Text className={styles.cardText}><p>Завтрак</p></Card.Text>
                         {this.props.cart.Products.filter(pro => pro.meal_category === mealCategory.breakfast).map(product =>
-                            <Product key={product.id}
-                                     productCount={this.props.cart.countItems[product.id]}
-                                     product={product}
-                                     put={e => this.props.cart.Put(e, true)}
-                                     extract={e => this.props.cart.Extract(e)}/>)}
+                            <ProductView key={product.id}
+                                         productCount={this.props.cart.countItems[product.id]}
+                                         product={product}
+                                         put={e => this.props.cart.Put(e, true)}
+                                         extract={e => this.props.cart.Extract(e)}/>)}
                     </div>
                     <div className={styles.mealCategory}>
                         <Card.Text className={styles.cardText}>Обед</Card.Text>
                         {this.props.cart.Products.filter(prod => prod.meal_category === mealCategory.lunch).map(product =>
-                            <Product key={product.id}
-                                     productCount={this.props.cart.countItems[product.id]}
-                                     product={product}
-                                     put={e => this.props.cart.Put(e, true)}
-                                     extract={e => this.props.cart.Extract(e)}/>)}
+                            <ProductView key={product.id}
+                                         productCount={this.props.cart.countItems[product.id]}
+                                         product={product}
+                                         put={e => this.props.cart.Put(e, true)}
+                                         extract={e => this.props.cart.Extract(e)}/>)}
                     </div>
                 </div>
                 <div style={{position: "absolute", bottom: "76px", left: "20px", display: "flex", flexDirection: "row", gap: "15px"}}>

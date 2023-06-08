@@ -5,7 +5,7 @@ import {IProduct} from "../../../../../componets/FoodCard/CardFood";
 import {observer} from "mobx-react";
 
 @observer
-export class Product extends React.Component<{
+export class ProductView extends React.Component<{
     product: IProduct,
     productCount: number,
     put: (e: IProduct)  => void,
@@ -28,4 +28,4 @@ export class Product extends React.Component<{
         );
     }
 }
-export default Product
+export default ProductView

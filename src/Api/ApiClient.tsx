@@ -45,6 +45,7 @@ class ApiClient extends ApiRequest {
             return response.data
         } catch (err) {
             const e = err as AxiosError<TGet, any>;
+            console.log("все плохо!", e.response)
             return e.response!.data;
         }
     }

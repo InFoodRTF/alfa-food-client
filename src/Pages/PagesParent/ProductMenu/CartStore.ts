@@ -4,6 +4,7 @@ import storeAdapterApi from "../../../Api/StoreAdapterApi";
 import {ICartInfo} from "./Component/BasketCard/CartView";
 import CalendarSwitch from "./Model/CalendarSwitch";
 import Requests from "../../../Api/Requests";
+import {ItemOrderType} from "./ProductsMenu";
 
 export default class CartStore extends storeAdapterApi {
     @observable
@@ -11,17 +12,17 @@ export default class CartStore extends storeAdapterApi {
     @observable
     public countItems: { [id: number]: number; } = {}; // так же изучить computed
     @observable
-    public StudentId: number = -1;
+    public ItemOrders: ItemOrderType = {}; // todo будущая реализация - будет ваще топ так упростит работу, просто вааащеее тоооооп
     @observable
-    public Calendar: CalendarSwitch;
-    constructor(calendar: CalendarSwitch) {
+    public SelectedStudentId: number = -1;
+
+    constructor(public Calendar: CalendarSwitch) {
         super();
         makeObservable(this);
-        this.Calendar = calendar;
     }
 
     @computed
-    get isEmpty() : boolean{
+    get isEmpty(): boolean {
         return this.Products.length === 0;
     }
 
@@ -70,26 +71,25 @@ export default class CartStore extends storeAdapterApi {
 
     @action
     public async changeCart() {
-        console.log(this.StudentId)
-        if (this.StudentId === -1) return;
+        console.log(this.SelectedStudentId)
+        if (this.SelectedStudentId === -1) return;
 
-        this.Products = []
+        this.Products = [];
         this.countItems = {};
-        let cartInfo = await this.getDataByToken<ICartInfo>(Requests.SwitchCart(this.StudentId, this.Calendar.CurDate))
+        let cartInfo = await this.getDataByToken<ICartInfo>(Requests.SwitchCart(this.SelectedStudentId, this.Calendar.CurDate))
         console.log(cartInfo)
         for (let item of cartInfo.cart_items) {
             item.product.price = Number(item.product.price);
-            // TODO Каординально изменить логику countItem не очень та и нужен на самом деле
-            for (let j = 0; j < item.quantity; j++)
+            for (let j = 0; j < item.quantity; j++) {
                 this.Put(item.product, false)
+            }
         }
     }
 
     @action
-        ChangeStudentId(studentId: string) {
-
-            this.StudentId = Number(studentId);
-            console.log("id сменили: " + studentId)
+    ChangeStudentId(studentId: string) {
+        this.SelectedStudentId = Number(studentId);
+        console.log("id сменили: " + studentId)
     }
 
     // название очень не нравиться поэтому вот -

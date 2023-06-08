@@ -6,17 +6,20 @@ import CardFood, {IProduct} from "../../../componets/FoodCard/CardFood";
 import LeftMenu, {ClickChange} from "../../../componets/LeftMenuItem/LeftMenu";
 import StudentsStore from "../../Store/StudentsStore";
 import CartView from "./Component/BasketCard/CartView";
-import {FilterFoodItem} from "./Component/FilterFoodItem/FilterFoodItem";
+import {MealCategoryFilter} from "./Component/FilterFoodItem/MealCategoryFilter";
 import MealCategory from "../../../Model/Enum/MealCategory";
 import CartStore from "./CartStore";
 import {IStudent} from "../../Store/IStudent";
 import {getFullName} from "../../../Lib/Transormators";
+import mealCategory from "../../../Model/Enum/MealCategory";
 
 type props = {
     productsStore: ProductsStore;
     studentStore: StudentsStore;
     cartStore: CartStore;
 }
+
+export type ItemOrderType = { [Category: string]: Item[]; }
 
 export interface ItemOrder {
     items: { [id: string]: Item[]; }
@@ -25,24 +28,13 @@ export interface ItemOrder {
 export interface Item {
     id: number;
     quantity: number;
+    meal_category: string;
     product: IProduct
 }
 
 @inject("productsStore", 'studentStore', 'cartStore')
 @observer
-class ProductMenu extends React.Component {
-    private GetFilteredProduct(mealCategory: MealCategory): IProduct[][] {
-        switch (mealCategory) {
-            case MealCategory.breakfast:
-                return this.injected.productsStore.ProductCardBreakfast;
-            case MealCategory.lunch:
-                return this.injected.productsStore.ProductCardLunch;
-            default :
-                return []
-        }
-
-    }
-
+class ProductMenu extends React.Component {// todo придумать норм название класс, а то это кринж))
     GetFullNameClickEvent(students: IStudent[]): ClickChange[] { // я бы назвал это костылём
         let result: ClickChange[] = [];
         for (let student of students)
@@ -78,7 +70,8 @@ class ProductMenu extends React.Component {
                     marginLeft: "auto",
                     marginRight: "auto"
                 }}>
-                    <LeftMenu calendar={productsStore.Calendar} ButtonsText={this.GetFullNameClickEvent(studentStore.Students)}
+                    <LeftMenu calendar={productsStore.Calendar}
+                              ButtonsText={this.GetFullNameClickEvent(studentStore.Students)}
                               onChangeButtons={async (e) => {
                                   cartStore.ChangeStudentId(e);
                                   await cartStore.changeCart();
@@ -89,19 +82,29 @@ class ProductMenu extends React.Component {
                               }}
                               canDataChange={cartStore.isEmpty}/>
                     <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
-                        <FilterFoodItem ChangeMealCategory={(e) => productsStore.ChangeMealCategory(e)}/>
+                        <div style={{display: "flex", flexDirection: "row", gap: "20px", height: "44px"}}>
+                            {
+                                productsStore.GetAvailableCategory.map(mealCategory =>
+                                    <MealCategoryFilter
+                                        value={mealCategory}
+                                        changeMealCategory={() => productsStore.ChangeMealCategory(mealCategory)}/>
+                                )
+                            }
+                        </div>
                         <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
-                            {this.GetFilteredProduct(productsStore.SelectedMealCategory).map(foodColumn =>
-                                <div style={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    gap: "20px"
-                                }}> {foodColumn.map(food =>
-                                    <CardFood
-                                        key={food.id}
-                                        product={food}
-                                        addToCart={(e: IProduct) => cartStore.Put(e, true)}/>)}
-                                </div>)}
+                            {
+                                productsStore.SelectedMealCategory != null &&
+                                productsStore.ShowProduct().map(foodColumn =>
+                                    <div style={{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        gap: "20px"
+                                    }}> {foodColumn.map(food =>
+                                        <CardFood
+                                            key={food.id}
+                                            product={food}
+                                            addToCart={(e: IProduct) => cartStore.Put(e, true)}/>)}
+                                    </div>)}
                         </div>
                     </div>
                     <CartView cart={cartStore}/>
