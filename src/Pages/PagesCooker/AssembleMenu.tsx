@@ -49,10 +49,11 @@ export class AssembleMenu extends PageComponent<props> {
                     <div style={{display: "flex", flexDirection: "column", gap: "26px", paddingTop: "2.5px"}}>
                         <BaseButItem w={264} h={44} text={"Добавить новое меню"}/>
                         {
-                            menuStore.Menus != undefined && menuStore.Menus.map(menu => <LeftMenuCooking onClick={async () => {
-                                menuStore.ChangeSelectedMenu(menu.id)
-                                await menuStore.LoadMenu();
-                            }} menu={menu} key={menu.id}/>)}
+                            menuStore.Menus !== undefined && menuStore.Menus.map(menu => <LeftMenuCooking
+                                onClick={async () => {
+                                    menuStore.ChangeSelectedMenu(menu.id)
+                                    await menuStore.LoadMenu();
+                                }} menu={menu} key={menu.id}/>)}
                         <BaseButItem w={264} h={44} text={"Изменить"}/>
                     </div>
                 </div>
@@ -67,11 +68,17 @@ export class AssembleMenu extends PageComponent<props> {
                             }<BaseButItem w={208} h={44} text={"Добавить категорию"}/>
                         </div>
                     </div>
-                    <div style={{display: "flex", flexDirection: "row", gap: "20px", paddingTop: "2.5px"}}>
+                    <div style={{display: "flex", flexDirection: "column", gap: "20px", paddingTop: "2.5px"}}>
                         {
                             menuStore.ShowProduct()
-                                .map((itemColumn) => itemColumn
-                                    .map(item => <EditingCard key={item.id} product={item}/>))
+                                .map((itemColumn) => <div style={{
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    gap: "20px"
+                                }}> {itemColumn
+                                    .map(item => <EditingCard key={item.id} item={item}/>)}
+                                </div>)
+
                         }
                         <CreatingCard/>
                     </div>

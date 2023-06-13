@@ -14,6 +14,8 @@ export default class ProductsStore extends BaseMenuStore { // todo не лучш
         this.Calendar = calendarSwitch;
     }
 
+
+
     @action
     override async LoadMenu() :Promise<void> {
         const menu: ItemOrder = await this.getDataByToken<ItemOrder>(Requests.GetMenu(this.Calendar.CurDate));

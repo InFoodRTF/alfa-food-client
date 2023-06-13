@@ -7,11 +7,9 @@ import LeftMenu, {ClickChange} from "../../../componets/LeftMenuItem/LeftMenu";
 import StudentsStore from "../../Store/StudentsStore";
 import CartView from "./Component/BasketCard/CartView";
 import {MealCategoryFilter} from "./Component/FilterFoodItem/MealCategoryFilter";
-import MealCategory from "../../../Model/Enum/MealCategory";
 import CartStore from "./CartStore";
 import {IStudent} from "../../Store/IStudent";
 import {getFullName} from "../../../Lib/Transormators";
-import mealCategory from "../../../Model/Enum/MealCategory";
 
 type props = {
     productsStore: ProductsStore;
@@ -93,7 +91,6 @@ class ProductMenu extends React.Component {// todo придумать норм �
                         </div>
                         <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                             {
-                                productsStore.SelectedMealCategory != null &&
                                 productsStore.ShowProduct().map(foodColumn =>
                                     <div style={{
                                         display: "flex",
@@ -102,7 +99,7 @@ class ProductMenu extends React.Component {// todo придумать норм �
                                     }}> {foodColumn.map(food =>
                                         <CardFood
                                             key={food.id}
-                                            product={food}
+                                            item={food}
                                             addToCart={(e: IProduct) => cartStore.Put(e, true)}/>)}
                                     </div>)}
                         </div>

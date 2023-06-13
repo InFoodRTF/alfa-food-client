@@ -1,6 +1,5 @@
 import axios, {AxiosError} from "axios";
 import IToken from "../Model/Interface/IToken";
-import IUser from "../Model/Interface/IUser";
 import ApiRequest from "./ApiRequest";
 
 
@@ -10,7 +9,7 @@ export type ResponseData<T> = {
     status: number;
 }
 
-// TODO ужас здесь повторяется код!!!
+// TODO ужас здесь повторяется код!!! catch then убрать определённо и придумать
 class ApiClient extends ApiRequest {
 
     async PostDataWithResult<TGet, TPost>(url: string, dataPost: TPost): Promise<ResponseData<TGet>> {

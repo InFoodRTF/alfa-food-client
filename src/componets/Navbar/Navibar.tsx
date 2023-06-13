@@ -1,90 +1,40 @@
 import styles from "./Navibar.module.css";
-import React from "react";
+import React, {useState} from "react";
 import logo from "./Img/Mask group.png";
 import exit from "./Img/r_m_exit.png";
 import {Image, Nav, Navbar} from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import httpPages from "../../Pages/PagesPath";
 import AuthKey from "../../Model/AuthKey";
+import leftButtonItem from "../LeftMenuItem/LeftButtonItem";
+import {observer} from "mobx-react";
 
 
 // todo ух ух ух, это все бы в один метод)))))
-const orderMeals = () => {
-    const order = document.getElementById('order')
-    const watch = document.getElementById('watch')
-    const report = document.getElementById('report')
-    if (order !== null && watch !== null && report !== null && (watch.classList.contains(styles.red) || report.classList.contains(styles.red))) {
-        order.classList.toggle(styles.red)
-        if (watch.classList.contains(styles.red)) {
-            watch.classList.remove(styles.red)
-        }
-        if (report.classList.contains(styles.red)) {
-            report.classList.remove(styles.red)
-        }
-    }
-    else
-        orderMeals2()
+const usePathname = () => {
+    const location = useLocation();
+    return location.pathname;
 }
-
-const orderWatch = () => {
-    const order = document.getElementById('order')
-    const watch = document.getElementById('watch')
-    const report = document.getElementById('report')
-    if (order !== null && watch !== null && report !== null && (order.classList.contains(styles.red) || report.classList.contains(styles.red))) {
-        watch.classList.toggle(styles.red)
-        if (order.classList.contains(styles.red)) {
-            order.classList.remove(styles.red)
-        }
-        if (report.classList.contains(styles.red)) {
-            report.classList.remove(styles.red)
-        }
-    }
-    else
-        orderWatch2()
-}
-
-const orderMeals2 = () => {
-    const order = document.getElementById('order')
-    const watch = document.getElementById('watch')
-    if (order !== null && watch !== null && watch.classList.contains(styles.red)) {
-        order.classList.toggle(styles.red)
-        watch.classList.remove(styles.red)
-    }
-}
-
-const orderWatch2 = () => {
-    const order = document.getElementById('order')
-    const watch = document.getElementById('watch')
-    if (order !== null && watch !== null && order.classList.contains(styles.red)) {
-        order.classList.remove(styles.red)
-        watch.classList.toggle(styles.red)
-    }
-}
-const orderReport = () => {
-    const order = document.getElementById('order')
-    const watch = document.getElementById('watch')
-    const report = document.getElementById('report')
-    if (order !== null && watch !== null && report !== null && (order.classList.contains(styles.red) || watch.classList.contains(styles.red))) {
-        report.classList.toggle(styles.red)
-        if (watch.classList.contains(styles.red)) {
-            watch.classList.remove(styles.red)
-        }
-        if (order.classList.contains(styles.red)) {
-            order.classList.remove(styles.red)
-        }
-    }
-}
-
 
 interface buttonLink {
     name: string;
     link: string;
 }
-export class Navibar extends React.Component<{ LeftButton: buttonLink, SecondButton: buttonLink, thirdButton?: buttonLink  }> {
 
+interface props {
+    LeftButton: buttonLink,
+    SecondButton: buttonLink,
+    thirdButton?: buttonLink
+}
+@observer
+export class Navibar extends React.Component<props,{curUrl: string}> { // пока идей с 3 state выглядит самой рабочей и адекватной))
+
+    constructor(props: props) {
+        super(props);
+        this.state = {curUrl: ""}
+    }
     componentDidMount() {
-        if (window.location.pathname === httpPages.Orders)
-            orderWatch();
+        console.log(httpPages.Products, this.props.LeftButton.link)
     }
 
     // todo это нужно будет вынести за пределы странички
@@ -92,7 +42,7 @@ export class Navibar extends React.Component<{ LeftButton: buttonLink, SecondBut
         AuthKey.Remove();
     }
     render() {
-
+        const {LeftButton, SecondButton, thirdButton} = this.props;
         return (
             <Navbar className={styles.nav}>
                 <Nav.Item className={styles.navbarCustom}>
@@ -102,10 +52,10 @@ export class Navibar extends React.Component<{ LeftButton: buttonLink, SecondBut
                             <p className={styles.textBrand}>Школьное Питание</p>
                         </Nav.Item>
                         <Nav.Item className={styles.navBlock}>
-                            <Nav.Link as={Link} to={this.props.LeftButton.link} className={[styles.navItem, styles.red].join(' ')} id={'order'} onClick={orderMeals}>{this.props.LeftButton.name}</Nav.Link>
-                            <Nav.Link as={Link} to={this.props.SecondButton.link} className={styles.navItem} id={'watch'} onClick={orderWatch}>{this.props.SecondButton.name}</Nav.Link>
-                            {this.props.thirdButton !== undefined && <Nav.Link as={Link} to={this.props.thirdButton.link} className={styles.navItem} id={'report'}
-                                       onClick={orderReport}>{this.props.thirdButton.name}</Nav.Link>}
+                            <Nav.Link as={Link} to={this.props.LeftButton.link} onClick={() => this.setState({curUrl: LeftButton.link})} className={`${styles.navItem} ${this.state.curUrl === LeftButton.link ? styles.red : ''}`} id={'order'}>{this.props.LeftButton.name}</Nav.Link>
+                            <Nav.Link as={Link} to={this.props.SecondButton.link} onClick={() => this.setState({curUrl: SecondButton.link})} className={`${styles.navItem} ${this.state.curUrl === SecondButton.link ? styles.red : ''}`} id={'watch'} >{this.props.SecondButton.name}</Nav.Link>
+                            {thirdButton !== undefined && <Nav.Link as={Link} onClick={() => this.setState({curUrl: thirdButton?.link ?? ''})} to={thirdButton.link} className={`${styles.navItem} ${this.state.curUrl === thirdButton.link ? styles.red : ''}`} id={'report'}
+                            >{thirdButton.name}</Nav.Link>}
                         </Nav.Item>
                     </Nav.Item>
                     <Nav.Item className={styles.navBlockRight}>

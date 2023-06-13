@@ -1,10 +1,17 @@
-import {action, computed, makeObservable, observable} from "mobx";
-import {Item, ItemOrder, ItemOrderType} from "../Pages/PagesParent/ProductMenu/ProductsMenu";
-import CalendarSwitch from "../Pages/PagesParent/ProductMenu/Model/CalendarSwitch";
-import Requests from "../Api/Requests";
-import {IProduct} from "../componets/FoodCard/CardFood";
+import {action, computed, observable} from "mobx";
+import {Item, ItemOrderType} from "../Pages/PagesParent/ProductMenu/ProductsMenu";
 import storeAdapterApi from "../Api/StoreAdapterApi";
 
+
+
+
+
+/**
+ *  Это базовый класс для управления меню в приложении
+ * Отыгрывает ключевую роль в организации функционала меню в рамках приложения.
+ * Предоставляет возможность выбирать категории меню, загружать список доступных продуктов и выводить выбранную категорию продуктов в виде матрицы.
+ * матрица, потому, что в html нужно
+ */
 export abstract class BaseMenuStore extends storeAdapterApi {
     @observable
     SelectedMealCategory?: string;
@@ -30,18 +37,19 @@ export abstract class BaseMenuStore extends storeAdapterApi {
 
     abstract LoadMenu(): Promise<void>;
 
-    public ShowProduct(): IProduct[][] { // todo вроде название норм, и все таки мне не очень нравится И возможно можно сделать COMPUTED
+    // гланый метод вывода всех товаров
+    public ShowProduct(): Item[][] { // todo вроде название норм, и все таки мне не очень нравится И возможно можно сделать COMPUTED
         if (this.menu === undefined || this.SelectedMealCategory === undefined) return []
 
         const AvailableProduct = this.GetAvailableProduct(this.menu[this.SelectedMealCategory]);
-        return this.GetInColumn(AvailableProduct, 3);
+        return this.GetInColumn<Item>(AvailableProduct, 3);
     }
 
 
-    // пока реализцация такая, более красивая когда-нибудь потом
+
     @action
-    private GetAvailableProduct(items: Item[]): IProduct[] {
-        let result: IProduct[] = [];
+    private GetAvailableProduct(items: Item[]): Item[] {
+        let result: Item[] = [];
         if (items == null) return result;
 
         for (let item of items) {
@@ -49,21 +57,21 @@ export abstract class BaseMenuStore extends storeAdapterApi {
 
             item.product.price = Number(item.product.price);
             item.product.id = item.id;
-            result.push(item.product)
+            result.push(item)
         }
 
         return result
     }
 
 
-    // TODO можно сделать универсальным и не болеть и радоваться жизни
+
     @action
-    private GetInColumn(products: IProduct[], countInRow: number) {
+    private GetInColumn<T>(products: T[], countInRow: number) : T[][] {
         const countColumn = Math.ceil(products.length / countInRow)
-        let array: IProduct[][] = []
+        let array: T[][] = []
 
         for (let i = 0; i < countColumn; i++) {
-            array.push(new Array<IProduct>)
+            array.push(new Array<T>)
             for (let j = 0; j < countInRow && i * countInRow + j < products.length; j++) {
                 array[i].push(products[i * countInRow + j])
             }

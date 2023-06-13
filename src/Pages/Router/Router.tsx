@@ -13,7 +13,6 @@ import {Footer} from "../../componets/Footer/Footer";
 import {Profile} from "../Profile/Profile";
 import UserStore from "../UserStore";
 import {AssembleMenu} from "../PagesCooker/AssembleMenu";
-import userStore from "../UserStore";
 
 type props = {
     userStore: UserStore;
@@ -24,7 +23,7 @@ type props = {
 export class Router extends React.Component {
     async componentDidMount() {
         await this.injected.userStore.AuthByToken();
-        this.injected.userStore.ChangeLoad();
+        this.injected.userStore.LoadIsComplete();
     }
 
     get injected() {
@@ -53,7 +52,7 @@ export class Router extends React.Component {
     render() {
         let {userStore} = this.injected;
         console.log("получин тип пользователя:",userStore.User.role)
-
+        // todo придумать loading, сейчас выходит, что шапка дольше идёт чем сама страничка
 
         return (
             <div>

@@ -1,4 +1,4 @@
-import {action, makeObservable, observable, runInAction} from "mobx";
+import {action, computed, makeObservable, observable, runInAction} from "mobx";
 import NotAuthUser from "../Model/Role/NotAuthUser";
 import IUser from "../Model/Interface/IUser";
 import StoreAdapterApi from "../Api/StoreAdapterApi";
@@ -8,6 +8,7 @@ class UserStore extends StoreAdapterApi {
     @observable
     public User: IUser = new NotAuthUser();
     public loading: boolean = true;
+
 
     constructor() {
         super()
@@ -20,8 +21,9 @@ class UserStore extends StoreAdapterApi {
         runInAction(() => this.User = user)
     }
 
-    public ChangeLoad(){
-        this.loading = !this.loading
+    @action
+    public LoadIsComplete(){
+        this.loading = false;
     }
 }
 
