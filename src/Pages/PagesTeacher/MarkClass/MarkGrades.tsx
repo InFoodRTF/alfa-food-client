@@ -40,7 +40,9 @@ export class MarkGrades extends PageComponent<InjectProps> {
                 width: "1119px",
                 marginTop: "70px",
                 marginLeft: "auto",
-                marginRight: "auto"
+                marginRight: "auto",
+                paddingBottom: "auto",
+                minHeight: "580px"
             }}>
                 <LeftMenu calendar={gradesStore.calendar} ButtonsText={this.GetGrades()} onChangeButtons={async (e) => {
                     gradesStore.changeSelectGrade(e)
@@ -56,7 +58,7 @@ export class MarkGrades extends PageComponent<InjectProps> {
                             <TickCard key={student.student!.id} studentAttend={student} onChange={() => gradesStore.changeMarkAttendance(student)} />)}
 
                         <div style={{width: "642px", paddingTop: "10px", textAlign: "center"}}>
-                            <BaseButItem w={218} h={39} text={"Сохранить изменения"}/>
+                            <BaseButItem onClick={() => console.log("сохраняем")} w={218} h={39} text={"Сохранить изменения"}/>
                         </div>
                     </div>
                 </div>

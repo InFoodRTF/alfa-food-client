@@ -12,7 +12,8 @@ import {MarkGrades} from "../PagesTeacher/MarkClass/MarkGrades";
 import {Footer} from "../../componets/Footer/Footer";
 import {Profile} from "../Profile/Profile";
 import UserStore from "../UserStore";
-import {AssembleMenu} from "../PagesCooker/AssembleMenu";
+import {AssembleMenu} from "../PagesCooker/AssembleMenu/AssembleMenu";
+import {CookingUploadRep} from "../PagesCooker/Report/CookingUploadRep";
 
 type props = {
     userStore: UserStore;
@@ -41,8 +42,8 @@ export class Router extends React.Component {
                                 SecondButton={{name: "Выгрузить отчет", link: httpPages.UploadData}}/>
             case Role.Cooker:
                 return <Navibar LeftButton={{name: "составить меню", link: httpPages.CreateMenu}}
-                                SecondButton={{name: "Создать Блюдо", link: "dfasfd"}}
-                                thirdButton={{name: "Выгрузить отчёт", link: "asf"}}/>
+                                SecondButton={{name: "Создать Блюдо", link: httpPages.Profile}}
+                                thirdButton={{name: "Выгрузить отчёт", link: httpPages.UploadReport}}/>
             default:
                 return <></>
         }
@@ -63,6 +64,7 @@ export class Router extends React.Component {
                     <Route path={HttpPages.Products} element={<ProductMenu/>}/>
                     <Route path={HttpPages.MyClass} element={<MarkGrades/>}/>
                     <Route path={httpPages.CreateMenu} element={<AssembleMenu/>}/>
+                    <Route path={httpPages.UploadReport} element={<CookingUploadRep/>}/>
                     <Route path={"*"} element={<Navigate to={HttpPages.Login}/>}/>
                 </Routes>
                 <Footer/>

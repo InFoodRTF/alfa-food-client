@@ -1,20 +1,14 @@
 import styles from "./Navibar.module.css";
-import React, {useState} from "react";
+import React from "react";
 import logo from "./Img/Mask group.png";
 import exit from "./Img/r_m_exit.png";
 import {Image, Nav, Navbar} from "react-bootstrap";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import httpPages from "../../Pages/PagesPath";
 import AuthKey from "../../Model/AuthKey";
-import leftButtonItem from "../LeftMenuItem/LeftButtonItem";
 import {observer} from "mobx-react";
 
 
-// todo ух ух ух, это все бы в один метод)))))
-const usePathname = () => {
-    const location = useLocation();
-    return location.pathname;
-}
 
 interface buttonLink {
     name: string;
@@ -27,7 +21,7 @@ interface props {
     thirdButton?: buttonLink
 }
 @observer
-export class Navibar extends React.Component<props,{curUrl: string}> { // пока идей с 3 state выглядит самой рабочей и адекватной))
+export class Navibar extends React.Component<props,{curUrl: string}> {
 
     constructor(props: props) {
         super(props);

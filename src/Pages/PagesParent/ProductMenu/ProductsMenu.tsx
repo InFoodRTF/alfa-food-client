@@ -66,7 +66,9 @@ class ProductMenu extends React.Component {// todo придумать норм �
                     width: "1119px",
                     marginTop: "70px",
                     marginLeft: "auto",
-                    marginRight: "auto"
+                    marginRight: "auto",
+                    paddingBottom: "60px",
+                    minHeight: "580px"
                 }}>
                     <LeftMenu calendar={productsStore.Calendar}
                               ButtonsText={this.GetFullNameClickEvent(studentStore.Students)}

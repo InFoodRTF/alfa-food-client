@@ -1,15 +1,15 @@
 import React from "react";
-import CalendarView from "../PagesParent/ProductMenu/Component/Calendar/CalendarView";
+import CalendarView from "../../PagesParent/ProductMenu/Component/Calendar/CalendarView";
 import {inject, observer} from "mobx-react";
 import {MenuStore} from "./Store/MenuStore";
-import {BaseButItem} from "../../componets/BaseButton/BaseButItem";
-import {MealCategoryFilter} from "../PagesParent/ProductMenu/Component/FilterFoodItem/MealCategoryFilter";
-import {PageComponent} from "../PageComponent";
-import {LeftMenuCooking} from "../../componets/LeftMenuCooking/LeftMenuCooking";
-import {InputCook} from "../../componets/InputFieldCooking/InputCook";
-import {CreatingCard} from "../../componets/CreatingFoodCard/CreatingCard";
-import {EditingCard} from "../../componets/EditingFoodCard/EditingCard";
-import mealCategory from "../../Model/Enum/MealCategory";
+import {BaseButItem} from "../../../componets/BaseButton/BaseButItem";
+import {MealCategoryFilter} from "../../PagesParent/ProductMenu/Component/FilterFoodItem/MealCategoryFilter";
+import {PageComponent} from "../../PageComponent";
+import {LeftMenuCooking} from "../../../componets/LeftMenuCooking/LeftMenuCooking";
+import {InputCook} from "../../../componets/InputFieldCooking/InputCook";
+import {CreatingCard} from "../../../componets/CreatingFoodCard/CreatingCard";
+import {EditingCard} from "../../../componets/EditingFoodCard/EditingCard";
+import mealCategory from "../../../Model/Enum/MealCategory";
 
 type props = {
     menuStore: MenuStore;
@@ -47,14 +47,14 @@ export class AssembleMenu extends PageComponent<props> {
                                       await menuStore.LoadMenu();
                                   }}/>
                     <div style={{display: "flex", flexDirection: "column", gap: "26px", paddingTop: "2.5px"}}>
-                        <BaseButItem w={264} h={44} text={"Добавить новое меню"}/>
+                        <BaseButItem onClick={() => console.log("добавляем")} w={264} h={44} text={"Добавить новое меню"}/>
                         {
                             menuStore.Menus !== undefined && menuStore.Menus.map(menu => <LeftMenuCooking
                                 onClick={async () => {
                                     menuStore.ChangeSelectedMenu(menu.id)
                                     await menuStore.LoadMenu();
                                 }} menu={menu} key={menu.id}/>)}
-                        <BaseButItem w={264} h={44} text={"Изменить"}/>
+                        <BaseButItem onClick={() => console.log("меняем")} w={264} h={44} text={"Изменить"}/>
                     </div>
                 </div>
                 <div style={{display: "flex", flexDirection: "column", gap: "23px"}}>
@@ -65,7 +65,7 @@ export class AssembleMenu extends PageComponent<props> {
                                 menuStore.GetAvailableCategory.map(mealCategory =>
                                     <MealCategoryFilter value={mealCategory}
                                                         changeMealCategory={() => menuStore.ChangeMealCategory(mealCategory)}/>)
-                            }<BaseButItem w={208} h={44} text={"Добавить категорию"}/>
+                            }<BaseButItem onClick={() => console.log("добавляем категорию")} w={208} h={44} text={"Добавить категорию"}/>
                         </div>
                     </div>
                     <div style={{display: "flex", flexDirection: "column", gap: "20px", paddingTop: "2.5px"}}>

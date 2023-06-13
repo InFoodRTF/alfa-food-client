@@ -48,7 +48,7 @@ export class Profile extends PageComponent<injProps> {
                         </div>
                     </div>
                     <div style={{width: "642px", paddingTop: "10px", textAlign: "center"}}>
-                        <BaseButItem w={218} h={39} text={"Сохранить изменения"}/>
+                        <BaseButItem onClick={() => console.log("cохраняем")} w={218} h={39} text={"Сохранить изменения"}/>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./LeftMenuCooking.module.css";
 import {Button} from "react-bootstrap";
-import {Menu} from "../../Pages/PagesCooker/Store/Models/Menu";
+import {Menu} from "../../Pages/PagesCooker/AssembleMenu/Store/Models/Menu";
 
 
 interface props {
@@ -26,7 +26,7 @@ export class LeftMenuCooking extends React.Component<props> {
             <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                 {
                         <div style={{display: "flex", flexDirection: "row", gap: "10px"}}>
-                            <Button variant={''} bsPrefix={''} onClick={changeClass}
+                            <Button variant={''} bsPrefix={''} className={styles.orderButton} onClick={changeClass}
                                     style={{width: `${200}px`}}>
                                 {menu.name}
                             </Button>

@@ -13,7 +13,8 @@ import ProductsStore from "./Pages/PagesParent/ProductMenu/ProductsStore";
 import CartStore from "./Pages/PagesParent/ProductMenu/CartStore";
 import CalendarSwitch from "./Pages/PagesParent/ProductMenu/Model/CalendarSwitch";
 import {GradesStore} from "./Pages/PagesTeacher/MarkClass/Store/GradesStore";
-import {MenuStore} from "./Pages/PagesCooker/Store/MenuStore";
+import {MenuStore} from "./Pages/PagesCooker/AssembleMenu/Store/MenuStore";
+import {ReportStore} from "./Pages/PagesCooker/Report/Store/ReportStore";
 //server()
     //const Stores = [new AuthStore(), new UserStore(), new OrdersStore(), new StudentsStore()] // когда нибдуь я впихну через массив
 
@@ -30,7 +31,8 @@ const stores = {
     productsStore: new ProductsStore(Calendar),
     cartStore: new CartStore(Calendar),
     gradesStore: new GradesStore(Calendar),
-    menuStore: new MenuStore(Calendar)
+    menuStore: new MenuStore(Calendar),
+    reportStore: new ReportStore(Calendar)
 }
 // strict.mode убран!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ВАЖНО ОЧЕНЬ ВАЖНО
 root.render(
