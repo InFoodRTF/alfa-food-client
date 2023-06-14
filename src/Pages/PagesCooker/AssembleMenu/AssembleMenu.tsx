@@ -93,7 +93,12 @@ export class AssembleMenu extends PageComponent<props> {
                                         menuStore.DownloadAvailableProduct()
                                         menuStore.ChangeIsOpen();
                                     }}/>}
+                                    {menuStore.ShowProduct().pop()?.length === 3 && <CreatingCard onClick={() => {
+                                        menuStore.DownloadAvailableProduct()
+                                        menuStore.ChangeIsOpen();
+                                    }}/>}
                                 </div>)
+
                         }
 
                     </div>
