@@ -41,8 +41,8 @@ export class Router extends React.Component {
                 return <Navibar LeftButton={{name: "Отметить класс", link: httpPages.MyClass}}
                                 SecondButton={{name: "Выгрузить отчет", link: httpPages.UploadData}}/>
             case Role.Cooker:
-                return <Navibar LeftButton={{name: "составить меню", link: httpPages.CreateMenu}}
-                                SecondButton={{name: "Создать Блюдо", link: httpPages.NotFound}}
+                return <Navibar LeftButton={{name: "Cоставить меню", link: httpPages.CreateMenu}}
+                                SecondButton={{name: "Создать блюдо", link: httpPages.NotFound}}
                                 thirdButton={{name: "Выгрузить отчёт", link: httpPages.UploadReport}}/>
             default:
                 return <></>
