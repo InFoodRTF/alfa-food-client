@@ -43,7 +43,7 @@ export default class CartView extends React.Component<{cart: CartStore}>{
                     <Card.Title className={styles.cardTitle} style={{width: "140px", height: "24px", textAlign: "right", marginBottom: "0px"}}>{this.props.cart.sum}</Card.Title>
                 </div>
                 <div style={{position: "absolute", textAlign: "center", width: "264px", bottom: "19px"}}>
-                    <Button variant={''} bsPrefix={''} className={styles.orderButton}><p className={styles.buttonText}>к оформлению</p></Button>
+                    <Button onClick={() => this.props.cart.CreateOrder()} variant={''} bsPrefix={''} className={styles.orderButton}><p className={styles.buttonText}>Оформить</p></Button>
                 </div>
             </Card>
         )

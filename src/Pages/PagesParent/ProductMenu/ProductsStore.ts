@@ -15,7 +15,6 @@ export default class ProductsStore extends BaseMenuStore { // todo не лучш
     }
 
 
-
     @action
     override async DownloadMenu() :Promise<void> {
         console.log("зашел в лоад")

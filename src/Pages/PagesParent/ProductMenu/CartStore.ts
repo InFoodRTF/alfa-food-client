@@ -36,6 +36,13 @@ export default class CartStore extends storeAdapterApi {
     }
 
     @action
+    async CreateOrder() {
+        if (!this.isEmpty)
+            await this.postByToken<{},{}>(Requests.CreateOrder, {});
+        else
+            console.log("корзина пуста")
+    }
+    @action
     async UpdateCart() {
         await this.getDataByToken(Requests.GetCart); // TODO ДУмать как часто нужно кидать запрос на cart
     }

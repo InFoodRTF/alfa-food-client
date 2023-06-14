@@ -10,7 +10,7 @@ class Requests { // ухх, это выглядит все сложнее и с�
     AddProductInCart = api + `cart/add/`;
     RemoveProductFromCart = api + `cart/remove/`;
     GetGrades = api + `grades/`;
-
+    CreateOrder = api +`/cart/create-order/`;
     ChangeAttendances = (id: number) =>  api + `attendances/student/${id}/`
     GetMenu = (date: string) => api + `menu/?date=${date}`
     SwitchCart = (studentId: number, date: string) => api + `cart/?menu_date=${date}&student_id=${studentId}`;
