@@ -19,7 +19,7 @@ interface IModal {
 }
 
 // TOdo сделать красивее
-class ModalExampleBasic extends React.Component<PropsWithChildren<IModal>, {}> {
+class ModalView extends React.Component<PropsWithChildren<IModal>, {}> {
 
 
     render() {
@@ -34,5 +34,5 @@ class ModalExampleBasic extends React.Component<PropsWithChildren<IModal>, {}> {
     }
 }
 
-export default ModalExampleBasic
+export default ModalView
 

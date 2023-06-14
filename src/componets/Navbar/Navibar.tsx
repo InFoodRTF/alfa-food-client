@@ -29,6 +29,7 @@ export class Navibar extends React.Component<props,{curUrl: string}> {
     }
     componentDidMount() {
         console.log(httpPages.Products, this.props.LeftButton.link)
+        this.setState({curUrl: window.location.pathname})
     }
 
     // todo это нужно будет вынести за пределы странички

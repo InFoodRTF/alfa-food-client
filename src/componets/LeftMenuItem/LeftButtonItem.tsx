@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./LeftButtonItem.module.css";
 import {Button} from "react-bootstrap";
-import ModalExampleBasic from "../ModalView/ModalConfirmChange";
+import ModalView from "../ModalView/ModalConfirmChange";
 import {observer} from "mobx-react";
 
 interface props {
@@ -48,17 +48,17 @@ export class LeftButtonItem extends React.Component<props, {
                     style={{width: `${this.props.w}px`}}>
                 <p className={styles.buttonText}>{this.props.student}</p>
 
-                <ModalExampleBasic active={this.state.showModal}
-                                   onClose={() => {
+                <ModalView active={this.state.showModal}
+                           onClose={() => {
                                        this.setState({showModal: false})
                                    }}
-                                   onSubmit={async () => {
+                           onSubmit={async () => {
                                        this.SelectedButton(this.state.selectedButton!)
                                        this.setState({showModal: false})
                                        await this.props.onDataChange();
                                    }}>
                     <span> если вы измените ученика, то корзина будет очищена </span>
-                </ModalExampleBasic>
+                </ModalView>
             </Button>
         )
     }

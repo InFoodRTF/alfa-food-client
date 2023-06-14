@@ -44,7 +44,7 @@ export class GradesStore extends StoreAdapterApi {
 
     @computed
     get GetSelectedGradeStudent(): AttendedStudent[] {
-        if (this.grades[this.SelectedGradeName] === undefined && this.grades[this.SelectedGradeName] === undefined)
+        if (this.grades[this.SelectedGradeName] === undefined || this.grades[this.SelectedGradeName].attended_students === undefined)
             return []
 
         return this.grades[this.SelectedGradeName].attended_students

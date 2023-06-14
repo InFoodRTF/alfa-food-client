@@ -4,11 +4,15 @@ import styles from "./EditingCard.module.css";
 import edit from "./Img/Edit.svg";
 import del from "./Img/Delete.svg";
 import {Item} from "../../Pages/PagesParent/ProductMenu/ProductsMenu";
+import {observer} from "mobx-react";
 
 interface props {
     item: Item
+    onCLickMinus: () => void,
+    onCLickPlus: () => void,
 }
 
+@observer
 export class EditingCard extends React.Component<props> {
     render() {
         const {item} = this.props;
@@ -26,7 +30,10 @@ export class EditingCard extends React.Component<props> {
                     <div className={styles.gramBlock}><Card.Text className={styles.gramText}>{item.product.grams}г</Card.Text></div>
                     <div className={styles.addInfBlock}>
                         <Button variant={''} bsPrefix={''} className={styles.cardButton}>
-                            <Card.Img className={styles.imgFormButtonEdit} src={edit}></Card.Img>
+                            <p style={{fontSize: "30px", position: "relative", top: "6px"}} onClick={() => this.props.onCLickPlus()} className={styles.smallButton}>+</p>
+                        </Button>
+                        <Button variant={''} bsPrefix={''} className={styles.cardButton}>
+                            <p style={{fontSize: "30px", position: "relative", top: "6px"}} onClick={() => this.props.onCLickMinus()} className={styles.smallButton}>-</p>
                         </Button>
                         <Button variant={''} bsPrefix={''} className={styles.cardButton}>
                             <Card.Img className={styles.imgFormButtonDel} src={del}></Card.Img>

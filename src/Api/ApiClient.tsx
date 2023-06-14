@@ -37,7 +37,7 @@ class ApiClient extends ApiRequest {
     }
 
     // TODo переделеать, в более универальный случай
-    async GetEntityByToken<TGet>(token: IToken, url: string): Promise<TGet> {
+    async GetEntityByToken<TGet>(token: IToken, url: string): Promise<TGet> { // как идея, можно выкинуть этоткод за абстрак класс, и брать его для всех методов здесь, тогда повторов не будет
         try {
             const response = await this.GetByToken<TGet>(url, token)
             console.log("все окей!", response)

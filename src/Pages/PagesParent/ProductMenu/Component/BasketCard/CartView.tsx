@@ -25,7 +25,7 @@ export default class CartView extends React.Component<{cart: CartStore}>{
                             <ProductView key={product.id}
                                          productCount={this.props.cart.countItems[product.id]}
                                          product={product}
-                                         put={e => this.props.cart.Put(e, true)}
+                                         put={e => this.props.cart.Add(e, true)}
                                          extract={e => this.props.cart.Extract(e)}/>)}
                     </div>
                     <div className={styles.mealCategory}>
@@ -34,7 +34,7 @@ export default class CartView extends React.Component<{cart: CartStore}>{
                             <ProductView key={product.id}
                                          productCount={this.props.cart.countItems[product.id]}
                                          product={product}
-                                         put={e => this.props.cart.Put(e, true)}
+                                         put={e => this.props.cart.Add(e, true)}
                                          extract={e => this.props.cart.Extract(e)}/>)}
                     </div>
                 </div>

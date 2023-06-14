@@ -5,7 +5,7 @@ import {IProduct} from "../../../../../componets/FoodCard/CardFood";
 import {observer} from "mobx-react";
 
 @observer
-export class ProductView extends React.Component<{
+export class ProductView extends React.Component<{ // this.props.productCount для чего это !!!)((!)
     product: IProduct,
     productCount: number,
     put: (e: IProduct)  => void,
@@ -19,7 +19,7 @@ export class ProductView extends React.Component<{
                         <p onClick={() => this.props.extract(this.props.product)} className={styles.smallButton}>-</p>
                     </Button>
                     <p className={styles.addFood} style={{width: "5px", height: "11px", marginBottom: "0px"}}>{this.props.productCount}</p>
-                    <Button onClick={() => this.props.productCount}  variant={''} bsPrefix={''} className={styles.addFood} style={{padding: "0px", margin: "0px"}}>
+                    <Button onClick={() => this.props.productCount }  variant={''} bsPrefix={''} className={styles.addFood} style={{padding: "0px", margin: "0px"}}>
                         <p onClick={() => this.props.put(this.props.product)} className={styles.smallButton}>+</p>
                     </Button>
                 </div>

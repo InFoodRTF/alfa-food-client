@@ -4,7 +4,7 @@ import CalendarView from "../../PagesParent/ProductMenu/Component/Calendar/Calen
 import { BaseButItem } from "../../../componets/BaseButton/BaseButItem";
 import {inject, observer} from "mobx-react";
 import {PageComponent} from "../../PageComponent";
-import {MenuStore} from "../AssembleMenu/Store/MenuStore";
+import {AssembleStore} from "../AssembleMenu/Store/AssembleStore";
 import styles from "./CookingUploadRep.module.css"
 import {ReportStore} from "./Store/ReportStore";
 import InputTemplate from "mdb-react-ui-kit/dist/types/free/forms/InputTemplate/InputTemplate";

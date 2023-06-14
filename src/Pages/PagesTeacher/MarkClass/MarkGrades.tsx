@@ -51,7 +51,7 @@ export class MarkGrades extends PageComponent<InjectProps> {
                     await gradesStore.LoadGrade();
                 }} canDataChange={true}/>
                 <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
-                    <p className={styles.markClass}>Отметить класс</p>
+                    <p className={styles.markGrade}>Отметить класс</p>
                     <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                         <SearchCard/>
                         {gradesStore.GetSelectedGradeStudent.map(student =>

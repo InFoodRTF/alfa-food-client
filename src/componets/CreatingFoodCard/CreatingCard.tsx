@@ -4,7 +4,7 @@ import styles from "./CreatingCard.module.css";
 import addImage from "./NewFood.svg";
 
 
-export class CreatingCard extends React.Component{
+export class CreatingCard extends React.Component<{onClick: () => void}>{
     render() {
         return (
             <Card className={styles.foodCard}>
@@ -13,7 +13,7 @@ export class CreatingCard extends React.Component{
                         <Card.Img className={styles.imgForm} src={addImage}></Card.Img>
                     </div>
                     <div className={styles.gramBlock}>
-                        <Button variant={''} bsPrefix={''} className={styles.cardButton}>
+                        <Button onClick={this.props.onClick} variant={''} bsPrefix={''} className={styles.cardButton}>
                             <p className={styles.textAdd}>Добавить блюдо</p>
                         </Button>
                     </div>

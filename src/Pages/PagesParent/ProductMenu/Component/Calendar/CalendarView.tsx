@@ -7,7 +7,7 @@ import CalendarSwitch from "../../Model/CalendarSwitch";
 import {observer} from "mobx-react";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
-import ModalExampleBasic from "../../../../../componets/ModalView/ModalConfirmChange";
+import ModalView from "../../../../../componets/ModalView/ModalConfirmChange";
 
 
 interface Props {
@@ -58,7 +58,7 @@ class CalendarView extends React.Component<Props, { showModal: boolean }> {
                               onChange={async (e: Date) => await this.ChangeData(e)}
                               value={this.props.calendar.Date}/>
                 }
-                <ModalExampleBasic
+                <ModalView
                     active={this.state.showModal && this.props.modalIsActive}
                     onClose={() => this.setState({showModal: false})}
                     onSubmit={() => {
@@ -66,7 +66,7 @@ class CalendarView extends React.Component<Props, { showModal: boolean }> {
                         this.setState({showModal: false})
                     }}>
                     <span>вы уверены, корзину будет очищена</span>
-                </ModalExampleBasic>
+                </ModalView>
             </div>
         );
     }

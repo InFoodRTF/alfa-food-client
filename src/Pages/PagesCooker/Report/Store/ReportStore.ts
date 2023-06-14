@@ -17,7 +17,6 @@ export class ReportStore extends StoreAdapterApi{
 
     @action
     DownLoadFile() {
-        console.log("asdfasd")
         this.DownloadFile<InfoPdf>(CookerHttp.DownLoadFile, {date: this.Calendar.CurDate, file_extension: "pdf"})
     }
 }

@@ -46,7 +46,7 @@ export default class CartStore extends storeAdapterApi {
     }
 
     @action // хз насчёт годности этого isAsync
-    public async Put(product: IProduct, isConnectedWithServer: boolean): Promise<void> {
+    public async Add(product: IProduct, isConnectedWithServer: boolean): Promise<void> {
         if (isConnectedWithServer) {
             await this.UpLoadProduct(product);
         }
@@ -81,7 +81,7 @@ export default class CartStore extends storeAdapterApi {
         for (let item of cartInfo.cart_items) {
             item.product.price = Number(item.product.price);
             for (let j = 0; j < item.quantity; j++) {
-                this.Put(item.product, false)
+                this.Add(item.product, false)
             }
         }
     }
@@ -94,8 +94,8 @@ export default class CartStore extends storeAdapterApi {
 
     // название очень не нравиться поэтому вот -
     // убирает из коризины элемент
-    @action
-    private Remove(product: IProduct) {
+    @action // todo название
+    private Remove(product: IProduct) { // TODO remove не работает с сервером, ааааа!!!???????
         const index = this.Products.indexOf(product);
         delete this.Products[index];
     }

@@ -12,12 +12,15 @@ const changeClass = (event: React.MouseEvent) => {
     event.currentTarget.classList.toggle(styles.redMenu)
 }
 
-export class ButItem extends React.Component<{ h: number, w: number, value: string, ChangeMealCategory: () => void }> {
+
+export class ButItem extends React.Component<{ h: number, w: number, value: string, ChangeMealCategory: () => void, active: boolean }> {
 
 
     render() {
         return (
-            <Button onClick={(e) => {changeClass(e); this.props.ChangeMealCategory() }} variant={''} bsPrefix={''} className={styles.orderButtonMenu}
+            <Button onClick={(e) => {changeClass(e); this.props.ChangeMealCategory() }}
+                    variant={''}
+                    bsPrefix={''} className={`${styles.orderButtonMenu} ${this.props.active ? styles.redMenu : ''}` }
                     style={{width: `${this.props.w}px`, height: `${this.props.h}px`}}>
                 <p className={styles.buttonText}>{this.props.value}</p>
             </Button>

@@ -23,7 +23,8 @@ export interface ItemOrder {
     items: { [id: string]: Item[]; }
 }
 
-export interface Item {
+export interface Item { // Лютый костыльььь
+    idProduct: number;
     id: number;
     quantity: number;
     meal_category: string;
@@ -50,7 +51,7 @@ class ProductMenu extends React.Component {// todo придумать норм �
 
     async componentDidMount() {
         await this.injected.studentStore.LoadStudent();
-        await this.injected.productsStore.LoadMenu();
+        await this.injected.productsStore.DownloadMenu();
         // ченки lifecycly hooks и сделай все красиво бро
     }
 
@@ -77,7 +78,7 @@ class ProductMenu extends React.Component {// todo придумать норм �
                                   await cartStore.changeCart();
                               }}
                               onChangeCalendar={async () => {
-                                  await productsStore.LoadMenu();
+                                  await productsStore.DownloadMenu();
                                   await cartStore.changeCart()
                               }}
                               canDataChange={cartStore.isEmpty}/>
@@ -87,7 +88,8 @@ class ProductMenu extends React.Component {// todo придумать норм �
                                 productsStore.GetAvailableCategory.map(mealCategory =>
                                     <MealCategoryFilter
                                         value={mealCategory}
-                                        changeMealCategory={() => productsStore.ChangeMealCategory(mealCategory)}/>
+                                        changeMealCategory={() => productsStore.ChangeMealCategory(mealCategory)}
+                                    selectedCategory={productsStore.SelectedMealCategory ?? ""}/>
                                 )
                             }
                         </div>
@@ -102,7 +104,7 @@ class ProductMenu extends React.Component {// todo придумать норм �
                                         <CardFood
                                             key={food.id}
                                             item={food}
-                                            addToCart={(e: IProduct) => cartStore.Put(e, true)}/>)}
+                                            addToCart={(e: IProduct) => cartStore.Add(e, true)}/>)}
                                     </div>)}
                         </div>
                     </div>

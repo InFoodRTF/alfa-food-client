@@ -1,7 +1,7 @@
-import {action, computed, makeObservable, observable} from "mobx";
+import {action, makeObservable, observable} from "mobx";
 import CalendarSwitch from "./Model/CalendarSwitch";
 import {ItemOrder} from "./ProductsMenu";
-import Requests from "../../../Api/Requests";
+import Requests, {CookerHttp} from "../../../Api/Requests";
 import {BaseMenuStore} from "../../../Lib/BaseMenuStore";
 
 export default class ProductsStore extends BaseMenuStore { // todo не лучшее название
@@ -17,10 +17,11 @@ export default class ProductsStore extends BaseMenuStore { // todo не лучш
 
 
     @action
-    override async LoadMenu() :Promise<void> {
-        const menu: ItemOrder = await this.getDataByToken<ItemOrder>(Requests.GetMenu(this.Calendar.CurDate));
+    override async DownloadMenu() :Promise<void> {
+        console.log("зашел в лоад")
         this.menu = {}
-
+        const menu: ItemOrder = await this.getDataByToken<ItemOrder>(Requests.GetMenu(this.Calendar.CurDate));
+        this.SelectedMealCategory = Object.keys(menu.items)[0];
         this.menu = menu.items;
     }
 }

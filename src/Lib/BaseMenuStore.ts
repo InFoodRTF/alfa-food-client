@@ -35,7 +35,7 @@ export abstract class BaseMenuStore extends storeAdapterApi {
         this.SelectedMealCategory = mealCategory;
     }
 
-    abstract LoadMenu(): Promise<void>;
+    abstract DownloadMenu(): Promise<void> ;
 
     // гланый метод вывода всех товаров
     public ShowProduct(): Item[][] { // todo вроде название норм, и все таки мне не очень нравится И возможно можно сделать COMPUTED
@@ -54,9 +54,11 @@ export abstract class BaseMenuStore extends storeAdapterApi {
 
         for (let item of items) {
             if (item.quantity === 0) continue;
-
             item.product.price = Number(item.product.price);
+            // TODO Лютый костыль
+            item.idProduct = item.product.id;
             item.product.id = item.id;
+
             result.push(item)
         }
 
