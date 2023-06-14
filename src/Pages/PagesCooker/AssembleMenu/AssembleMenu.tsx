@@ -89,7 +89,7 @@ export class AssembleMenu extends PageComponent<props> {
                                         menuStore.addInMenu(item)
                                     }}/>)
                                 }
-                                    { <CreatingCard onClick={() => {
+                                    {itemColumn.length !== 3 && <CreatingCard onClick={() => {
                                         menuStore.DownloadAvailableProduct()
                                         menuStore.ChangeIsOpen();
                                     }}/>}
