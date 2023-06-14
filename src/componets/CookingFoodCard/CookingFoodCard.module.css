@@ -1,0 +1,81 @@
+:root { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+    :root { font-family: 'Inter var', sans-serif; }
+}
+
+.foodCardMenu {
+    width: 1016px;
+    height: 140px;
+    border-radius: 10px;
+    border-color: white;
+}
+
+.imgBlockMenu{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: left;
+}
+
+.cardBlockMenu{
+    display: flex;
+    flex-direction: row;
+    gap: 190px;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.addInfBlock{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.textMenu{
+    width: 577px;
+    margin-bottom: 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 39px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    flex: none;
+}
+
+.priceMenu{
+    height: 24px;
+    margin-bottom: 0;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    flex: none;
+}
+
+.foodInfMenu{
+    display: flex;
+    flex-direction: row;
+    gap: 19px;
+}
+
+.infBlockMenu{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.addButtonMenu{
+    background-color: white;
+    border: none;
+}
