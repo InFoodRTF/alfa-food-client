@@ -97,10 +97,17 @@ export class AssembleMenu extends PageComponent<props> {
                                 </div>
                                 )
                         }
-                        {menuStore.ShowProduct().pop()?.length === 3 && <CreatingCard onClick={() => {
-                            menuStore.DownloadAvailableProduct()
-                            menuStore.ChangeIsOpen();
-                        }}/>}
+
+                            {menuStore.ShowProduct().pop()?.length === 3 && <div style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                gap: "20px"
+                            }}> <CreatingCard onClick={() => {
+                                menuStore.DownloadAvailableProduct()
+                                menuStore.ChangeIsOpen();
+                            }}/> </div>}
+
+
                     </div>
                     <ModalView active={menuStore.IsOpenAllProductMenu} onClose={() => menuStore.ChangeIsOpen()}
                                onSubmit={console.log}>
