@@ -40,8 +40,8 @@ export class Profile extends PageComponent<injProps> {
                             </div>
                         </div>
                         <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
-                            <Account text={"нету"} desc={"Почта"} />
-                            <Account text={"нету"} desc={"Телефон"}/>
+                            <Account text={"нет"} desc={"Почта"} />
+                            <Account text={"нет"} desc={"Телефон"}/>
                         </div>
                         <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                             <Account desc={"Логин"} text={userStore.User.username}/>

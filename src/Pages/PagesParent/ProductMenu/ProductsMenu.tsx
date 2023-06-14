@@ -69,7 +69,7 @@ class ProductMenu extends React.Component {// todo придумать норм �
                     marginLeft: "auto",
                     marginRight: "auto",
                     paddingBottom: "60px",
-                    minHeight: "580px"
+                    minHeight: "580px",
                 }}>
                     <LeftMenu calendar={productsStore.Calendar}
                               ButtonsText={this.GetFullNameClickEvent(studentStore.Students)}
@@ -82,7 +82,7 @@ class ProductMenu extends React.Component {// todo придумать норм �
                                   await cartStore.changeCart()
                               }}
                               canDataChange={cartStore.isEmpty}/>
-                    <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
+                    <div style={{display: "flex", flexDirection: "column", gap: "20px", minWidth: "550px"}}>
                         <div style={{display: "flex", flexDirection: "row", gap: "20px", height: "44px"}}>
                             {
                                 productsStore.GetAvailableCategory.map(mealCategory =>
