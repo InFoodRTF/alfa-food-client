@@ -6,12 +6,19 @@ import CartStore from "../../CartStore";
 import {observer} from "mobx-react";
 import {Item} from "../../ProductsMenu";
 import mealCategory from "../../../../../Model/Enum/MealCategory";
+import ModalView from "../../../../../componets/ModalView/ModalConfirmChange";
 
 export interface ICartInfo {
     cart_items: Item[]
 }
 @observer
-export default class CartView extends React.Component<{cart: CartStore}>{
+export default class CartView extends React.Component<{cart: CartStore}, {create: boolean}>{
+    constructor(props: {cart: CartStore}) {
+        super(props);
+
+        this.state = {create: false}
+    }
+
     render() {
         return(
             <Card className={styles.basCard}>
@@ -43,8 +50,12 @@ export default class CartView extends React.Component<{cart: CartStore}>{
                     <Card.Title className={styles.cardTitle} style={{width: "140px", height: "24px", textAlign: "right", marginBottom: "0px"}}>{this.props.cart.sum}</Card.Title>
                 </div>
                 <div style={{position: "absolute", textAlign: "center", width: "264px", bottom: "19px"}}>
-                    <Button onClick={() => this.props.cart.CreateOrder()} variant={''} bsPrefix={''} className={styles.orderButton}><p className={styles.buttonText}>Оформить</p></Button>
+                    <Button onClick={() => {this.props.cart.CreateOrder(); this.setState({create: true})}} variant={''} bsPrefix={''} className={styles.orderButton}><p className={styles.buttonText}>Оформить</p></Button>
                 </div>
+                <ModalView  textClose={"ок"} active={this.state.create} onClose={() => {
+                    this.setState({create: false})
+                    this.props.cart.Clear();
+                }}><span> Заказ сделал</span></ModalView>
             </Card>
         )
     }

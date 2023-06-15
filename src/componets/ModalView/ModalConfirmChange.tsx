@@ -15,7 +15,8 @@ const customStyles = {
 interface IModal {
     active: boolean,
     onClose: () => void,
-    onSubmit: () => void
+    textClose?: string
+    onSubmit?: () => void
 }
 
 // TOdo сделать красивее
@@ -27,8 +28,8 @@ class ModalView extends React.Component<PropsWithChildren<IModal>, {}> {
             <Modal style={customStyles} isOpen={this.props.active}
             ariaHideApp={false}>
                 <div>{this.props.children}</div>
-                <button onClick={() => this.props.onSubmit()}> Да</button>
-                <button onClick={() => this.props.onClose()}> Нет</button>
+                {this.props.onSubmit !== undefined && <button onClick={() => this.props.onSubmit ?? ""}> Да</button>}
+                <button onClick={() => this.props.onClose()}> {this.props.textClose ?? " Нет"}</button>
             </Modal>
         );
     }

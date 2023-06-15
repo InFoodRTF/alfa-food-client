@@ -91,7 +91,6 @@ export class AssembleStore extends BaseMenuStore {
             return ;
         }
 
-        console.log(toJS(item))
         const resp = await this.postByToken<{}, RequestProductInMenu>(CookerHttp.AddProductInMenu, {
             menu_id: this.SelectedMenuId,
             product_id: item.idProduct,

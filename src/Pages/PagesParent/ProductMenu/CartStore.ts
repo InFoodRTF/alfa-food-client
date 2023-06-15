@@ -36,6 +36,11 @@ export default class CartStore extends storeAdapterApi {
     }
 
     @action
+    Clear() {
+        this.Products = [];
+    }
+
+    @action
     async CreateOrder() {
         if (!this.isEmpty)
             await this.postByToken<{},{}>(Requests.CreateOrder, {});
