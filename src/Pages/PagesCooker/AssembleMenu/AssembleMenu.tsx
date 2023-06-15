@@ -104,6 +104,7 @@ export class AssembleMenu extends PageComponent<props> {
                                 gap: "20px"
                             }}> <CreatingCard onClick={async () => {
                                 await menuStore.DownloadAvailableProduct()
+                                menuStore.ChangeIsOpen();
                             }}/> </div>}
 
 
