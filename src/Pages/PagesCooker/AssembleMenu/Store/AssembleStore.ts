@@ -1,4 +1,3 @@
-
 import CalendarSwitch from "../../../PagesParent/ProductMenu/Model/CalendarSwitch";
 import {CookerHttp} from "../../../../Api/Requests";
 import {Menu} from "./Models/Menu";
@@ -22,18 +21,18 @@ export class AssembleStore extends BaseMenuStore {
     AvailableIProduct: IProduct[] = []
     @observable
     IsOpenAllProductMenu: boolean = false; // пока хз либо state либо это: это по идей быстрее работает
-    
-    
+
 
     constructor(public Calendar: CalendarSwitch) {
         super();
         makeObservable(this);
     }
-    
+
     @action
     ChangeIsOpen() {
         this.IsOpenAllProductMenu = !this.IsOpenAllProductMenu;
     }
+
     @action
     ChangeSelectedMenu(menuId: number) {
         this.SelectedMenuId = menuId;
@@ -56,21 +55,24 @@ export class AssembleStore extends BaseMenuStore {
 
     @action
     async DownloadAvailableProduct() {
-        this.AvailableIProduct = await this.getDataByToken<IProduct[]>(CookerHttp.GetAvailableItem);
+        const x = await this.getDataByToken<IProduct[]>(CookerHttp.GetAvailableItem);
+        if (x.length !== 0)
+            this.AvailableIProduct = x;
+        this.ChangeIsOpen();
     }
 
     @action
     async addInMenuNew(productId: number) {
-        if (this.SelectedMenuId === undefined){
+        if (this.SelectedMenuId === undefined) {
             console.log("меню не выбранно ")
-            return ;
+            return;
         }
-        if (this.SelectedMealCategory === undefined){
+        if (this.SelectedMealCategory === undefined) {
             console.log("не выбранна категория блюд: хз как это возможно!!")
-            return ;
+            return;
         }
 
-            await this.postByToken<{}, RequestProductInMenu>(CookerHttp.AddProductInMenu, {
+        await this.postByToken<{}, RequestProductInMenu>(CookerHttp.AddProductInMenu, {
             menu_id: this.SelectedMenuId,
             product_id: productId,
             meal_category: this.SelectedMealCategory
@@ -82,13 +84,13 @@ export class AssembleStore extends BaseMenuStore {
 
     @action
     async addInMenu(item: Item) {
-        if (this.SelectedMenuId === undefined){
+        if (this.SelectedMenuId === undefined) {
             console.log("меню не выбранно ")
-            return ;
+            return;
         }
-        if (this.SelectedMealCategory === undefined){
+        if (this.SelectedMealCategory === undefined) {
             console.log("не выбранна категория блюд: хз как это возможно!!")
-            return ;
+            return;
         }
 
         const resp = await this.postByToken<{}, RequestProductInMenu>(CookerHttp.AddProductInMenu, {
@@ -97,24 +99,26 @@ export class AssembleStore extends BaseMenuStore {
             meal_category: this.SelectedMealCategory
         })
 
-        if (resp.status === 200){
+        if (resp.status === 200) {
             ++item.quantity;
         }
     }
 
     @action
     async removeFromMenu(item: Item) { // todo повтор кодааааа
-        if (this.SelectedMenuId === undefined){
+        if (this.SelectedMenuId === undefined) {
             console.log("меню не выбранно ")
-            return ;
+            return;
         }
-        if (this.SelectedMealCategory === undefined){
+        if (this.SelectedMealCategory === undefined) {
             console.log("не выбранна категория блюд: хз как это возможно!!")
-            return ;
+            return;
         }
 
-        const Resp = await this.postByToken<ItemOrderType,{menuitem_id: number}>(CookerHttp.RemoveProduct, {menuitem_id: item.id})
-        if (Resp.status === 200){
+        const Resp = await this.postByToken<ItemOrderType, {
+            menuitem_id: number
+        }>(CookerHttp.RemoveProduct, {menuitem_id: item.id})
+        if (Resp.status === 200) {
             --item.quantity;
         }
 
