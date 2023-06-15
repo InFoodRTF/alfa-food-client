@@ -23,7 +23,7 @@ export class ChooseProductAdd extends React.Component<props>{
                 minHeight: "620px"
             }}>
                 <SearchCard/>
-                {products.length !== 0 && products.map((p) => <CookingFoodCard product={p} onClick={() => this.props.onClick(p)} />)}
+                {products !== undefined && products !== null && products.map((p) => <CookingFoodCard product={p} onClick={() => this.props.onClick(p)} />)}
             </div>
         )
     }
