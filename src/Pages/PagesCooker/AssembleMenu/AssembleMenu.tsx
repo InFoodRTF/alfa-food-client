@@ -102,8 +102,8 @@ export class AssembleMenu extends PageComponent<props> {
                                 display: "flex",
                                 flexDirection: "row",
                                 gap: "20px"
-                            }}> <CreatingCard onClick={() => {
-                                menuStore.DownloadAvailableProduct()
+                            }}> <CreatingCard onClick={async () => {
+                                await menuStore.DownloadAvailableProduct()
                                 menuStore.ChangeIsOpen();
                             }}/> </div>}
 
