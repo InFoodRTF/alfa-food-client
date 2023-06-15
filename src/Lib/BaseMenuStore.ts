@@ -1,9 +1,6 @@
-import {action, computed, observable} from "mobx";
+import {action, computed, observable, toJS} from "mobx";
 import {Item, ItemOrderType} from "../Pages/PagesParent/ProductMenu/ProductsMenu";
 import storeAdapterApi from "../Api/StoreAdapterApi";
-
-
-
 
 
 /**
@@ -46,19 +43,20 @@ export abstract class BaseMenuStore extends storeAdapterApi {
     }
 
 
-
     @action
     private GetAvailableProduct(items: Item[]): Item[] {
         let result: Item[] = [];
         if (items == null) return result;
-
         for (let item of items) {
             if (item.quantity === 0) continue;
+
             item.product.price = Number(item.product.price);
             // TODO Лютый костыль
-            item.idProduct = item.product.id;
+            console.log(toJS(item), "ds;lkfajsd;lfska")
+            if (item.idProduct === undefined)
+                item.idProduct = item.product.id;
             item.product.id = item.id;
-
+            console.log(toJS(item), "agter")
             result.push(item)
         }
 
@@ -66,9 +64,8 @@ export abstract class BaseMenuStore extends storeAdapterApi {
     }
 
 
-
     @action
-    private GetInColumn<T>(products: T[], countInRow: number) : T[][] {
+    private GetInColumn<T>(products: T[], countInRow: number): T[][] {
         const countColumn = Math.ceil(products.length / countInRow)
         let array: T[][] = []
 

@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./CookingFoodCard.module.css";
 import {Card} from "react-bootstrap";
-import food from "./Img/Food.svg";
 import plus from "./Img/Plus.svg";
 import {IProduct} from "../FoodCard/CardFood";
 
@@ -17,7 +16,7 @@ export class CookingFoodCard extends React.Component<props>{
                 <div className={styles.cardBlockMenu}>
                     <div className={styles.foodInfMenu}>
                         <div className={styles.imgBlockMenu}>
-                            <img src={food} alt={""}/>
+                            <img width="150" height="110" style={{borderRadius: "15px"}} src={product.image} alt={""}/>
                         </div>
                         <div className={styles.infBlockMenu}>
                                 <p className={styles.textMenu}>{product.name}</p>
