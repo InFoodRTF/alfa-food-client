@@ -56,8 +56,9 @@ export class AssembleStore extends BaseMenuStore {
     @action
     async DownloadAvailableProduct() {
         const x = await this.getDataByToken<IProduct[]>(CookerHttp.GetAvailableItem);
-        if (x.length !== 0)
+        if (x === undefined || x.length !== 0)
             this.AvailableIProduct = x;
+        this.AvailableIProduct = [];
         this.ChangeIsOpen();
     }
 
