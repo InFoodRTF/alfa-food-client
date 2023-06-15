@@ -21,7 +21,7 @@ class Requests { // ухх, это выглядит все сложнее и с�
 export class CookerHttp {
     static GetMenuByDate = (date: string) => api + `menu/list/?date=${date}`;
     static GetProductByMenu = (menuId: string) => api + `menu/${menuId}/`;
-    static GetAvailableItem = api + "products"
+    static GetAvailableItem = api + "products/-"
     static RemoveProduct = api + "menu/item/remove/";
     static DownLoadFile = api + "report/"
     static AddProductInMenu: string = api + "menu/item/add/"
