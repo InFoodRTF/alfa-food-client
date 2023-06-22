@@ -65,7 +65,7 @@ export default class CartStore extends BaseItemStore {
         console.log(this.SelectedStudentId)
         if (this.SelectedStudentId === -1) return;
 
-        this.ItemsClear();
+        this.itemsClear();
         let cartInfo = await this.getDataByToken<ICartInfo>(Requests.SwitchCart(this.SelectedStudentId, this.Calendar.CurDate))
         console.log(cartInfo)
         for (let item of cartInfo.cart_items) {

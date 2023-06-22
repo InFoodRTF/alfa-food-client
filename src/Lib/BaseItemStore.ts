@@ -28,11 +28,9 @@ export abstract class BaseItemStore extends storeAdapterApi {
     }
 
     @action
-    public ItemsClear() {
+    public itemsClear() {
         this.Items = {};
     }
-
-
 
     @computed
     get GetAvailableCategory(): string[] {

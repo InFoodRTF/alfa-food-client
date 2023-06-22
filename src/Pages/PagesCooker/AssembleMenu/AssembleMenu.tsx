@@ -26,6 +26,10 @@ export class AssembleMenu extends PageComponent<props> {
         await this.injected.menuStore.DownloadMenu();
     }
 
+    componentWillUnmount() {
+        this.injected.menuStore.RemoveMenuId()
+    }
+
     render() {
         let {menuStore} = this.injected;
         return (
@@ -110,7 +114,7 @@ export class AssembleMenu extends PageComponent<props> {
                     <ModalView active={menuStore.IsOpenAllProductMenu} onClose={() => menuStore.ChangeIsOpen()}
                                onSubmit={console.log}>
                         <ChooseProductAdd products={menuStore.AvailableIProduct}
-                                          onClick={(p) => menuStore.addInMenuNew(p.id)}/>
+                                          onClick={(p) => menuStore.addNewInMenu(p.id)}/>
                     </ModalView>
                 </div>
             </div>
