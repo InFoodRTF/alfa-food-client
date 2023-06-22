@@ -39,7 +39,7 @@ export default class CartView extends React.Component<{ cart: CartStore }, { cre
                             <ProductView key={item.id}
                                          item={item}
                                          put={e => this.props.cart.Add(e, true)}
-                                         extract={e => this.props.cart.Extract(e)}/>))}
+                                         extract={e => this.props.cart.remove(e)}/>))}
 
                     </div>
                 </div>
@@ -69,7 +69,7 @@ export default class CartView extends React.Component<{ cart: CartStore }, { cre
                 </div>
                 <ModalView textClose={"ок"} active={this.state.create} onClose={() => {
                     this.setState({create: false})
-                    this.props.cart.Clear();
+                    this.props.cart.ItemsClear();
                 }}><span> Заказ сделал</span></ModalView>
             </Card>
         )

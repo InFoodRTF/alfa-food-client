@@ -1,12 +1,11 @@
-import {action, computed, makeObservable, observable, toJS} from "mobx";
+import {action, computed, makeObservable, observable} from "mobx";
 import {ICartInfo} from "./Component/BasketCard/CartView";
 import CalendarSwitch from "./Model/CalendarSwitch";
 import Requests from "../../../Api/Requests";
-import {Item, ItemOrderType,} from "./ProductsMenu";
-import {BaseMenuStore} from "../../../Lib/BaseMenuStore";
-import {createObservableArray} from "mobx/dist/types/observablearray";
+import {Item} from "./ProductsMenu";
+import {BaseItemStore} from "../../../Lib/BaseItemStore";
 
-export default class CartStore extends BaseMenuStore {
+export default class CartStore extends BaseItemStore {
     @observable
     public SelectedStudentId: number = -1;
 
@@ -16,18 +15,8 @@ export default class CartStore extends BaseMenuStore {
     }
 
     @computed
-    get isEmpty(): boolean {
-        return Object.keys(this.menu).length === 0; // по идей можно вынести в baseMenuStore
-    }
-
-    @computed
     get sum() {
         return 0; // TODO Cумму нужно реализовать !!
-    }
-
-    @action
-    Clear() {
-        this.menu = {};
     }
 
     @action
@@ -57,17 +46,17 @@ export default class CartStore extends BaseMenuStore {
         if (!this.IsPuttedItem(item)) {
             this.PutNewItem(item);
         } else {
-            this.menu[item.meal_category].find(e => e.id === item.id)!.quantity++;
+            this.Items[item.meal_category].find(e => e.id === item.id)!.quantity++;
         }
     }
 
     @action
-    async Extract(item: Item): Promise<void> {
+    async remove(item: Item): Promise<void> {
         await this.postByToken(Requests.RemoveProductFromCart, {menuitem_id: item.id});
         if (item.quantity === 1) {
-            this.Remove(item);
+            this.extract(item);
         } else {
-            this.menu[item.meal_category].find(e => e.id === item.id)!.quantity--;  // много ! возможно будет какой-нибудь косяк
+            this.Items[item.meal_category].find(e => e.id === item.id)!.quantity--;  // много ! возможно будет какой-нибудь косяк
         }
     }
 
@@ -76,7 +65,7 @@ export default class CartStore extends BaseMenuStore {
         console.log(this.SelectedStudentId)
         if (this.SelectedStudentId === -1) return;
 
-        this.menu = {}
+        this.ItemsClear();
         let cartInfo = await this.getDataByToken<ICartInfo>(Requests.SwitchCart(this.SelectedStudentId, this.Calendar.CurDate))
         console.log(cartInfo)
         for (let item of cartInfo.cart_items) {
@@ -94,25 +83,23 @@ export default class CartStore extends BaseMenuStore {
     }
 
 
-    private Remove(item: Item) {
-        const index = this.menu[item.meal_category].indexOf(item);
-        delete this.menu[item.meal_category][index];
+    private extract(item: Item) {
+        const index = this.Items[item.meal_category].indexOf(item);
+        delete this.Items[item.meal_category][index];
     }
 
-    @action
     private IsPuttedItem(item: Item): boolean {
-        return this.menu[item.meal_category] !== undefined && this.menu[item.meal_category].find(e => e.id === item.id) !== undefined;
+        return this.Items[item.meal_category] !== undefined && this.Items[item.meal_category].find(e => e.id === item.id) !== undefined;
     }
 
     @action
     private PutNewItem(item: Item) {
-        if (this.menu[item.meal_category] === undefined) {
-            this.menu[item.meal_category] = observable<Item>([]);
+        if (this.Items[item.meal_category] === undefined) {
+            this.Items[item.meal_category] = observable<Item>([]);
         }
-        console.log(toJS(this.menu),"новый item")
+
         item.quantity = 1;
-        this.menu[item.meal_category].push(item);
-        console.log(toJS(this.menu),"добавлен item")
+        this.Items[item.meal_category].push(item);
     }
 
     DownloadMenu(): Promise<void> {

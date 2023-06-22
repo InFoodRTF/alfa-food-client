@@ -1,10 +1,10 @@
 import {action, IObservableArray, makeObservable, observable} from "mobx";
 import CalendarSwitch from "./Model/CalendarSwitch";
-import {ItemOrder, ItemOrderType} from "./ProductsMenu";
+import {ItemOrderResponse, ItemOrderType} from "./ProductsMenu";
 import Requests from "../../../Api/Requests";
-import {BaseMenuStore} from "../../../Lib/BaseMenuStore";
+import {BaseItemStore} from "../../../Lib/BaseItemStore";
 
-export default class ProductsStore extends BaseMenuStore { // todo не лучшее название
+export default class ProductsStore extends BaseItemStore { // todo не лучшее название
     @observable
     Calendar: CalendarSwitch;
 
@@ -18,10 +18,10 @@ export default class ProductsStore extends BaseMenuStore { // todo не лучш
     @action
     override async DownloadMenu() :Promise<void> {
         console.log("зашел в лоад")
-        this.menu = {}
-        const menu = await this.getDataByToken<ItemOrder>(Requests.GetMenu(this.Calendar.CurDate));
+        this.Items = {}
+        const menu = await this.getDataByToken<ItemOrderResponse>(Requests.GetMenu(this.Calendar.CurDate));
         this.SelectedMealCategory = Object.keys(menu.items)[0];
-        this.menu = menu.items;
+        this.Items = menu.items;
     }
 }
 

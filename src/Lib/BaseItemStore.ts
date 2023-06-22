@@ -4,18 +4,18 @@ import storeAdapterApi from "../Api/StoreAdapterApi";
 
 
 /**
- *  Это базовый класс для управления меню в приложении
+ *  Это базовый класс для управления Продуктами в приложении
  * Отыгрывает ключевую роль в организации функционала меню в рамках приложения.
  * Предоставляет возможность выбирать категории меню, загружать список доступных продуктов и выводить выбранную категорию продуктов в виде матрицы.
  * матрица, потому, что в html нужно
  */
 
-// потенциально это будет класс стор, который работает именно с item's, то есть с чистыми данными с Сервера (item - в postman норм показана что это)
-export abstract class BaseMenuStore extends storeAdapterApi {
+// потенциально это будет класс стор, который работает именно с item's, то есть с чистыми данными с Сервера (item - абстрация над product (доп данные типа катеогрий, количества этого продукта т.д))
+export abstract class BaseItemStore extends storeAdapterApi {
     @observable
-    SelectedMealCategory?: string = "Завтрак"; // TOdo не забудь сменить
+    SelectedMealCategory?: string; // TOdo не забудь сменить
     @observable
-    menu: ItemOrderType = {};
+    Items: ItemOrderType = {};
 
     protected constructor() {
         super();
@@ -23,11 +23,24 @@ export abstract class BaseMenuStore extends storeAdapterApi {
     }
 
     @computed
-    get GetAvailableCategory(): string[] {
-        if (this.menu === undefined) return [];
+    public get isEmpty(): boolean {
+        return Object.keys(this.Items).length === 0; // по идей можно вынести в baseMenuStore
+    }
 
+    @action
+    public ItemsClear() {
+        this.Items = {};
+    }
+
+
+
+    @computed
+    get GetAvailableCategory(): string[] {
+        if (this.Items === undefined) return [];
+
+        console.log(toJS(this.Items),"2222222")
         let result: string[] = [];
-        for (let category in this.menu) {
+        for (let category in this.Items) { // todo это что-то лютое!!
             result.push(category)
         }
 
@@ -43,10 +56,10 @@ export abstract class BaseMenuStore extends storeAdapterApi {
 
     @computed
     public get ShowSelectedCategoryProduct(): Item[][] { // todo вроде название норм, и все таки мне не очень нравится И возможно можно сделать COMPUTED
-        if (this.menu === undefined || this.SelectedMealCategory === undefined || this.menu[this.SelectedMealCategory] === undefined) return []
+        if (this.Items === undefined || this.SelectedMealCategory === undefined || this.Items[this.SelectedMealCategory] === undefined) return []
 
-        console.log(toJS(this.menu),"Work here2")
-        const availableProduct = this.GetAvailableProduct(this.menu[this.SelectedMealCategory]);
+        console.log(toJS(this.Items),"Work here2")
+        const availableProduct = this.GetAvailableProduct(this.Items[this.SelectedMealCategory]);
         console.log(availableProduct, "work here 3")
         return this.GetInColumn<Item>(availableProduct, 3);
     }
@@ -56,7 +69,6 @@ export abstract class BaseMenuStore extends storeAdapterApi {
     private GetAvailableProduct(items: IObservableArray<Item>): Item[] {
         let result: Item[] = [];
         console.log(items, "Я здеееесь")
-        if (items.toString() === "Страница не найдена") return result;
         for (let item of items.toJSON()) {
             if (item.quantity === 0) continue;
 

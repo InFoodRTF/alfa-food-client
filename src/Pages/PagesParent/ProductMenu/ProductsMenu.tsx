@@ -20,12 +20,11 @@ type props = {
 
 export type ItemOrderType = { [Category: string]: IObservableArray<Item>; }
 
-export interface ItemOrder {
+export interface ItemOrderResponse {
     items: ItemOrderType
 }
 
 export interface Item { // Лютый костыльььь
-    idProduct: number;
     id: number;
     quantity: number;
     meal_category: string;

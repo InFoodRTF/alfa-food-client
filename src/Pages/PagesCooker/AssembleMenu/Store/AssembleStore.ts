@@ -3,8 +3,8 @@ import CalendarSwitch from "../../../PagesParent/ProductMenu/Model/CalendarSwitc
 import {CookerHttp} from "../../../../Api/Requests";
 import {Menu} from "./Models/Menu";
 import {action, keys, makeObservable, observable, toJS} from "mobx";
-import {BaseMenuStore} from "../../../../Lib/BaseMenuStore";
-import {Item, ItemOrderType} from "../../../PagesParent/ProductMenu/ProductsMenu";
+import {BaseItemStore} from "../../../../Lib/BaseItemStore";
+import {Item, ItemOrderResponse, ItemOrderType} from "../../../PagesParent/ProductMenu/ProductsMenu";
 import {IProduct} from "../../../../componets/FoodCard/CardFood";
 import {createObservableArray} from "mobx/dist/types/observablearray";
 
@@ -14,7 +14,7 @@ interface RequestProductInMenu {
     menu_id: number,
 }
 
-export class AssembleStore extends BaseMenuStore {
+export class AssembleStore extends BaseItemStore {
     @observable
     Menus: Menu[] = [];
     @observable
@@ -43,11 +43,11 @@ export class AssembleStore extends BaseMenuStore {
     @action
     override async DownloadMenu() { // todo вообще это тоже можно скрыть
         console.log("зашел в лоад")
-        this.menu = {}
+        this.Items = {}
         if (this.SelectedMenuId !== undefined) {
             console.log("прошел проверку ")
-            const menu = await this.getDataByToken<ItemOrderType>(CookerHttp.GetProductByMenu(this.SelectedMenuId.toString()));
-            this.menu = menu
+            const menu = await this.getDataByToken<ItemOrderResponse>(CookerHttp.GetProductByMenu(this.SelectedMenuId.toString()));
+            this.Items = menu.items
             this.SelectedMealCategory = Object.keys(menu.items)[0];
         } else {
             console.log('не выбрано меню');
@@ -94,7 +94,7 @@ export class AssembleStore extends BaseMenuStore {
 
         const resp = await this.postByToken<{}, RequestProductInMenu>(CookerHttp.AddProductInMenu, {
             menu_id: this.SelectedMenuId,
-            product_id: item.idProduct,
+            product_id: item.product.id,
             meal_category: this.SelectedMealCategory
         })
 
