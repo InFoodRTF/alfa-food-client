@@ -25,9 +25,9 @@ class ModalView extends React.Component<PropsWithChildren<IModal>, {}> {
 
     render() {
         return (
-            <Modal style={customStyles} isOpen={this.props.active}
+            <Modal style={customStyles}  isOpen={this.props.active}
             ariaHideApp={false}>
-                <div>{this.props.children}</div>
+                <div>{this.props.children}</div >
                 {this.props.onSubmit !== undefined && <button onClick={() => this.props.onSubmit ?? ""}> Да</button>}
                 <button onClick={() => this.props.onClose()}> {this.props.textClose ?? " Нет"}</button>
             </Modal>

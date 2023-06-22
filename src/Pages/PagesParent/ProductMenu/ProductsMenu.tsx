@@ -10,6 +10,7 @@ import {MealCategoryFilter} from "./Component/FilterFoodItem/MealCategoryFilter"
 import CartStore from "./CartStore";
 import {IStudent} from "../../Store/IStudent";
 import {getFullName} from "../../../Lib/Transormators";
+import {IObservableArray, observable} from "mobx";
 
 type props = {
     productsStore: ProductsStore;
@@ -17,10 +18,10 @@ type props = {
     cartStore: CartStore;
 }
 
-export type ItemOrderType = { [Category: string]: Item[]; }
+export type ItemOrderType = { [Category: string]: IObservableArray<Item>; }
 
 export interface ItemOrder {
-    items: { [id: string]: Item[]; }
+    items: ItemOrderType
 }
 
 export interface Item { // Лютый костыльььь
@@ -95,7 +96,7 @@ class ProductMenu extends React.Component {// todo придумать норм �
                         </div>
                         <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                             {
-                                productsStore.ShowProduct().map(foodColumn =>
+                                productsStore.ShowSelectedCategoryProduct.map(foodColumn =>
                                     <div style={{
                                         display: "flex",
                                         flexDirection: "row",
@@ -104,7 +105,7 @@ class ProductMenu extends React.Component {// todo придумать норм �
                                         <CardFood
                                             key={food.id}
                                             item={food}
-                                            addToCart={(e: IProduct) => cartStore.Add(e, true)}/>)}
+                                            addToCart={(e: Item) => cartStore.Add(e, true)}/>)}
                                     </div>)}
                         </div>
                     </div>

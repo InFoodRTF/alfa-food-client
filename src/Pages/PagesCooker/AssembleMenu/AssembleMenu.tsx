@@ -77,7 +77,7 @@ export class AssembleMenu extends PageComponent<props> {
                     <div style={{display: "flex", flexDirection: "column", gap: "20px", paddingTop: "2.5px"}}>
 
                         {
-                            menuStore.ShowProduct()
+                            menuStore.ShowSelectedCategoryProduct
                                 .map((itemColumn) => <div style={{
                                     display: "flex",
                                     flexDirection: "row",
@@ -98,7 +98,7 @@ export class AssembleMenu extends PageComponent<props> {
                                 )
                         }
 
-                            {menuStore.ShowProduct().pop()?.length === 3 && <div style={{
+                            {menuStore.ShowSelectedCategoryProduct.pop()?.length === 3 && <div style={{
                                 display: "flex",
                                 flexDirection: "row",
                                 gap: "20px"

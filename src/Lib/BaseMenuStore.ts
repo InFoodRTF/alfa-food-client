@@ -1,4 +1,4 @@
-import {action, computed, observable, toJS} from "mobx";
+import {action, computed, IObservableArray, makeObservable, observable, toJS} from "mobx";
 import {Item, ItemOrderType} from "../Pages/PagesParent/ProductMenu/ProductsMenu";
 import storeAdapterApi from "../Api/StoreAdapterApi";
 
@@ -9,16 +9,23 @@ import storeAdapterApi from "../Api/StoreAdapterApi";
  * Предоставляет возможность выбирать категории меню, загружать список доступных продуктов и выводить выбранную категорию продуктов в виде матрицы.
  * матрица, потому, что в html нужно
  */
+
+// потенциально это будет класс стор, который работает именно с item's, то есть с чистыми данными с Сервера (item - в postman норм показана что это)
 export abstract class BaseMenuStore extends storeAdapterApi {
     @observable
-    SelectedMealCategory?: string;
+    SelectedMealCategory?: string = "Завтрак"; // TOdo не забудь сменить
     @observable
-    menu: ItemOrderType = {}
+    menu: ItemOrderType = {};
+
+    protected constructor() {
+        super();
+        makeObservable(this)
+    }
 
     @computed
     get GetAvailableCategory(): string[] {
-        if (this.menu === undefined)
-            return [];
+        if (this.menu === undefined) return [];
+
         let result: string[] = [];
         for (let category in this.menu) {
             result.push(category)
@@ -34,29 +41,26 @@ export abstract class BaseMenuStore extends storeAdapterApi {
 
     abstract DownloadMenu(): Promise<void> ;
 
-    // гланый метод вывода всех товаров
-    public ShowProduct(): Item[][] { // todo вроде название норм, и все таки мне не очень нравится И возможно можно сделать COMPUTED
-        if (this.menu === undefined || this.SelectedMealCategory === undefined) return []
+    @computed
+    public get ShowSelectedCategoryProduct(): Item[][] { // todo вроде название норм, и все таки мне не очень нравится И возможно можно сделать COMPUTED
+        if (this.menu === undefined || this.SelectedMealCategory === undefined || this.menu[this.SelectedMealCategory] === undefined) return []
 
-        const AvailableProduct = this.GetAvailableProduct(this.menu[this.SelectedMealCategory]);
-        return this.GetInColumn<Item>(AvailableProduct, 3);
+        console.log(toJS(this.menu),"Work here2")
+        const availableProduct = this.GetAvailableProduct(this.menu[this.SelectedMealCategory]);
+        console.log(availableProduct, "work here 3")
+        return this.GetInColumn<Item>(availableProduct, 3);
     }
 
 
     @action
-    private GetAvailableProduct(items: Item[]): Item[] {
+    private GetAvailableProduct(items: IObservableArray<Item>): Item[] {
         let result: Item[] = [];
-        if (items == null) return result;
-        for (let item of items) {
+        console.log(items, "Я здеееесь")
+        if (items.toString() === "Страница не найдена") return result;
+        for (let item of items.toJSON()) {
             if (item.quantity === 0) continue;
 
             item.product.price = Number(item.product.price);
-            // TODO Лютый костыль
-            console.log(toJS(item), "ds;lkfajsd;lfska")
-            if (item.idProduct === undefined)
-                item.idProduct = item.product.id;
-            item.product.id = item.id;
-            console.log(toJS(item), "agter")
             result.push(item)
         }
 

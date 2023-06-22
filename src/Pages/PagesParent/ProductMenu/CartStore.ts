@@ -1,18 +1,12 @@
-import {action, computed, makeObservable, observable} from "mobx";
-import {IProduct} from "../../../componets/FoodCard/CardFood";
-import storeAdapterApi from "../../../Api/StoreAdapterApi";
+import {action, computed, makeObservable, observable, toJS} from "mobx";
 import {ICartInfo} from "./Component/BasketCard/CartView";
 import CalendarSwitch from "./Model/CalendarSwitch";
 import Requests from "../../../Api/Requests";
-import {ItemOrderType} from "./ProductsMenu";
+import {Item, ItemOrderType,} from "./ProductsMenu";
+import {BaseMenuStore} from "../../../Lib/BaseMenuStore";
+import {createObservableArray} from "mobx/dist/types/observablearray";
 
-export default class CartStore extends storeAdapterApi {
-    @observable
-    public Products: IProduct[] = [];
-    @observable
-    public countItems: { [id: number]: number; } = {}; // так же изучить computed
-    @observable
-    public ItemOrders: ItemOrderType = {}; // todo будущая реализация - будет ваще топ так упростит работу, просто вааащеее тоооооп
+export default class CartStore extends BaseMenuStore {
     @observable
     public SelectedStudentId: number = -1;
 
@@ -23,61 +17,57 @@ export default class CartStore extends storeAdapterApi {
 
     @computed
     get isEmpty(): boolean {
-        return this.Products.length === 0;
+        return Object.keys(this.menu).length === 0; // по идей можно вынести в baseMenuStore
     }
 
     @computed
     get sum() {
-        if (this.Products.length !== 0) {
-            return this.Products.map(prod => prod.price * this.countItems[prod.id]).reduce((prevVal, curVal) => prevVal + curVal)
-        }
-
-        return 0;
+        return 0; // TODO Cумму нужно реализовать !!
     }
 
     @action
     Clear() {
-        this.Products = [];
+        this.menu = {};
     }
 
     @action
     async CreateOrder() {
         if (!this.isEmpty)
-            await this.postByToken<{},{}>(Requests.CreateOrder, {});
+            await this.postByToken<{}, {}>(Requests.CreateOrder, {});
         else
             console.log("корзина пуста")
     }
+
     @action
     async UpdateCart() {
         await this.getDataByToken(Requests.GetCart); // TODO ДУмать как часто нужно кидать запрос на cart
     }
 
     @action
-    public async UpLoadProduct(product: IProduct) {
-        await this.postByToken(Requests.AddProductInCart, {menuitem_id: product.id});
+    public async UpLoadProduct(menuItem_id: number) {
+        await this.postByToken(Requests.AddProductInCart, {menuitem_id: menuItem_id});
     }
 
-    @action // хз насчёт годности этого isAsync
-    public async Add(product: IProduct, isConnectedWithServer: boolean): Promise<void> {
+    @action // хз насчёт годности этого isConnectedWithServer
+    public async Add(item: Item, isConnectedWithServer: boolean): Promise<void> {
         if (isConnectedWithServer) {
-            await this.UpLoadProduct(product);
+            await this.UpLoadProduct(item.id);
         }
 
-        if (!this.IsPutted(product.id)) {
-            this.PutNew(product);
+        if (!this.IsPuttedItem(item)) {
+            this.PutNewItem(item);
+        } else {
+            this.menu[item.meal_category].find(e => e.id === item.id)!.quantity++;
         }
-
-        this.countItems[product.id]++;
     }
 
     @action
-    async Extract(product: IProduct): Promise<void> {
-        await this.postByToken(Requests.RemoveProductFromCart, {menuitem_id: product.id});
-        if (this.countItems[product.id] === 1) {
-            delete this.countItems[product.id];
-            this.Remove(product);
+    async Extract(item: Item): Promise<void> {
+        await this.postByToken(Requests.RemoveProductFromCart, {menuitem_id: item.id});
+        if (item.quantity === 1) {
+            this.Remove(item);
         } else {
-            this.countItems[product.id]--;
+            this.menu[item.meal_category].find(e => e.id === item.id)!.quantity--;  // много ! возможно будет какой-нибудь косяк
         }
     }
 
@@ -86,14 +76,13 @@ export default class CartStore extends storeAdapterApi {
         console.log(this.SelectedStudentId)
         if (this.SelectedStudentId === -1) return;
 
-        this.Products = [];
-        this.countItems = {};
+        this.menu = {}
         let cartInfo = await this.getDataByToken<ICartInfo>(Requests.SwitchCart(this.SelectedStudentId, this.Calendar.CurDate))
         console.log(cartInfo)
         for (let item of cartInfo.cart_items) {
             item.product.price = Number(item.product.price);
             for (let j = 0; j < item.quantity; j++) {
-                this.Add(item.product, false)
+                this.Add(item, false)
             }
         }
     }
@@ -104,23 +93,29 @@ export default class CartStore extends storeAdapterApi {
         console.log("id сменили: " + studentId)
     }
 
-    // название очень не нравиться поэтому вот -
-    // убирает из коризины элемент
-    @action // todo название
-    private Remove(product: IProduct) { // TODO remove не работает с сервером, ааааа!!!???????
-        const index = this.Products.indexOf(product);
-        delete this.Products[index];
+
+    private Remove(item: Item) {
+        const index = this.menu[item.meal_category].indexOf(item);
+        delete this.menu[item.meal_category][index];
     }
 
     @action
-    private IsPutted(id: number) {
-        return this.countItems[id] !== undefined && this.countItems[id] !== 0;
+    private IsPuttedItem(item: Item): boolean {
+        return this.menu[item.meal_category] !== undefined && this.menu[item.meal_category].find(e => e.id === item.id) !== undefined;
     }
 
-    //TODO ооо великий рефакторинг, приди и сделай по нормальному плз
     @action
-    private PutNew(product: IProduct) {
-        this.countItems[product.id] = 0;
-        this.Products.push(product);
+    private PutNewItem(item: Item) {
+        if (this.menu[item.meal_category] === undefined) {
+            this.menu[item.meal_category] = observable<Item>([]);
+        }
+        console.log(toJS(this.menu),"новый item")
+        item.quantity = 1;
+        this.menu[item.meal_category].push(item);
+        console.log(toJS(this.menu),"добавлен item")
+    }
+
+    DownloadMenu(): Promise<void> {
+        return Promise.resolve(undefined);
     }
 }

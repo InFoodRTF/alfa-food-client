@@ -4,8 +4,9 @@ import {CookerHttp} from "../../../../Api/Requests";
 import {Menu} from "./Models/Menu";
 import {action, keys, makeObservable, observable, toJS} from "mobx";
 import {BaseMenuStore} from "../../../../Lib/BaseMenuStore";
-import {Item, ItemOrder, ItemOrderType} from "../../../PagesParent/ProductMenu/ProductsMenu";
+import {Item, ItemOrderType} from "../../../PagesParent/ProductMenu/ProductsMenu";
 import {IProduct} from "../../../../componets/FoodCard/CardFood";
+import {createObservableArray} from "mobx/dist/types/observablearray";
 
 interface RequestProductInMenu {
     product_id: number,
@@ -45,8 +46,8 @@ export class AssembleStore extends BaseMenuStore {
         this.menu = {}
         if (this.SelectedMenuId !== undefined) {
             console.log("прошел проверку ")
-            const menu = await this.getDataByToken<ItemOrder>(CookerHttp.GetProductByMenu(this.SelectedMenuId.toString()));
-            this.menu = menu.items;
+            const menu = await this.getDataByToken<ItemOrderType>(CookerHttp.GetProductByMenu(this.SelectedMenuId.toString()));
+            this.menu = menu
             this.SelectedMealCategory = Object.keys(menu.items)[0];
         } else {
             console.log('не выбрано меню');

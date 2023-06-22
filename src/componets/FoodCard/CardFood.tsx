@@ -15,7 +15,7 @@ export interface IProduct {
     meal_category: MealCategory;
 }
 @observer
-class CardFood extends React.Component<{item: Item, addToCart: (e: IProduct, ) => void}> {
+class CardFood extends React.Component<{item: Item, addToCart: (e: Item, ) => void}> {
     render() {
          return(
             <Card className={styles.foodCard}>
@@ -27,7 +27,7 @@ class CardFood extends React.Component<{item: Item, addToCart: (e: IProduct, ) =
                     </div>
                     <div className={styles.gramBlock}><Card.Text className={styles.gramText}>{this.props.item.product.grams + " грамм"}</Card.Text></div>
                     <div className={styles.addInfBlock}>
-                        <Button onClick={() => this.props.addToCart(this.props.item.product)} variant={''} bsPrefix={''} className={styles.cardButton}><p className={styles.text}>+</p><p className={styles.textAdd}>Добавить</p></Button>
+                        <Button onClick={() => this.props.addToCart(this.props.item)} variant={''} bsPrefix={''} className={styles.cardButton}><p className={styles.text}>+</p><p className={styles.textAdd}>Добавить</p></Button>
                     </div>
                 </div>
             </Card>
