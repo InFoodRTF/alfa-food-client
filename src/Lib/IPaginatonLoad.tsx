@@ -2,6 +2,8 @@ import IToken from "../Model/Interface/IToken";
 import {AxiosError} from "axios";
 import ApiRequest from "../Api/ApiRequest";
 
+
+
 abstract class PaginationReq extends ApiRequest {
 
     async   GetDataByPagination<T>(token: IToken, url: string): Promise<{ newData: T[], totalLoad: number }> {

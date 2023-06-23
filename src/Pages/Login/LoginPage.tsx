@@ -28,7 +28,7 @@ export class LoginPage extends PageComponent<props> {
             case StatusResponse.BadRequest:
                 return <span>Не корректный пароль или логин</span>
             case StatusResponse.ServerNotFound:
-                return <span>Мы не работает</span>
+                return <span>Мы не работаем</span>
             case StatusResponse.NotServer:
                 break;
             default:

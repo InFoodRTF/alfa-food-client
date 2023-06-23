@@ -34,7 +34,7 @@ export default class CartView extends React.Component<{ cart: CartStore }, { cre
                 </Card.Title>
                 <div style={{display: "flex", flexDirection: "column", gap: "22px", marginTop: "54px"}}>
                     <div className={styles.mealCategory}>
-                        {this.props.cart.getAvailableCategory.map(category => {
+                        {this.props.cart.Items !== undefined && this.props.cart.getAvailableCategory.map(category => {
                             return <div>
                                 <Card.Text className={styles.cardText}><p>{category}</p></Card.Text>
                                 {this.props.cart.Items[category].map(item =>

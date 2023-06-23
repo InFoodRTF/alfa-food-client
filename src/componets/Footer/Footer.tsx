@@ -7,7 +7,7 @@ import teamproject from "./Img/tp.png";
 
 
 
-// todo сделать fotter
+// todo сделать footer
 export class Footer extends React.Component {
     render() {
         return (

@@ -4,6 +4,7 @@ import CalendarSwitch from "./Model/CalendarSwitch";
 import Requests from "../../../Api/Requests";
 import {BaseItemStore, Item} from "../../../Lib/BaseItemStore";
 
+// undefined - при первом запуске корзины, это загруженная коризна с сервера, а в ней нету категорий, поэтому и undefined!!
 export default class CartStore extends BaseItemStore {
     @observable
     public SelectedStudentId: number = -1;

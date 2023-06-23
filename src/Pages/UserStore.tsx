@@ -1,4 +1,4 @@
-import {action, computed, makeObservable, observable, runInAction} from "mobx";
+import {action, makeObservable, observable, runInAction} from "mobx";
 import NotAuthUser from "../Model/Role/NotAuthUser";
 import IUser from "../Model/Interface/IUser";
 import StoreAdapterApi from "../Api/StoreAdapterApi";
@@ -22,7 +22,7 @@ class UserStore extends StoreAdapterApi {
     }
 
     @action
-    public LoadIsComplete(){
+    public LoadIsComplete(){ // todo Сделать загрузку сайта
         this.loading = false;
     }
 }

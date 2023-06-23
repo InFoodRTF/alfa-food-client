@@ -14,6 +14,7 @@ import {Profile} from "../Profile/Profile";
 import UserStore from "../UserStore";
 import {AssembleMenu} from "../PagesCooker/AssembleMenu/AssembleMenu";
 import {CookingUploadRep} from "../PagesCooker/Report/CookingUploadRep";
+import {PageComponent} from "../PageComponent";
 
 type props = {
     userStore: UserStore;
@@ -21,14 +22,10 @@ type props = {
 
 @inject("userStore")
 @observer
-export class Router extends React.Component {
+export class MainPageRouter extends PageComponent<props> {
     async componentDidMount() {
         await this.injected.userStore.AuthByToken();
         this.injected.userStore.LoadIsComplete();
-    }
-
-    get injected() {
-        return this.props as props;
     }
 
     public GetNaviBarUser(user: IUser): JSX.Element { // todo можно сделать так, чтоб он навигировал на правильную страницу, а не через profile

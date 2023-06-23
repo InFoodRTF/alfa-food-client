@@ -3,6 +3,8 @@ import ILoaderPagination from "../Model/Interface/ILoaderPagination";
 import IToken from "../Model/Interface/IToken";
 import PaginationReq from "./IPaginatonLoad";
 
+// todo плз когда нибудь сделай ее более универасальной, хочу чтоб данные можно было получать в store и там сними работать, не возращать сразу отсуюда в html
+// и камон, ты вставляшь сюда ApiClient и token ??? какой-то кринж)) ааааааааааааааааа плз сделай норм, если сделтаешь, сможешь везде использвоать эту штуку, я верю, что сделаю это аааааааа
 class LoaderPagination<T> extends PaginationReq implements ILoaderPagination {
     @observable
     private CanLoad: boolean = true;
@@ -14,12 +16,12 @@ class LoaderPagination<T> extends PaginationReq implements ILoaderPagination {
     public List: T[] = []
 
     @computed
-    public get LoadMore(): boolean {
+    public get LoadMore(): boolean { // todo для чего это я написал?
         return this.CanLoad;
     }
 
     @action
-    async LoadData(): Promise<void> {
+    async LoadData(): Promise<void> { //todo класс, видно класс делает одно дело, только одно
         console.log("пошли заказы")
         let {
             newData,

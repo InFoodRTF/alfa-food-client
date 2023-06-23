@@ -15,7 +15,7 @@ export class GradesStore extends StoreAdapterApi {
     @observable
     SelectedGradeName: string = '';
     @observable
-    SelectedMealCategory: MealCategory = MealCategory.breakfast;
+    SelectedMealCategory: MealCategory = MealCategory.breakfast; // что-то древнее
 
     constructor(calendar: CalendarSwitch) {
         super();
@@ -38,7 +38,7 @@ export class GradesStore extends StoreAdapterApi {
         console.log("work", this.GetSelectedGradeStudent)
         attendStudent.mark_attendance = !attendStudent.mark_attendance
         await this.patchByToken<{}, {mark_attendance: string}>(Requests.ChangeAttendances(attendStudent.id),
-            {mark_attendance: attendStudent.mark_attendance ? "true": "false"}); // todo здесь очень интересная система
+            {mark_attendance: attendStudent.mark_attendance ? "true": "false"}); // todo здесь очень интересная система. upd: не так то реально интересная система можно и todo убрать
     }
 
     @computed

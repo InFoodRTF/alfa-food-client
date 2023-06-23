@@ -8,12 +8,11 @@ interface props {
     menu: Menu;
     onClick: () => void;
 }
-//у каждой галочки должен быть уникальный id, например фио в поля "id" и "htmlFor"
 export class LeftMenuCooking extends React.Component<props> {
     render() {
         const {menu,onClick} = this.props;
         const changeClass = (event: any) => { // todo много кода, надо будет урезать
-            this.props.onClick();
+            onClick()
             const buttons = document.querySelectorAll('Button')
             for (let i = 0; i < buttons.length; i++) {
                 if (buttons[i].classList.contains(styles.red)) {
