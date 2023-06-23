@@ -3,8 +3,8 @@ import IUser from "../Model/Interface/IUser";
 import Requests from "./Requests";
 import Role from "../Model/Enum/Role";
 import Grade from "../Pages/Store/Grade";
-import {IProduct} from "../componets/FoodCard/CardFood";
 import {IStudent} from "../Pages/Store/IStudent";
+import {IProduct} from "../Lib/BaseItemStore";
 
 export default function server(): void {
 

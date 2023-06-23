@@ -1,7 +1,7 @@
 import React from "react";
 import { SearchCard } from "../../Pages/PagesTeacher/MarkClass/Component/SearchCard/SearchCard";
 import {CookingFoodCard} from "../CookingFoodCard/CookingFoodCard";
-import {IProduct} from "../FoodCard/CardFood";
+import {IProduct} from "../../Lib/BaseItemStore";
 
 interface props {
     products: IProduct[]

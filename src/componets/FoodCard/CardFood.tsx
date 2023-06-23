@@ -3,17 +3,9 @@ import {Button, Card} from "react-bootstrap";
 import styles from "./CardFood.module.css";
 import {observer} from "mobx-react";
 import MealCategory from "../../Model/Enum/MealCategory";
-import {Item} from "../../Pages/PagesParent/ProductMenu/ProductsMenu";
+import {Item} from "../../Lib/BaseItemStore";
 
-export interface IProduct {
-    id: number
-    name: string;
-    price: number;
-    description: string;
-    grams: number;
-    image: string;
-    meal_category: MealCategory;
-}
+
 @observer
 class CardFood extends React.Component<{item: Item, addToCart: (e: Item, ) => void}> {
     render() {

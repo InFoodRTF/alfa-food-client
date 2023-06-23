@@ -2,7 +2,7 @@ import React from "react";
 import {Button, Card} from "react-bootstrap";
 import styles from "./Food.module.css";
 import {observer} from "mobx-react";
-import {Item} from "../../ProductsMenu";
+import {Item} from "../../../../../Lib/BaseItemStore";
 
 @observer
 export class ProductView extends React.Component<{ // this.props.productCount для чего это !!!)((!)

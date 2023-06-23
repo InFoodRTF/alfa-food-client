@@ -1,9 +1,8 @@
 import {action, computed, makeObservable, observable} from "mobx";
-import {ICartInfo} from "./Component/BasketCard/CartView";
+import {ICartInfo} from "./Component/Cart/CartView";
 import CalendarSwitch from "./Model/CalendarSwitch";
 import Requests from "../../../Api/Requests";
-import {Item} from "./ProductsMenu";
-import {BaseItemStore} from "../../../Lib/BaseItemStore";
+import {BaseItemStore, Item} from "../../../Lib/BaseItemStore";
 
 export default class CartStore extends BaseItemStore {
     @observable
@@ -29,11 +28,11 @@ export default class CartStore extends BaseItemStore {
 
     @action
     async UpdateCart() {
-        await this.getDataByToken(Requests.GetCart); // TODO ДУмать как часто нужно кидать запрос на cart
+        await this.getDataByToken(Requests.GetCart); // TODO ДУмать как часто нужно кидать запрос на cart (идея запросов другая не как сейчас. Вадим знает)
     }
 
     @action
-    public async UpLoadProduct(menuItem_id: number) {
+    public async UpLoadProduct(menuItem_id: number): Promise<void> {
         await this.postByToken(Requests.AddProductInCart, {menuitem_id: menuItem_id});
     }
 
@@ -46,17 +45,17 @@ export default class CartStore extends BaseItemStore {
         if (!this.IsPuttedItem(item)) {
             this.PutNewItem(item);
         } else {
-            this.Items[item.meal_category].find(e => e.id === item.id)!.quantity++;
+            this.Items[item.meal_category].find(e => e.id === item.id)!.quantity++; // а может можно проще
         }
     }
 
     @action
-    async remove(item: Item): Promise<void> {
+    async remove(item: Item) {
         await this.postByToken(Requests.RemoveProductFromCart, {menuitem_id: item.id});
         if (item.quantity === 1) {
             this.extract(item);
         } else {
-            this.Items[item.meal_category].find(e => e.id === item.id)!.quantity--;  // много ! возможно будет какой-нибудь косяк
+            this.Items[item.meal_category].find(e => e.id === item.id)!.quantity--;  // есть "!" возможно будет какой-нибудь косяк
         }
     }
 
@@ -65,7 +64,7 @@ export default class CartStore extends BaseItemStore {
         console.log(this.SelectedStudentId)
         if (this.SelectedStudentId === -1) return;
 
-        this.itemsClear();
+        this.clear();
         let cartInfo = await this.getDataByToken<ICartInfo>(Requests.SwitchCart(this.SelectedStudentId, this.Calendar.CurDate))
         console.log(cartInfo)
         for (let item of cartInfo.cart_items) {
@@ -102,7 +101,7 @@ export default class CartStore extends BaseItemStore {
         this.Items[item.meal_category].push(item);
     }
 
-    DownloadMenu(): Promise<void> {
+    DownloadItems(): Promise<void> {
         return Promise.resolve(undefined);
     }
 }

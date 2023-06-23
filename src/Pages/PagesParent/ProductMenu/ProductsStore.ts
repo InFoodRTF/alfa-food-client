@@ -1,8 +1,7 @@
-import {action, IObservableArray, makeObservable, observable} from "mobx";
+import {action, makeObservable, observable} from "mobx";
 import CalendarSwitch from "./Model/CalendarSwitch";
-import {ItemOrderResponse, ItemOrderType} from "./ProductsMenu";
 import Requests from "../../../Api/Requests";
-import {BaseItemStore} from "../../../Lib/BaseItemStore";
+import {BaseItemStore, ItemOrderResponse} from "../../../Lib/BaseItemStore";
 
 export default class ProductsStore extends BaseItemStore { // todo не лучшее название
     @observable
@@ -16,7 +15,7 @@ export default class ProductsStore extends BaseItemStore { // todo не лучш
 
 
     @action
-    override async DownloadMenu() :Promise<void> {
+    override async DownloadItems() :Promise<void> {
         console.log("зашел в лоад")
         this.Items = {}
         const menu = await this.getDataByToken<ItemOrderResponse>(Requests.GetMenu(this.Calendar.CurDate));

@@ -1,10 +1,9 @@
 import React from "react";
 import {Button, Card} from "react-bootstrap";
 import styles from "./EditingCard.module.css";
-import edit from "./Img/Edit.svg";
 import del from "./Img/Delete.svg";
-import {Item} from "../../Pages/PagesParent/ProductMenu/ProductsMenu";
 import {observer} from "mobx-react";
+import {Item} from "../../Lib/BaseItemStore";
 
 interface props {
     item: Item

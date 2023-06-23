@@ -6,7 +6,6 @@ import {action, computed, makeObservable, observable} from "mobx";
 import {AttendedGrade, AttendedStudent} from "./attendedGrade";
 import MealCategory from "../../../../Model/Enum/MealCategory";
 import {getStringMealCategory} from "../../../../Lib/Transormators";
-import grade from "../../../Store/Grade";
 
 export class GradesStore extends StoreAdapterApi {
     @observable

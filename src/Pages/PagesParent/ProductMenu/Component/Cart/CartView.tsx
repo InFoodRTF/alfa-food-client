@@ -4,8 +4,8 @@ import styles from "./CardBasket.module.css";
 import ProductView from "./ProductView";
 import CartStore from "../../CartStore";
 import {observer} from "mobx-react";
-import {Item} from "../../ProductsMenu";
 import ModalView from "../../../../../componets/ModalView/ModalConfirmChange";
+import {Item} from "../../../../../Lib/BaseItemStore";
 
 export interface ICartInfo {
     cart_items: Item[]
@@ -34,13 +34,17 @@ export default class CartView extends React.Component<{ cart: CartStore }, { cre
                 </Card.Title>
                 <div style={{display: "flex", flexDirection: "column", gap: "22px", marginTop: "54px"}}>
                     <div className={styles.mealCategory}>
-                        <Card.Text className={styles.cardText}><p>Завтрак</p></Card.Text>
-                        {this.props.cart.ShowSelectedCategoryProduct.map(Items => Items.map(item =>
-                            <ProductView key={item.id}
-                                         item={item}
-                                         put={e => this.props.cart.Add(e, true)}
-                                         extract={e => this.props.cart.remove(e)}/>))}
+                        {this.props.cart.getAvailableCategory.map(category => {
+                            return <div>
+                                <Card.Text className={styles.cardText}><p>{category}</p></Card.Text>
+                                {this.props.cart.Items[category].map(item =>
+                                    <ProductView key={item.id}
+                                                 item={item}
+                                                 put={e => this.props.cart.Add(e, true)}
+                                                 extract={e => this.props.cart.remove(e)}/>)}
+                            </div>
 
+                        })}
                     </div>
                 </div>
                 <div style={{
@@ -69,7 +73,7 @@ export default class CartView extends React.Component<{ cart: CartStore }, { cre
                 </div>
                 <ModalView textClose={"ок"} active={this.state.create} onClose={() => {
                     this.setState({create: false})
-                    this.props.cart.itemsClear();
+                    this.props.cart.clear();
                 }}><span> Заказ сделал</span></ModalView>
             </Card>
         )

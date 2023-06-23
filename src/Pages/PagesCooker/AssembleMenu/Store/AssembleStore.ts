@@ -3,9 +3,7 @@ import CalendarSwitch from "../../../PagesParent/ProductMenu/Model/CalendarSwitc
 import {CookerHttp} from "../../../../Api/Requests";
 import {Menu} from "./Models/Menu";
 import {action, makeObservable, observable} from "mobx";
-import {BaseItemStore} from "../../../../Lib/BaseItemStore";
-import {Item, ItemOrderResponse, ItemOrderType} from "../../../PagesParent/ProductMenu/ProductsMenu";
-import {IProduct} from "../../../../componets/FoodCard/CardFood";
+import {BaseItemStore, IProduct, Item, ItemOrderResponse, ItemsCategory} from "../../../../Lib/BaseItemStore";
 
 interface RequestProductInMenu {
     product_id: number,
@@ -44,8 +42,8 @@ export class AssembleStore extends BaseItemStore {
     }
 
     @action
-    override async DownloadMenu() { // todo вообще это тоже можно скрыть
-        this.itemsClear()
+    override async DownloadItems() { // todo вообще это тоже можно скрыть
+        this.clear()
 
         if (this.SelectedMenuId !== undefined) {
             const menu = await this.getDataByToken<ItemOrderResponse>(CookerHttp.GetProductByMenu(this.SelectedMenuId.toString()));
@@ -116,7 +114,7 @@ export class AssembleStore extends BaseItemStore {
             return ;
         }
 
-        const Resp = await this.postByToken<ItemOrderType,{menuitem_id: number}>(CookerHttp.RemoveProduct, {menuitem_id: item.id})
+        const Resp = await this.postByToken<ItemsCategory,{menuitem_id: number}>(CookerHttp.RemoveProduct, {menuitem_id: item.id})
         if (Resp.status === 200){
             --item.quantity;
         }

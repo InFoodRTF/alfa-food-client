@@ -1,21 +1,39 @@
-import {action, computed, IObservableArray, makeObservable, observable, toJS} from "mobx";
-import {Item, ItemOrderType} from "../Pages/PagesParent/ProductMenu/ProductsMenu";
+import {action, computed, IObservableArray, makeObservable, observable} from "mobx";
 import storeAdapterApi from "../Api/StoreAdapterApi";
+import MealCategory from "../Model/Enum/MealCategory";
 
 
-/**
- *  Это базовый класс для управления Продуктами в приложении
- * Отыгрывает ключевую роль в организации функционала меню в рамках приложения.
- * Предоставляет возможность выбирать категории меню, загружать список доступных продуктов и выводить выбранную категорию продуктов в виде матрицы.
- * матрица, потому, что в html нужно
- */
 
-// потенциально это будет класс стор, который работает именно с item's, то есть с чистыми данными с Сервера (item - абстрация над product (доп данные типа катеогрий, количества этого продукта т.д))
+export type ItemsCategory = { [Category: string]: IObservableArray<Item>; } // todo название не самое понятное и круто было тебе не экспоритить в другие классы
+
+export interface ItemOrderResponse {
+    items: ItemsCategory
+}
+
+export interface Item {
+    id: number;
+    quantity: number;
+    meal_category: string;
+    product: IProduct
+}
+
+export interface IProduct {
+    id: number
+    name: string;
+    price: number;
+    description: string;
+    grams: number;
+    image: string;
+    meal_category: MealCategory;
+}
+
 export abstract class BaseItemStore extends storeAdapterApi {
+    // TOdo реализовать отобржаение в корзине
     @observable
-    SelectedMealCategory?: string; // TOdo не забудь сменить
+    SelectedMealCategory?: string;
+    // абстрация над product (доп данные: категория, количества этого продукта т.д
     @observable
-    Items: ItemOrderType = {};
+    Items: ItemsCategory = {};
 
     protected constructor() {
         super();
@@ -27,18 +45,20 @@ export abstract class BaseItemStore extends storeAdapterApi {
         return Object.keys(this.Items).length === 0; // по идей можно вынести в baseMenuStore
     }
 
-    @action
-    public itemsClear() {
-        this.Items = {};
+    @computed
+    public get showSelectedCategoryProduct(): Item[][] { // todo вроде название норм, и все таки мне не очень нравится И возможно можно сделать COMPUTED
+        if (this.Items === undefined || this.SelectedMealCategory === undefined || this.Items[this.SelectedMealCategory] === undefined) return []
+
+        const availableProduct = this.getAvailableProduct(this.Items[this.SelectedMealCategory]);
+        return this.getInColumn<Item>(availableProduct, 3);
     }
 
     @computed
-    get GetAvailableCategory(): string[] {
-        if (this.Items === undefined) return [];
+    get getAvailableCategory(): string[] {
+        if (this.isEmpty) return [];
 
-        console.log(toJS(this.Items),"2222222")
         let result: string[] = [];
-        for (let category in this.Items) { // todo это что-то лютое!!
+        for (let category in this.Items) { // todo это что-то лютое!! почему это лютое ???)))
             result.push(category)
         }
 
@@ -46,27 +66,20 @@ export abstract class BaseItemStore extends storeAdapterApi {
     }
 
     @action
-    public ChangeMealCategory(mealCategory: string): void {
+    public clear() {
+        this.Items = {};
+    }
+
+    @action
+    public changeMealCategory(mealCategory: string): void {
         this.SelectedMealCategory = mealCategory;
     }
 
-    abstract DownloadMenu(): Promise<void> ;
-
-    @computed
-    public get ShowSelectedCategoryProduct(): Item[][] { // todo вроде название норм, и все таки мне не очень нравится И возможно можно сделать COMPUTED
-        if (this.Items === undefined || this.SelectedMealCategory === undefined || this.Items[this.SelectedMealCategory] === undefined) return []
-
-        console.log(toJS(this.Items),"Work here2")
-        const availableProduct = this.GetAvailableProduct(this.Items[this.SelectedMealCategory]);
-        console.log(availableProduct, "work here 3")
-        return this.GetInColumn<Item>(availableProduct, 3);
-    }
-
+    abstract DownloadItems(): Promise<void> ;
 
     @action
-    private GetAvailableProduct(items: IObservableArray<Item>): Item[] {
+    private getAvailableProduct(items: IObservableArray<Item>): Item[] {
         let result: Item[] = [];
-        console.log(items, "Я здеееесь")
         for (let item of items.toJSON()) {
             if (item.quantity === 0) continue;
 
@@ -79,18 +92,18 @@ export abstract class BaseItemStore extends storeAdapterApi {
 
 
     @action
-    private GetInColumn<T>(products: T[], countInRow: number): T[][] {
-        const countColumn = Math.ceil(products.length / countInRow)
-        let array: T[][] = []
+    private getInColumn<T>(products: T[], countRow: number): T[][] {
+        const countColumn = Math.ceil(products.length / countRow)
+        let result: T[][] = []
 
         for (let i = 0; i < countColumn; i++) {
-            array.push(new Array<T>)
-            for (let j = 0; j < countInRow && i * countInRow + j < products.length; j++) {
-                array[i].push(products[i * countInRow + j])
+            result.push(new Array<T>)
+            for (let j = 0; j < countRow && i * countRow + j < products.length; j++) {
+                result[i].push(products[i * countRow + j])
             }
         }
 
-        return array
+        return result
     }
 
 }

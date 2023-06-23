@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./CookingFoodCard.module.css";
 import {Card} from "react-bootstrap";
 import plus from "./Img/Plus.svg";
-import {IProduct} from "../FoodCard/CardFood";
+import {IProduct} from "../../Lib/BaseItemStore";
 
 interface props {
     product: IProduct;

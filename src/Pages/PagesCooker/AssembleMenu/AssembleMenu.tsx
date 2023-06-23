@@ -23,7 +23,7 @@ export class AssembleMenu extends PageComponent<props> {
 
     async componentDidMount() {
         await this.injected.menuStore.downloadAvailableMenu();
-        await this.injected.menuStore.DownloadMenu();
+        await this.injected.menuStore.DownloadItems();
     }
 
     componentWillUnmount() {
@@ -49,7 +49,7 @@ export class AssembleMenu extends PageComponent<props> {
                     <CalendarView calendar={menuStore.Calendar} modalIsActive={true} canDataChange={true}
                                   onDataChange={async () => {
                                       await menuStore.downloadAvailableMenu();
-                                      await menuStore.DownloadMenu();
+                                      await menuStore.DownloadItems();
                                   }}/>
                     <div style={{display: "flex", flexDirection: "column", gap: "26px", paddingTop: "2.5px"}}>
                         <BaseButItem onClick={() => console.log("добавляем")} w={264} h={44}
@@ -58,7 +58,7 @@ export class AssembleMenu extends PageComponent<props> {
                             menuStore.Menus !== undefined && menuStore.Menus.map(menu => <LeftMenuCooking
                                 onClick={async () => {
                                     menuStore.ChangeSelectedMenu(menu.id)
-                                    await menuStore.DownloadMenu();
+                                    await menuStore.DownloadItems();
                                 }} menu={menu} key={menu.id}/>)}
                         <BaseButItem onClick={() => console.log("меняем")} w={264} h={44} text={"Изменить"}/>
                     </div>
@@ -68,9 +68,9 @@ export class AssembleMenu extends PageComponent<props> {
                         <InputCook/>
                         <div style={{display: "flex", flexDirection: "row", gap: "20px"}}>
                             {
-                                menuStore.GetAvailableCategory.map(mealCategory =>
+                                menuStore.getAvailableCategory.map(mealCategory =>
                                     <MealCategoryFilter value={mealCategory}
-                                                        changeMealCategory={() => menuStore.ChangeMealCategory(mealCategory)}
+                                                        changeMealCategory={() => menuStore.changeMealCategory(mealCategory)}
                                                         selectedCategory={menuStore.SelectedMealCategory ?? ""}/>)
                             }
                             <BaseButItem onClick={() => console.log("добавляем категорию")} w={208} h={44}
@@ -80,7 +80,7 @@ export class AssembleMenu extends PageComponent<props> {
 
                     <div style={{display: "flex", flexDirection: "column", gap: "20px", paddingTop: "2.5px"}}>
                         {
-                            menuStore.ShowSelectedCategoryProduct
+                            menuStore.showSelectedCategoryProduct
                                 .map((itemColumn) => <div style={{
                                     display: "flex",
                                     flexDirection: "row",
@@ -100,7 +100,7 @@ export class AssembleMenu extends PageComponent<props> {
                                 </div>
                                 )
                         }
-                            {menuStore.ShowSelectedCategoryProduct.pop()?.length === 3 && <div style={{
+                            {menuStore.showSelectedCategoryProduct.pop()?.length === 3 && <div style={{
                                 display: "flex",
                                 flexDirection: "row",
                                 gap: "20px"

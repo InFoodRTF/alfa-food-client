@@ -1,16 +1,15 @@
 import React from "react";
-
 import {inject, observer} from "mobx-react";
 import ProductsStore from "./ProductsStore";
-import CardFood, {IProduct} from "../../../componets/FoodCard/CardFood";
 import LeftMenu, {ClickChange} from "../../../componets/LeftMenuItem/LeftMenu";
 import StudentsStore from "../../Store/StudentsStore";
-import CartView from "./Component/BasketCard/CartView";
+import CartView from "./Component/Cart/CartView";
 import {MealCategoryFilter} from "./Component/FilterFoodItem/MealCategoryFilter";
 import CartStore from "./CartStore";
 import {IStudent} from "../../Store/IStudent";
 import {getFullName} from "../../../Lib/Transormators";
-import {IObservableArray, observable} from "mobx";
+import {Item} from "../../../Lib/BaseItemStore";
+import CardFood from "../../../componets/FoodCard/CardFood";
 
 type props = {
     productsStore: ProductsStore;
@@ -18,18 +17,7 @@ type props = {
     cartStore: CartStore;
 }
 
-export type ItemOrderType = { [Category: string]: IObservableArray<Item>; }
 
-export interface ItemOrderResponse {
-    items: ItemOrderType
-}
-
-export interface Item { // Лютый костыльььь
-    id: number;
-    quantity: number;
-    meal_category: string;
-    product: IProduct
-}
 
 @inject("productsStore", 'studentStore', 'cartStore')
 @observer
@@ -51,7 +39,7 @@ class ProductMenu extends React.Component {// todo придумать норм �
 
     async componentDidMount() {
         await this.injected.studentStore.LoadStudent();
-        await this.injected.productsStore.DownloadMenu();
+        await this.injected.productsStore.DownloadItems();
         // ченки lifecycly hooks и сделай все красиво бро
     }
 
@@ -78,24 +66,24 @@ class ProductMenu extends React.Component {// todo придумать норм �
                                   await cartStore.changeCart();
                               }}
                               onChangeCalendar={async () => {
-                                  await productsStore.DownloadMenu();
+                                  await productsStore.DownloadItems();
                                   await cartStore.changeCart()
                               }}
                               canDataChange={cartStore.isEmpty}/>
                     <div style={{display: "flex", flexDirection: "column", gap: "20px", minWidth: "550px"}}>
                         <div style={{display: "flex", flexDirection: "row", gap: "20px", height: "44px"}}>
                             {
-                                productsStore.GetAvailableCategory.map(mealCategory =>
+                                productsStore.getAvailableCategory.map(mealCategory =>
                                     <MealCategoryFilter
                                         value={mealCategory}
-                                        changeMealCategory={() => productsStore.ChangeMealCategory(mealCategory)}
+                                        changeMealCategory={() => productsStore.changeMealCategory(mealCategory)}
                                     selectedCategory={productsStore.SelectedMealCategory ?? ""}/>
                                 )
                             }
                         </div>
                         <div style={{display: "flex", flexDirection: "column", gap: "20px"}}>
                             {
-                                productsStore.ShowSelectedCategoryProduct.map(foodColumn =>
+                                productsStore.showSelectedCategoryProduct.map(foodColumn =>
                                     <div style={{
                                         display: "flex",
                                         flexDirection: "row",
