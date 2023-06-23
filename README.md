@@ -1,6 +1,6 @@
 # Клиентая часть приложения школьной столовой
 John - parent
-Galine - cooker
+Galina - cooker
 Valentina - teacher
 
 Парол для всех
