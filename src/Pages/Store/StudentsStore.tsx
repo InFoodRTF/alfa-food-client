@@ -22,7 +22,7 @@ class StudentsStore extends StoreAdapterApi {
 
 
     @action
-    async LoadInfoGrade(name: string): Promise<void> {
+    async LoadInfoGrade(name: string): Promise<void> { // название делаеть другое, и воощбе хз, что делает
         this.Grades[name] = await this.getDataByToken<Grade>(Requests.GetGrades + `${name}`);
         console.log(`${this.Grades[name].name}`)
     }
